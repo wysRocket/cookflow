@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Play, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Northern Lights Gradient Blob */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sage/20 rounded-full blur-[120px] mix-blend-screen animate-pulse z-0 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#14b8a6]/20 rounded-full blur-[120px] mix-blend-screen animate-pulse z-0 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -40,16 +41,22 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="group relative px-8 py-4 bg-sage text-obsidian font-bold font-sans rounded-none hover:bg-emerald-300 transition-all duration-300 overflow-hidden w-full sm:w-auto">
+            <Link
+              to="/app/courses"
+              className="group relative px-8 py-4 bg-[#14b8a6] text-obsidian font-bold font-sans rounded-none hover:bg-emerald-300 transition-all duration-300 overflow-hidden w-full sm:w-auto"
+            >
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Start a Masterclass
                 <Play className="w-4 h-4 fill-current" />
               </span>
-            </button>
-            <button className="px-8 py-4 bg-transparent border border-white/20 text-white font-sans font-medium hover:bg-white/5 hover:border-sage/50 hover:text-sage transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2">
+            </Link>
+            <Link
+              to="/app/recipes"
+              className="px-8 py-4 bg-transparent border border-white/20 text-white font-sans font-medium hover:bg-white/5 hover:border-sage/50 hover:text-[#14b8a6] transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
+            >
               Explore Recipes
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
         </motion.div>
       </div>

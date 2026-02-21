@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, ChefHat } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -10,9 +11,9 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0 flex items-center gap-2 cursor-pointer">
-            <ChefHat className="h-8 w-8 text-sage" />
+            <ChefHat className="h-8 w-8 text-[#14b8a6]" />
             <span className="font-serif text-2xl font-bold tracking-wider text-white">
-              COOK<span className="text-sage">FLOW</span>
+              COOK<span className="text-[#14b8a6]">FLOW</span>
             </span>
           </div>
           
@@ -22,7 +23,7 @@ const Navbar: React.FC = () => {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  className="text-gray-300 hover:text-sage transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium font-sans uppercase tracking-widest"
+                  className="text-gray-300 hover:text-[#14b8a6] transition-colors duration-300 px-3 py-2 rounded-md text-sm font-medium font-sans uppercase tracking-widest"
                 >
                   {item}
                 </a>
@@ -31,9 +32,9 @@ const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:block">
-            <button className="bg-sage/10 hover:bg-sage/20 text-sage border border-sage/50 px-6 py-2 rounded-full font-sans text-sm font-semibold transition-all duration-300 neon-glow">
+            <Link to="/app/courses" className="bg-[#14b8a6]/10 hover:bg-[#14b8a6]/20 text-[#14b8a6] border border-sage/50 px-6 py-2 rounded-full font-sans text-sm font-semibold transition-all duration-300 neon-glow">
               Access the Kitchen
-            </button>
+            </Link>
           </div>
 
           <div className="-mr-2 flex md:hidden">
@@ -66,9 +67,9 @@ const Navbar: React.FC = () => {
                   {item}
                 </a>
               ))}
-              <button className="w-full text-left mt-4 bg-sage/10 text-sage border border-sage/50 px-4 py-3 rounded-md font-sans text-sm font-semibold">
+              <Link to="/app/courses" onClick={() => setIsOpen(false)} className="block w-full text-left mt-4 bg-[#14b8a6]/10 text-[#14b8a6] border border-sage/50 px-4 py-3 rounded-md font-sans text-sm font-semibold">
                 Access the Kitchen
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}

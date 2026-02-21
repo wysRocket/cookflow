@@ -7,9 +7,9 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <ChefHat className="h-6 w-6 text-sage" />
+            <ChefHat className="h-6 w-6 text-[#14b8a6]" />
             <span className="font-serif text-xl font-bold tracking-wider text-white">
-              COOK<span className="text-sage">FLOW</span>
+              COOK<span className="text-[#14b8a6]">FLOW</span>
             </span>
           </div>
           
@@ -24,33 +24,33 @@ const Footer: React.FC = () => {
           <div>
             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-widest">Platform</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-sage cursor-pointer">Academy</li>
-              <li className="hover:text-sage cursor-pointer">Mentors</li>
-              <li className="hover:text-sage cursor-pointer">Pricing</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Academy</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Mentors</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Pricing</li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-widest">Resources</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-sage cursor-pointer">Blog</li>
-              <li className="hover:text-sage cursor-pointer">Technique Guide</li>
-              <li className="hover:text-sage cursor-pointer">Ingredient Map</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Blog</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Technique Guide</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Ingredient Map</li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-widest">Company</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-sage cursor-pointer">About</li>
-              <li className="hover:text-sage cursor-pointer">Careers</li>
-              <li className="hover:text-sage cursor-pointer">Press</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">About</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Careers</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Press</li>
             </ul>
           </div>
           <div>
             <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-widest">Legal</h4>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li className="hover:text-sage cursor-pointer">Privacy</li>
-              <li className="hover:text-sage cursor-pointer">Terms</li>
-              <li className="hover:text-sage cursor-pointer">VAT Info</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Privacy</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">Terms</li>
+              <li className="hover:text-[#14b8a6] cursor-pointer">VAT Info</li>
             </ul>
           </div>
         </div>

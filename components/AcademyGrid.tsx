@@ -102,7 +102,7 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
                   onMouseLeave={() => setShowTip(false)}
                   onFocus={() => setShowTip(true)}
                   onBlur={() => setShowTip(false)}
-                  className="p-1 rounded-full bg-white/10 hover:bg-sage/20 text-white/50 hover:text-sage transition-colors backdrop-blur-sm border border-white/5 hover:border-sage/50"
+                  className="p-1 rounded-full bg-white/10 hover:bg-[#14b8a6]/20 text-white/50 hover:text-[#14b8a6] transition-colors backdrop-blur-sm border border-white/5 hover:border-sage/50"
                   aria-label="Scientific Principle"
                 >
                   <Info className="w-4 h-4" />
@@ -117,7 +117,7 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
                       style={{ transformStyle: "preserve-3d", transform: "translateZ(60px)" }}
                       className="absolute bottom-full left-0 mb-3 w-56 p-4 bg-obsidian/95 border border-sage/50 rounded-xl text-left shadow-2xl shadow-sage/10 backdrop-blur-xl z-50 pointer-events-none"
                     >
-                      <div className="flex items-center gap-2 mb-2 text-sage border-b border-white/10 pb-2">
+                      <div className="flex items-center gap-2 mb-2 text-[#14b8a6] border-b border-white/10 pb-2">
                         <FlaskConical className="w-3 h-3" />
                         <span className="text-[10px] font-bold uppercase tracking-widest">Mentor Tip</span>
                       </div>
@@ -134,11 +134,11 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
             {/* Metrics Row */}
             <div className="flex items-center gap-4 text-gray-200 text-sm font-sans mb-4 shadow-black drop-shadow-md">
               <div className="flex items-center gap-1">
-                <Award className="w-4 h-4 text-sage" />
+                <Award className="w-4 h-4 text-[#14b8a6]" />
                 <span>{module.level}</span>
               </div>
               <div className="flex items-center gap-1">
-                <Clock className="w-4 h-4 text-sage" />
+                <Clock className="w-4 h-4 text-[#14b8a6]" />
                 <span>{module.lessons} Lessons</span>
               </div>
             </div>
@@ -154,9 +154,9 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
              className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-obsidian/90 backdrop-blur-md border-t border-sage/30 rounded-b-xl translate-y-8 group-hover:translate-y-0"
           >
             <div className="flex items-start gap-3">
-              <Info className="w-5 h-5 text-sage shrink-0 mt-1" />
+              <Info className="w-5 h-5 text-[#14b8a6] shrink-0 mt-1" />
               <div>
-                <p className="text-xs font-bold text-sage uppercase tracking-wider mb-1">Key Technique</p>
+                <p className="text-xs font-bold text-[#14b8a6] uppercase tracking-wider mb-1">Key Technique</p>
                 <p className="text-sm text-gray-200">{module.technique}</p>
               </div>
             </div>

@@ -1,0 +1,432 @@
+import React, { useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { authClient } from '../lib/auth-client';
+
+// ── Types ──────────────────────────────────────────────────────────────────────
+type AuthClientWithSignOut = {
+    signOut: () => Promise<{ error?: { message?: string } | null }>;
+};
+
+// ── Toggle Component ────────────────────────────────────────────────────────────
+interface ToggleProps {
+    enabled: boolean;
+    onToggle: () => void;
+    disabled?: boolean;
+}
+
+const Toggle: React.FC<ToggleProps> = ({ enabled, onToggle, disabled = false }) => (
+    <button
+        type="button"
+        onClick={onToggle}
+        disabled={disabled}
+        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#0ff0f0] focus:ring-offset-2 focus:ring-offset-[#102222] ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+            } ${enabled ? 'bg-[#0ff0f0]/30 border border-[#0ff0f0]/40' : 'bg-[#234848]'}`}
+    >
+        <span
+            className={`inline-block h-4 w-4 transform rounded-full transition shadow-md ${enabled ? 'translate-x-6 bg-[#0ff0f0]' : 'translate-x-1 bg-slate-400'
+                }`}
+        />
+    </button>
+);
+
+// ── Main Component ──────────────────────────────────────────────────────────────
+const Settings: React.FC = () => {
+    const navigate = useNavigate();
+    const shouldEnforceAuth = import.meta.env.VITE_REQUIRE_AUTH === 'true';
+    const { data: session } = authClient.useSession();
+
+    const sessionUser = useMemo(
+        () => session?.user as { name?: string; email?: string; image?: string } | undefined,
+        [session]
+    );
+
+    // Profile state
+    const [firstName, setFirstName] = useState(sessionUser?.name?.split(' ')[0] ?? 'Julian');
+    const [lastName, setLastName] = useState(sessionUser?.name?.split(' ').slice(1).join(' ') ?? 'Vandermerwe');
+    const [bio, setBio] = useState(
+        'Aspiring home cook specializing in French pastry. Love experimenting with sous-vide techniques.'
+    );
+    const [interests, setInterests] = useState(['Pastry', 'Sous-vide', 'Italian']);
+
+    // Preferences state
+    const [voiceControl, setVoiceControl] = useState(true);
+    const [weeklyDigest, setWeeklyDigest] = useState(false);
+
+    // UI state
+    const [isSigningOut, setIsSigningOut] = useState(false);
+    const [saved, setSaved] = useState(false);
+
+    const displayEmail = sessionUser?.email ?? 'chef.alex@cookflow.app';
+
+    const handleSave = () => {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 2000);
+    };
+
+    const handleSignOut = async () => {
+        setIsSigningOut(true);
+        try {
+            const client = authClient as unknown as AuthClientWithSignOut;
+            await client.signOut();
+        } finally {
+            setIsSigningOut(false);
+            navigate('/auth/sign-in', { replace: true });
+        }
+    };
+
+    const removeInterest = (tag: string) =>
+        setInterests((prev) => prev.filter((t) => t !== tag));
+
+    return (
+        <>
+            {/* Load Material Symbols font */}
+            <link
+                href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap"
+                rel="stylesheet"
+            />
+
+            <style>{`
+                .ms-icon { font-family: 'Material Symbols Outlined'; font-style: normal; font-weight: 400; font-display: swap; }
+                .glass-panel {
+                    background: rgba(21, 42, 42, 0.6);
+                    backdrop-filter: blur(12px);
+                    -webkit-backdrop-filter: blur(12px);
+                    border: 1px solid rgba(15, 240, 240, 0.1);
+                }
+                .gold-glow {
+                    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+                    border: 1px solid rgba(212, 175, 55, 0.3);
+                }
+                .cf-input {
+                    width: 100%;
+                    background: #152a2a;
+                    border: 1px solid #234848;
+                    border-radius: 0.5rem;
+                    padding: 0.75rem 1rem;
+                    color: #f1f5f9;
+                    outline: none;
+                    font-size: 0.875rem;
+                    transition: border-color 0.15s, box-shadow 0.15s;
+                    font-family: inherit;
+                }
+                .cf-input:focus { border-color: #0ff0f0; box-shadow: 0 0 0 1px #0ff0f0; }
+                .cf-input::placeholder { color: #4a6a6a; }
+            `}</style>
+
+            <div
+                className="min-h-screen relative font-['Noto_Sans',sans-serif]"
+                style={{ background: 'linear-gradient(135deg, #102222 0%, #0a1a1a 100%)' }}
+            >
+                {/* Decorative blobs */}
+                <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: 'rgba(15,240,240,0.04)' }} />
+                <div className="pointer-events-none absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full blur-[80px]" style={{ background: 'rgba(212,175,55,0.04)' }} />
+
+                <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10">
+
+                    {/* ── Header ──────────────────────────────────────────────── */}
+                    <header className="mb-8 md:mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4 border-b pb-6" style={{ borderColor: '#234848' }}>
+                        <div>
+                            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1 font-serif" style={{ color: '#d4af37' }}>
+                                Settings
+                            </h1>
+                            <p className="text-sm text-slate-400">Manage your profile, billing, and cooking preferences.</p>
+                        </div>
+                        <div className="flex gap-3">
+                            <button
+                                onClick={() => navigate(-1)}
+                                className="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white transition-all"
+                                style={{ border: '1px solid #234848' }}
+                                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(15,240,240,0.5)')}
+                                onMouseLeave={e => (e.currentTarget.style.borderColor = '#234848')}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handleSave}
+                                className="px-6 py-2 rounded-lg text-sm font-bold transition-all"
+                                style={{
+                                    background: '#0ff0f0',
+                                    color: '#102222',
+                                    boxShadow: '0 0 15px rgba(15,240,240,0.3)',
+                                }}
+                            >
+                                {saved ? '✓ Saved!' : 'Save Changes'}
+                            </button>
+                        </div>
+                    </header>
+
+                    {/* ── Grid ────────────────────────────────────────────────── */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+
+                        {/* ── Left Column ────────────────────────────────────── */}
+                        <div className="lg:col-span-8 flex flex-col gap-6 md:gap-8">
+
+                            {/* Profile Card */}
+                            <section className="glass-panel rounded-xl p-6 md:p-8">
+                                <div className="flex items-center gap-2 mb-6" style={{ color: '#0ff0f0' }}>
+                                    <span className="ms-icon text-xl material-symbols-outlined">person</span>
+                                    <h2 className="text-lg font-bold text-white tracking-wide font-serif">Profile Settings</h2>
+                                </div>
+
+                                <div className="flex flex-col md:flex-row gap-8 items-start">
+                                    {/* Avatar */}
+                                    <div className="flex flex-col items-center gap-2 flex-shrink-0">
+                                        <div className="relative group cursor-pointer">
+                                            <div className="w-24 h-24 md:w-28 md:h-28 rounded-full p-1" style={{ border: '2px solid #0ff0f0' }}>
+                                                {sessionUser?.image ? (
+                                                    <img
+                                                        src={sessionUser.image}
+                                                        alt="Profile"
+                                                        className="w-full h-full rounded-full object-cover"
+                                                    />
+                                                ) : (
+                                                    <div
+                                                        className="w-full h-full rounded-full flex items-center justify-center text-3xl"
+                                                        style={{ background: 'linear-gradient(135deg, #234848, #102222)' }}
+                                                    >
+                                                        👨‍🍳
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="absolute inset-0 flex items-center justify-center rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                <span className="material-symbols-outlined text-white text-xl">edit</span>
+                                            </div>
+                                        </div>
+                                        <span className="text-xs font-bold tracking-wider" style={{ color: '#0ff0f0' }}>CHANGE PHOTO</span>
+                                    </div>
+
+                                    {/* Inputs */}
+                                    <div className="flex-1 w-full grid grid-cols-1 md:grid-cols-2 gap-5">
+                                        <label className="flex flex-col gap-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">First Name</span>
+                                            <input
+                                                className="cf-input"
+                                                type="text"
+                                                value={firstName}
+                                                onChange={e => setFirstName(e.target.value)}
+                                            />
+                                        </label>
+                                        <label className="flex flex-col gap-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Last Name</span>
+                                            <input
+                                                className="cf-input"
+                                                type="text"
+                                                value={lastName}
+                                                onChange={e => setLastName(e.target.value)}
+                                            />
+                                        </label>
+                                        <label className="flex flex-col gap-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Email</span>
+                                            <input
+                                                className="cf-input"
+                                                type="email"
+                                                value={displayEmail}
+                                                readOnly
+                                                style={{ opacity: 0.7, cursor: 'not-allowed' }}
+                                            />
+                                        </label>
+                                        <label className="flex flex-col gap-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Status</span>
+                                            <div className="cf-input flex items-center gap-2 cursor-default" style={{ opacity: 0.8 }}>
+                                                <span className="w-2 h-2 rounded-full bg-[#0ff0f0] animate-pulse" />
+                                                <span>{shouldEnforceAuth ? 'Authenticated' : 'Dev Mode'}</span>
+                                            </div>
+                                        </label>
+                                        <label className="flex flex-col gap-2 md:col-span-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Bio</span>
+                                            <textarea
+                                                className="cf-input resize-y"
+                                                rows={3}
+                                                value={bio}
+                                                onChange={e => setBio(e.target.value)}
+                                            />
+                                        </label>
+
+                                        {/* Culinary Interests */}
+                                        <div className="md:col-span-2">
+                                            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                                                Culinary Interests
+                                            </span>
+                                            <div className="flex flex-wrap gap-2">
+                                                {interests.map(tag => (
+                                                    <span
+                                                        key={tag}
+                                                        className="px-3 py-1 rounded-full text-sm flex items-center gap-1"
+                                                        style={{
+                                                            background: '#234848',
+                                                            color: '#0ff0f0',
+                                                            border: '1px solid rgba(15,240,240,0.2)',
+                                                        }}
+                                                    >
+                                                        {tag}
+                                                        <button
+                                                            onClick={() => removeInterest(tag)}
+                                                            className="hover:text-white ml-0.5 transition-colors leading-none"
+                                                        >
+                                                            ×
+                                                        </button>
+                                                    </span>
+                                                ))}
+                                                <button className="px-3 py-1 rounded-full border border-dashed text-sm text-slate-400 hover:text-white hover:border-slate-300 transition-colors" style={{ borderColor: '#4a6a6a' }}>
+                                                    + Add Tag
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            {/* Account & Plan */}
+                            <section className="glass-panel rounded-xl p-6 md:p-8 relative overflow-hidden">
+                                <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+                                    <span className="material-symbols-outlined text-white" style={{ fontSize: '8rem', lineHeight: 1 }}>verified</span>
+                                </div>
+                                <div className="flex items-center gap-2 mb-6 relative z-10" style={{ color: '#0ff0f0' }}>
+                                    <span className="material-symbols-outlined text-xl">badge</span>
+                                    <h2 className="text-lg font-bold text-white tracking-wide font-serif">Account &amp; Plan</h2>
+                                </div>
+                                <div
+                                    className="flex flex-col md:flex-row items-center justify-between gap-6 p-5 md:p-6 rounded-lg relative z-10"
+                                    style={{ background: '#112222', border: '1px solid #234848' }}
+                                >
+                                    <div>
+                                        <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Current Tier</p>
+                                        <h3 className="text-xl md:text-2xl font-bold text-white flex flex-wrap items-center gap-3 font-serif">
+                                            Chef de Partie
+                                            <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide text-black" style={{ background: '#d4af37' }}>
+                                                Premium
+                                            </span>
+                                        </h3>
+                                        <p className="text-slate-400 text-sm mt-1">$12.00 / month • Billed annually</p>
+                                    </div>
+                                    <button
+                                        className="flex items-center gap-2 py-3 px-6 rounded-lg font-bold text-sm text-black transition-all whitespace-nowrap flex-shrink-0"
+                                        style={{
+                                            background: '#d4af37',
+                                            boxShadow: '0 0 20px rgba(212,175,55,0.4)',
+                                        }}
+                                        onMouseEnter={e => (e.currentTarget.style.background = '#bfa030')}
+                                        onMouseLeave={e => (e.currentTarget.style.background = '#d4af37')}
+                                    >
+                                        <span className="material-symbols-outlined text-xl">star</span>
+                                        Upgrade to Executive Chef
+                                    </button>
+                                </div>
+                            </section>
+
+                            {/* Preferences */}
+                            <section className="glass-panel rounded-xl p-6 md:p-8">
+                                <div className="flex items-center gap-2 mb-6" style={{ color: '#0ff0f0' }}>
+                                    <span className="material-symbols-outlined text-xl">tune</span>
+                                    <h2 className="text-lg font-bold text-white tracking-wide font-serif">Preferences</h2>
+                                </div>
+                                <div className="flex flex-col divide-y" style={{ borderColor: '#234848' }}>
+                                    {/* Dark Mode (always on in this theme, decorative) */}
+                                    <div className="flex items-center justify-between py-4">
+                                        <div>
+                                            <p className="text-white font-medium">Dark Mode</p>
+                                            <p className="text-slate-500 text-sm">Easier on the eyes in low-light kitchens.</p>
+                                        </div>
+                                        <Toggle enabled={true} onToggle={() => { }} disabled />
+                                    </div>
+                                    {/* Voice Control */}
+                                    <div className="flex items-center justify-between py-4">
+                                        <div>
+                                            <p className="text-white font-medium">Voice Control</p>
+                                            <p className="text-slate-500 text-sm">Enable "Hey Chef" commands for hands-free cooking.</p>
+                                        </div>
+                                        <Toggle enabled={voiceControl} onToggle={() => setVoiceControl(v => !v)} />
+                                    </div>
+                                    {/* Weekly Digest */}
+                                    <div className="flex items-center justify-between py-4">
+                                        <div>
+                                            <p className="text-white font-medium">Weekly Digest</p>
+                                            <p className="text-slate-500 text-sm">Receive curated recipes and tips every Monday.</p>
+                                        </div>
+                                        <Toggle enabled={weeklyDigest} onToggle={() => setWeeklyDigest(v => !v)} />
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+
+                        {/* ── Right Column ────────────────────────────────────── */}
+                        <div className="lg:col-span-4 flex flex-col gap-6 md:gap-8">
+
+                            {/* Subscription Card */}
+                            <div className="rounded-xl p-6 relative gold-glow" style={{ background: '#102222' }}>
+                                <div className="flex items-center justify-between mb-4">
+                                    <h3 className="text-lg font-bold font-serif" style={{ color: '#d4af37' }}>Subscription</h3>
+                                    <span className="material-symbols-outlined" style={{ color: '#d4af37' }}>credit_card</span>
+                                </div>
+                                <div className="flex flex-col gap-4">
+                                    <div className="p-4 rounded-lg" style={{ background: '#152a2a', border: '1px solid #234848' }}>
+                                        <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-1">Next Billing Date</p>
+                                        <p className="text-white font-mono text-lg">Oct 24, 2024</p>
+                                        <p className="text-[#0ff0f0] text-xs mt-1">Auto-renewal active</p>
+                                    </div>
+                                    <div className="p-4 rounded-lg" style={{ background: '#152a2a', border: '1px solid #234848' }}>
+                                        <p className="text-xs text-slate-400 uppercase font-bold tracking-wider mb-3">Payment Method</p>
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-6 rounded flex items-center justify-center text-[8px] text-white font-bold tracking-tighter bg-slate-700">
+                                                VISA
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <p className="text-white text-sm font-medium">Visa ending in 4242</p>
+                                                <p className="text-slate-500 text-xs">Expires 12/25</p>
+                                            </div>
+                                            <button className="ml-auto text-sm hover:text-white transition-colors" style={{ color: '#0ff0f0' }}>Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button
+                                    className="w-full mt-6 py-2 rounded text-sm text-slate-400 hover:text-white transition-colors"
+                                    style={{ border: '1px solid #234848' }}
+                                    onMouseEnter={e => (e.currentTarget.style.borderColor = '#4a6a6a')}
+                                    onMouseLeave={e => (e.currentTarget.style.borderColor = '#234848')}
+                                >
+                                    View Billing History
+                                </button>
+                            </div>
+
+                            {/* Help & Support */}
+                            <div className="glass-panel rounded-xl p-6">
+                                <h3 className="text-base font-bold text-white mb-4 font-serif">Need Help?</h3>
+                                <ul className="space-y-3">
+                                    {[
+                                        { icon: 'help', label: 'Support Center' },
+                                        { icon: 'chat', label: 'Chat with a Chef' },
+                                        { icon: 'policy', label: 'Privacy Policy' },
+                                    ].map(({ icon, label }) => (
+                                        <li key={label}>
+                                            <a
+                                                href="#"
+                                                className="flex items-center gap-3 text-slate-400 hover:text-[#0ff0f0] transition-colors text-sm group"
+                                            >
+                                                <span className="material-symbols-outlined text-lg group-hover:scale-110 transition-transform">{icon}</span>
+                                                {label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                            {/* Danger Zone / Sign Out */}
+                            <div className="pt-4 border-t mt-auto" style={{ borderColor: '#234848' }}>
+                                <button
+                                    onClick={handleSignOut}
+                                    disabled={isSigningOut || !session}
+                                    className="flex items-center gap-2 text-sm font-medium transition-colors text-red-400 hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <span className="material-symbols-outlined text-lg">logout</span>
+                                    {isSigningOut ? 'Signing out…' : 'Sign Out'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+};
+
+export default Settings;

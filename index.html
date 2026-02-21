@@ -1,86 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>COOKFLOW | Elite Culinary Mastery</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <script>
       tailwind.config = {
         theme: {
           extend: {
             colors: {
-              obsidian: '#0a0a0a',
-              'obsidian-light': '#171717',
-              sage: '#5eead4', // teal-300
-              saffron: '#fb923c', // orange-400
-              gold: '#eab308',
+              obsidian: "#0a0a0a",
+              "obsidian-light": "#171717",
+              sage: "#14b8a6",
+              saffron: "#fb923c",
+              gold: "#D4AF37",
+              // CookFlow app design tokens
+              "cf-teal": "#14b8a6",
+              "cf-gold": "#D4AF37",
+              "cf-bg": "#0F172A",
+              "cf-surface": "#1E293B",
+              "cf-text": "#F1F5F9",
+              "cf-muted": "#94A3B8",
+              "cf-border": "#334155",
             },
             fontFamily: {
-              serif: ['"Playfair Display"', 'serif'],
-              sans: ['"Space Grotesk"', 'sans-serif'],
+              serif: ['"Playfair Display"', "serif"],
+              sans: ['"Space Grotesk"', "sans-serif"],
+              inter: ['"Inter"', "system-ui", "sans-serif"],
             },
             backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+              "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
             },
             keyframes: {
               shimmer: {
-                '0%': { transform: 'translateX(-100%)' },
-                '100%': { transform: 'translateX(100%)' },
-              }
+                "0%": { transform: "translateX(-100%)" },
+                "100%": { transform: "translateX(100%)" },
+              },
             },
             animation: {
-              shimmer: 'shimmer 2s infinite',
-            }
-          }
-        }
-      }
+              shimmer: "shimmer 2s infinite",
+            },
+          },
+        },
+      };
     </script>
     <style>
       body {
         background-color: #0a0a0a;
         color: #e5e5e5;
       }
+
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
+
       ::-webkit-scrollbar-track {
         background: #0a0a0a;
       }
+
       ::-webkit-scrollbar-thumb {
         background: #333;
         border-radius: 4px;
       }
+
       ::-webkit-scrollbar-thumb:hover {
-        background: #5eead4;
+        background: #14b8a6;
       }
+
       .glass-panel {
         background: rgba(23, 23, 23, 0.7);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.08);
       }
+
       .neon-glow:hover {
-        box-shadow: 0 0 20px rgba(94, 234, 212, 0.2);
+        box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
-    "framer-motion": "https://esm.sh/framer-motion@^12.34.1",
-    "react/": "https://esm.sh/react@^19.2.4/",
-    "react": "https://esm.sh/react@^19.2.4"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+      {
+        "imports": {
+          "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+          "lucide-react": "https://esm.sh/lucide-react@^0.574.0",
+          "framer-motion": "https://esm.sh/framer-motion@^12.34.1",
+          "react/": "https://esm.sh/react@^19.2.4/",
+          "react": "https://esm.sh/react@^19.2.4"
+        }
+      }
+    </script>
+  </head>
+
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>

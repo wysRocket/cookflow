@@ -15,7 +15,7 @@ const RitualList: React.FC = () => {
           <div className="lg:col-span-4">
             <h2 className="font-serif text-4xl md:text-5xl text-white mb-6">
               Signature <br/>
-              <span className="text-sage italic">CookFlows</span>
+              <span className="text-[#14b8a6] italic">CookFlows</span>
             </h2>
             <p className="text-gray-400 mb-8 leading-relaxed">
               These are not just recipes. They are rituals. Multi-day processes designed to fundamentally alter your relationship with ingredients.
@@ -45,7 +45,7 @@ const RitualList: React.FC = () => {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-2xl font-serif text-white group-hover:text-sage transition-colors duration-300">
+                    <h3 className="text-2xl font-serif text-white group-hover:text-[#14b8a6] transition-colors duration-300">
                       {ritual.title}
                     </h3>
                     <p className="mt-2 text-gray-400 max-w-md text-sm">
@@ -59,7 +59,7 @@ const RitualList: React.FC = () => {
                       <span className="text-sm text-gray-300 font-sans">{ritual.duration}</span>
                     </div>
                     <div className="h-10 w-[1px] bg-white/10 hidden md:block" />
-                     <button className="p-3 rounded-full bg-white/5 text-white hover:bg-sage hover:text-obsidian transition-colors duration-300">
+                     <button className="p-3 rounded-full bg-white/5 text-white hover:bg-[#14b8a6] hover:text-obsidian transition-colors duration-300">
                         <ArrowUpRight className="w-5 h-5" />
                      </button>
                   </div>

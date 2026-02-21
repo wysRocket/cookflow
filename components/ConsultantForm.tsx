@@ -8,7 +8,7 @@ const ConsultantForm: React.FC = () => {
   return (
     <section className="py-24 bg-obsidian relative overflow-hidden">
       {/* Background blobs */}
-      <div className="absolute top-0 left-0 w-96 h-96 bg-sage/5 rounded-full blur-[100px]" />
+      <div className="absolute top-0 left-0 w-96 h-96 bg-[#14b8a6]/5 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-saffron/5 rounded-full blur-[100px]" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -44,7 +44,7 @@ const ConsultantForm: React.FC = () => {
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-widest mb-2">Interests</label>
               <div className="flex flex-wrap gap-2">
                 {['Modernist', 'Pastry', 'Fermentation', 'Butchery', 'Vegan', 'Sourcing'].map((tag) => (
-                  <button key={tag} className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 text-sm hover:border-sage hover:text-sage transition-all">
+                  <button key={tag} className="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-gray-300 text-sm hover:border-sage hover:text-[#14b8a6] transition-all">
                     {tag}
                   </button>
                 ))}
