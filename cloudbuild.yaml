@@ -1,0 +1,25 @@
+steps:
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'us-docker.pkg.dev/sample-firebase-ai-app-9cee4/cloudrun/container/aistudio/applet-proxy', '.']
+  
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-docker.pkg.dev/sample-firebase-ai-app-9cee4/cloudrun/container/aistudio/applet-proxy']
+
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'cookflow'
+      - '--image'
+      - 'us-docker.pkg.dev/sample-firebase-ai-app-9cee4/cloudrun/container/aistudio/applet-proxy'
+      - '--region'
+      - 'us-west1'
+      - '--project'
+      - 'sample-firebase-ai-app-9cee4'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
