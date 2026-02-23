@@ -46,7 +46,7 @@ const creations = [
     rating: 4.9,
     reviews: 89,
     image:
-      "https://images.unsplash.com/photo-1627582236894-6d9bfe65d064?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1514516875225-c603b5cb47ef?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 3,
@@ -56,7 +56,7 @@ const creations = [
     rating: 4.7,
     reviews: 56,
     image:
-      "https://images.unsplash.com/photo-1514309401768-45eacdeec7ce?auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 4,
@@ -153,6 +153,7 @@ const ChefProfile: React.FC = () => {
         <img
           src={profile.banner}
           alt="Kitchen Banner"
+          loading="lazy"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/50 to-transparent" />
@@ -165,6 +166,7 @@ const ChefProfile: React.FC = () => {
             <img
               src={profile.avatar}
               alt={profile.name}
+              loading="lazy"
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-2 right-2 w-4 h-4 bg-[#D4AF37] border-2 border-[#0F172A] rounded-full" />
@@ -262,6 +264,7 @@ const ChefProfile: React.FC = () => {
                     <img
                       src={item.image}
                       alt={item.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute top-3 right-3 bg-[#1E293B]/80 backdrop-blur text-[#14b8a6] text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1 border border-[#334155]">
@@ -367,8 +370,9 @@ const ChefProfile: React.FC = () => {
           {/* Coming Soon Teaser */}
           <div className="relative rounded-xl overflow-hidden border border-[#334155] group cursor-pointer shadow-lg">
             <img
-              src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&q=80"
+              src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=800&q=80"
               alt="Mastering Modern Sauces"
+              loading="lazy"
               className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent p-5 flex flex-col justify-end">
@@ -402,6 +406,7 @@ const ChefProfile: React.FC = () => {
                     <img
                       src={person.avatar}
                       alt={person.name}
+                      loading="lazy"
                       className="w-8 h-8 rounded-full border border-[#334155]"
                     />
                     <span className="text-sm font-medium text-[#F1F5F9]">

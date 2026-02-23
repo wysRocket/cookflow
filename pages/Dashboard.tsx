@@ -9,7 +9,7 @@ const academyCourses = [
         instructor: 'PARIS',
         timeAgo: '11 years ago',
         details: '27 details',
-        image: 'https://images.unsplash.com/photo-1514845565127-ec14eebb7a0e?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 2,
@@ -17,7 +17,7 @@ const academyCourses = [
         instructor: 'ROME',
         timeAgo: '11 years ago',
         details: '15 details',
-        image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 3,
@@ -25,7 +25,7 @@ const academyCourses = [
         instructor: 'SAN SEBASTIAN',
         timeAgo: '11 years ago',
         details: '15 details',
-        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 4,
@@ -33,7 +33,7 @@ const academyCourses = [
         instructor: 'COPENHAGEN',
         timeAgo: '11 years ago',
         details: '27 details',
-        image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 5,
@@ -41,7 +41,7 @@ const academyCourses = [
         instructor: 'ROUEN',
         timeAgo: '11 years ago',
         details: '21 details',
-        image: 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 6,
@@ -49,7 +49,7 @@ const academyCourses = [
         instructor: 'OSLO',
         timeAgo: '05 years ago',
         details: '15 details',
-        image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 7,
@@ -57,7 +57,7 @@ const academyCourses = [
         instructor: 'COPENHAGEN',
         timeAgo: '7 years ago',
         details: '18 details',
-        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80',
     },
     {
         id: 8,
@@ -65,7 +65,7 @@ const academyCourses = [
         instructor: 'COPENHAGEN',
         timeAgo: '01 years ago',
         details: '27 details',
-        image: 'https://images.unsplash.com/photo-1558450143-7dcfae4bf5e8?auto=format&fit=crop&q=80',
+        image: 'https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80',
     }
 ];
 
@@ -86,6 +86,7 @@ const Dashboard: React.FC = () => {
                                 <img
                                     src={course.image}
                                     alt={course.title}
+                                    loading="lazy"
                                     className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-transparent to-transparent opacity-60" />

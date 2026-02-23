@@ -4,7 +4,7 @@ import { MapPin, Clock, Award, Info, FlaskConical } from 'lucide-react';
 import { academyModules } from '../data';
 import { AcademyModule } from '../types';
 
-const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }) => {
+const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({ module, index }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [showTip, setShowTip] = useState(false);
 
@@ -19,7 +19,7 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
   // Increased rotation range for more pronounced 3D effect
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["22deg", "-22deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-22deg", "22deg"]);
-  
+
   // Parallax effect for content
   const contentZ = useTransform(mouseYSpring, [-0.5, 0.5], ["30px", "30px"]);
 
@@ -72,19 +72,20 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
           <img
             src={module.image}
             alt={module.focus}
+            loading="lazy"
             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          
+
           {/* Shimmer Effect */}
           <div className="absolute inset-0 z-20 pointer-events-none overflow-hidden rounded-xl">
-             <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer">
-                <div className="w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg]" />
-             </div>
+            <div className="absolute inset-0 -translate-x-full group-hover:animate-shimmer">
+              <div className="w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg]" />
+            </div>
           </div>
         </div>
 
         {/* Floating Content */}
-        <div 
+        <div
           className="absolute inset-0 z-30 p-6 flex flex-col justify-end"
           style={{ transform: "translateZ(40px)" }}
         >
@@ -93,7 +94,7 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
               <MapPin className="w-4 h-4 shadow-black drop-shadow-md" />
               <span className="text-xs font-bold tracking-widest uppercase shadow-black drop-shadow-md">{module.city}</span>
             </div>
-            
+
             <div className="flex items-center gap-3 mb-2">
               <h3 className="text-2xl font-serif text-white shadow-black drop-shadow-lg">{module.focus}</h3>
               <div className="relative">
@@ -130,7 +131,7 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
                 </AnimatePresence>
               </div>
             </div>
-            
+
             {/* Metrics Row */}
             <div className="flex items-center gap-4 text-gray-200 text-sm font-sans mb-4 shadow-black drop-shadow-md">
               <div className="flex items-center gap-1">
@@ -150,8 +151,8 @@ const AcademyCard = ({ module, index }: { module: AcademyModule; index: number }
           </div>
 
           {/* Hidden Reveal on Hover */}
-          <div 
-             className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-obsidian/90 backdrop-blur-md border-t border-sage/30 rounded-b-xl translate-y-8 group-hover:translate-y-0"
+          <div
+            className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-obsidian/90 backdrop-blur-md border-t border-sage/30 rounded-b-xl translate-y-8 group-hover:translate-y-0"
           >
             <div className="flex items-start gap-3">
               <Info className="w-5 h-5 text-[#14b8a6] shrink-0 mt-1" />

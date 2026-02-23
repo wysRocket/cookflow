@@ -154,10 +154,10 @@ const Community: React.FC = () => {
         p.id !== id
           ? p
           : {
-              ...p,
-              liked: !p.liked,
-              likes: p.liked ? p.likes - 1 : p.likes + 1,
-            },
+            ...p,
+            liked: !p.liked,
+            likes: p.liked ? p.likes - 1 : p.likes + 1,
+          },
       ),
     );
   };
@@ -198,11 +198,10 @@ const Community: React.FC = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              activeTab === tab
+            className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeTab === tab
                 ? "bg-[#14b8a6] text-white"
                 : "bg-[#1E293B] text-[#94A3B8] border border-[#334155] hover:border-[#14b8a6]/50 hover:text-[#F1F5F9]"
-            }`}
+              }`}
           >
             {tab}
           </button>
@@ -223,6 +222,7 @@ const Community: React.FC = () => {
                 <img
                   src={post.avatar}
                   alt={post.author}
+                  loading="lazy"
                   className="w-10 h-10 rounded-full border border-[#334155] object-cover flex-shrink-0"
                 />
                 <div className="flex-1 min-w-0">
@@ -246,6 +246,7 @@ const Community: React.FC = () => {
                   <img
                     src={post.image}
                     alt="Post"
+                    loading="lazy"
                     className="w-full h-52 object-cover"
                   />
                 </div>
@@ -267,11 +268,10 @@ const Community: React.FC = () => {
               <div className="flex items-center gap-1 pt-1 border-t border-[#334155]">
                 <button
                   onClick={() => toggleLike(post.id)}
-                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-colors ${
-                    post.liked
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-colors ${post.liked
                       ? "text-red-400 bg-red-400/10"
                       : "text-[#64748B] hover:text-red-400 hover:bg-red-400/10"
-                  }`}
+                    }`}
                 >
                   <Heart
                     className={`w-4 h-4 ${post.liked ? "fill-red-400" : ""}`}
@@ -287,11 +287,10 @@ const Community: React.FC = () => {
                 </button>
                 <button
                   onClick={() => toggleBookmark(post.id)}
-                  className={`ml-auto flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-colors ${
-                    post.bookmarked
+                  className={`ml-auto flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-colors ${post.bookmarked
                       ? "text-[#14b8a6] bg-[#14b8a6]/10"
                       : "text-[#64748B] hover:text-[#14b8a6] hover:bg-[#14b8a6]/10"
-                  }`}
+                    }`}
                 >
                   <Bookmark
                     className={`w-4 h-4 ${post.bookmarked ? "fill-[#14b8a6]" : ""}`}
@@ -322,6 +321,7 @@ const Community: React.FC = () => {
                   <img
                     src={chef.avatar}
                     alt={chef.name}
+                    loading="lazy"
                     className="w-9 h-9 rounded-full border border-[#334155] object-cover flex-shrink-0"
                   />
                   <div className="flex-1 min-w-0">

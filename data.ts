@@ -5,7 +5,7 @@ export const academyModules: AcademyModule[] = [
     id: '1',
     city: 'Paris',
     focus: 'Modern Pastry',
-    image: 'https://images.unsplash.com/photo-1605807646983-377bc5a76493?q=80&w=1200',
+    image: 'https://images.unsplash.com/photo-1579372786545-d24232daf58c?q=80&w=1200',
     level: 'Elite',
     lessons: 12,
     price: 49,

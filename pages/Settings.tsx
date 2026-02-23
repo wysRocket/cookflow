@@ -32,7 +32,7 @@ const Toggle: React.FC<ToggleProps> = ({ enabled, onToggle, disabled = false }) 
 // ── Main Component ──────────────────────────────────────────────────────────────
 const Settings: React.FC = () => {
     const navigate = useNavigate();
-    const shouldEnforceAuth = import.meta.env.VITE_REQUIRE_AUTH === 'true';
+    const shouldEnforceAuth = (import.meta as any).env.VITE_REQUIRE_AUTH === 'true';
     const { data: session } = authClient.useSession();
 
     const sessionUser = useMemo(
@@ -114,12 +114,8 @@ const Settings: React.FC = () => {
             `}</style>
 
             <div
-                className="min-h-screen relative font-['Noto_Sans',sans-serif]"
-                style={{ background: 'linear-gradient(135deg, #102222 0%, #0a1a1a 100%)' }}
+                className="relative font-['Noto_Sans',sans-serif]"
             >
-                {/* Decorative blobs */}
-                <div className="pointer-events-none absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[100px]" style={{ background: 'rgba(15,240,240,0.04)' }} />
-                <div className="pointer-events-none absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full blur-[80px]" style={{ background: 'rgba(212,175,55,0.04)' }} />
 
                 <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-10">
 
@@ -177,6 +173,7 @@ const Settings: React.FC = () => {
                                                     <img
                                                         src={sessionUser.image}
                                                         alt="Profile"
+                                                        loading="lazy"
                                                         className="w-full h-full rounded-full object-cover"
                                                     />
                                                 ) : (

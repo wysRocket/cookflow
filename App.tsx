@@ -87,7 +87,7 @@ const App: React.FC = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={
-        <div className="min-h-screen bg-[#0F172A] text-[#F1F5F9] flex items-center justify-center">
+        <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
           <p className="text-sm tracking-widest uppercase text-[#94A3B8]">Loading...</p>
         </div>
       }>

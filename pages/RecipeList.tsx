@@ -242,11 +242,10 @@ const RecipeList: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === f
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f
                   ? "bg-[#14b8a6] text-white"
                   : "bg-[#1E293B] text-[#94A3B8] border border-[#334155] hover:border-[#14b8a6]/50 hover:text-[#F1F5F9]"
-              }`}
+                }`}
             >
               {f}
             </button>
@@ -274,6 +273,7 @@ const RecipeList: React.FC = () => {
                 <img
                   src={recipe.image}
                   alt={recipe.name}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B]/80 via-transparent to-transparent" />

@@ -146,13 +146,13 @@ const MealPlanner: React.FC = () => {
     setPickerCell(null);
   };
 
-  const totalMeals = Object.values(plan).reduce(
+  const totalMeals = Object.values(plan).reduce<number>(
     (sum, day) => sum + Object.values(day).filter(Boolean).length,
     0,
   );
-  const totalKcal = Object.values(plan).reduce(
+  const totalKcal = Object.values(plan).reduce<number>(
     (sum, day) =>
-      sum + Object.values(day).reduce((s, e) => s + (e?.kcal ?? 0), 0),
+      sum + Object.values(day).reduce<number>((s, e) => s + (e?.kcal ?? 0), 0),
     0,
   );
 
@@ -254,6 +254,7 @@ const MealPlanner: React.FC = () => {
                         <img
                           src={entry.image}
                           alt={entry.name}
+                          loading="lazy"
                           className="w-full h-14 object-cover"
                         />
                         <div className="px-2 py-1.5 bg-[#0F172A]">
@@ -307,6 +308,7 @@ const MealPlanner: React.FC = () => {
                 <img
                   src={recipe.image}
                   alt={recipe.name}
+                  loading="lazy"
                   className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
                 />
                 <div className="min-w-0">
@@ -393,6 +395,7 @@ const MealPlanner: React.FC = () => {
                   <img
                     src={recipe.image}
                     alt={recipe.name}
+                    loading="lazy"
                     className="w-10 h-10 rounded-lg object-cover flex-shrink-0"
                   />
                   <div>

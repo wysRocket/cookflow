@@ -71,10 +71,10 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose }) => {
                                 onDrop={handleDrop}
                                 onClick={() => fileInputRef.current?.click()}
                                 className={`relative rounded-2xl border-2 border-dashed transition-all cursor-pointer overflow-hidden ${dragging
-                                        ? 'border-[#14b8a6] bg-orange-50'
-                                        : uploaded
-                                            ? 'border-[#D4AF37] bg-lime-50'
-                                            : 'border-[#E2E8F0] bg-[#F8FAFC] hover:border-[#14b8a6] hover:bg-orange-50/50'
+                                    ? 'border-[#14b8a6] bg-orange-50'
+                                    : uploaded
+                                        ? 'border-[#D4AF37] bg-lime-50'
+                                        : 'border-[#E2E8F0] bg-[#F8FAFC] hover:border-[#14b8a6] hover:bg-orange-50/50'
                                     }`}
                                 style={{ minHeight: 180 }}
                             >
@@ -82,6 +82,7 @@ const UploadModal: React.FC<UploadModalProps> = ({ onClose }) => {
                                     <img
                                         src={uploaded}
                                         alt="Preview"
+                                        loading="lazy"
                                         className="w-full h-48 object-cover"
                                     />
                                 ) : (
