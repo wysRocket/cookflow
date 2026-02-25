@@ -56,7 +56,7 @@ const chefs: Chef[] = [
     tags: ["Pastry", "Desserts"],
   },
   {
-    id: 1,
+    id: 4,
     name: "Chef Kenji Nakamura",
     title: "Executive Chef",
     city: "Tokyo, JP",
@@ -69,7 +69,7 @@ const chefs: Chef[] = [
     tags: ["Japanese", "Ramen"],
   },
   {
-    id: 2,
+    id: 5,
     name: "Chef Sofia Reyes",
     title: "Head Chef",
     city: "Mexico City, MX",
@@ -82,7 +82,7 @@ const chefs: Chef[] = [
     tags: ["Mexican", "Street Food"],
   },
   {
-    id: 3,
+    id: 6,
     name: "Chef Luca Ferrara",
     title: "Grill Master",
     city: "Florence, IT",

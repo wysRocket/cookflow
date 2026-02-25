@@ -200,8 +200,9 @@ const MealPlanner: React.FC = () => {
 
       {/* Calendar + Sidebar */}
       <div className="flex gap-5">
-        {/* Calendar */}
-        <div className="flex-1 bg-[#1E293B] rounded-2xl border border-[#334155] overflow-hidden">
+        {/* Calendar — scrolls horizontally on small screens */}
+        <div className="flex-1 min-w-0 overflow-x-auto">
+        <div className="min-w-[560px] bg-[#1E293B] rounded-2xl border border-[#334155] overflow-hidden">
           {/* Day headers */}
           <div className="grid grid-cols-7 border-b border-[#334155]">
             {DAYS.map((day, i) => (
@@ -283,6 +284,9 @@ const MealPlanner: React.FC = () => {
               })}
             </div>
           ))}
+        </div>
+
+        </div>
         </div>
 
         {/* Recipe bank sidebar */}

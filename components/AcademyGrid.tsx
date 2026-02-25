@@ -1,10 +1,20 @@
-import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from 'framer-motion';
-import { MapPin, Clock, Award, Info, FlaskConical } from 'lucide-react';
-import { academyModules } from '../data';
-import { AcademyModule } from '../types';
+import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
+import { MapPin, Clock, Award, Info, FlaskConical } from "lucide-react";
+import { academyModules } from "../data";
+import { AcademyModule } from "../types";
 
-const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({ module, index }) => {
+const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
+  module,
+  index,
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const [showTip, setShowTip] = useState(false);
 
@@ -92,11 +102,15 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({ modul
           <div className="transform transition-transform duration-500 group-hover:-translate-y-6">
             <div className="flex items-center gap-2 text-saffron mb-2">
               <MapPin className="w-4 h-4 shadow-black drop-shadow-md" />
-              <span className="text-xs font-bold tracking-widest uppercase shadow-black drop-shadow-md">{module.city}</span>
+              <span className="text-xs font-bold tracking-widest uppercase shadow-black drop-shadow-md">
+                {module.city}
+              </span>
             </div>
 
             <div className="flex items-center gap-3 mb-2">
-              <h3 className="text-2xl font-serif text-white shadow-black drop-shadow-lg">{module.focus}</h3>
+              <h3 className="text-2xl font-serif text-white shadow-black drop-shadow-lg">
+                {module.focus}
+              </h3>
               <div className="relative">
                 <button
                   onMouseEnter={() => setShowTip(true)}
@@ -115,12 +129,17 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({ modul
                       animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
                       exit={{ opacity: 0, scale: 0.8, y: 10, rotateX: 20 }}
                       transition={{ duration: 0.2 }}
-                      style={{ transformStyle: "preserve-3d", transform: "translateZ(60px)" }}
+                      style={{
+                        transformStyle: "preserve-3d",
+                        transform: "translateZ(60px)",
+                      }}
                       className="absolute bottom-full left-0 mb-3 w-56 p-4 bg-obsidian/95 border border-sage/50 rounded-xl text-left shadow-2xl shadow-sage/10 backdrop-blur-xl z-50 pointer-events-none"
                     >
                       <div className="flex items-center gap-2 mb-2 text-[#14b8a6] border-b border-white/10 pb-2">
                         <FlaskConical className="w-3 h-3" />
-                        <span className="text-[10px] font-bold uppercase tracking-widest">Mentor Tip</span>
+                        <span className="text-[10px] font-bold uppercase tracking-widest">
+                          Mentor Tip
+                        </span>
                       </div>
                       <p className="text-xs text-gray-300 leading-relaxed font-sans">
                         {module.scientificPrinciple}
@@ -145,25 +164,30 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({ modul
             </div>
 
             <div className="flex items-center justify-between border-t border-white/20 pt-4 backdrop-blur-sm bg-black/20 rounded px-2 -mx-2">
-              <span className="text-xl font-bold text-white">€{module.price}</span>
+              <span className="text-xl font-bold text-white">
+                €{module.price}
+              </span>
               <span className="text-xs text-gray-300">Full Access</span>
             </div>
           </div>
 
           {/* Hidden Reveal on Hover */}
-          <div
-            className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-obsidian/90 backdrop-blur-md border-t border-sage/30 rounded-b-xl translate-y-8 group-hover:translate-y-0"
-          >
+          <div className="absolute bottom-0 left-0 right-0 p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out bg-obsidian/90 backdrop-blur-md border-t border-sage/30 rounded-b-xl translate-y-8 group-hover:translate-y-0">
             <div className="flex items-start gap-3">
               <Info className="w-5 h-5 text-[#14b8a6] shrink-0 mt-1" />
               <div>
-                <p className="text-xs font-bold text-[#14b8a6] uppercase tracking-wider mb-1">Key Technique</p>
+                <p className="text-xs font-bold text-[#14b8a6] uppercase tracking-wider mb-1">
+                  Key Technique
+                </p>
                 <p className="text-sm text-gray-200">{module.technique}</p>
               </div>
             </div>
-            <button className="w-full mt-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-bold border border-white/10 rounded transition-colors">
+            <Link
+              to="/app/courses"
+              className="block w-full mt-4 py-2 bg-white/10 hover:bg-white/20 text-white text-xs uppercase tracking-widest font-bold border border-white/10 rounded transition-colors text-center"
+            >
               View Curriculum
-            </button>
+            </Link>
           </div>
         </div>
       </motion.div>
@@ -176,10 +200,13 @@ const AcademyGrid: React.FC = () => {
     <section id="academy" className="py-24 bg-obsidian relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-16">
-          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">The Academy</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-white mb-4">
+            The Academy
+          </h2>
           <div className="w-24 h-1 bg-saffron" />
           <p className="mt-4 text-gray-400 font-sans max-w-xl">
-            Curated curriculums from the culinary capitals of Europe. Deep dive into technique, chemistry, and history.
+            Curated curriculums from the culinary capitals of Europe. Deep dive
+            into technique, chemistry, and history.
           </p>
         </div>
 

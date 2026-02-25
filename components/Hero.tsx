@@ -1,11 +1,14 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Play, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { motion } from "framer-motion";
+import { Play, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
+    <div
+      id="journeys"
+      className="relative h-screen w-full overflow-hidden flex items-center justify-center"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/60 to-obsidian/30 z-10" />
@@ -36,8 +39,9 @@ const Hero: React.FC = () => {
             </span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300 font-sans font-light leading-relaxed">
-            Transition from inspiration to mastery with the most advanced recipe-to-lesson ecosystem.
-            Precision metrics. Molecular insights. Elite mentorship.
+            Transition from inspiration to mastery with the most advanced
+            recipe-to-lesson ecosystem. Precision metrics. Molecular insights.
+            Elite mentorship.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -60,15 +64,17 @@ const Hero: React.FC = () => {
           </div>
         </motion.div>
       </div>
-      
+
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 1 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
       >
-        <span className="text-xs uppercase tracking-widest text-gray-500">Scroll</span>
+        <span className="text-xs uppercase tracking-widest text-gray-500">
+          Scroll
+        </span>
         <div className="w-[1px] h-12 bg-gradient-to-b from-sage to-transparent" />
       </motion.div>
     </div>

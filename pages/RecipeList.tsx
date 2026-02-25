@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   Search,
   Clock,
@@ -189,9 +189,16 @@ const difficultyColor: Record<Recipe["difficulty"], string> = {
 };
 
 const RecipeList: React.FC = () => {
+  const [searchParams] = useSearchParams();
   const [activeFilter, setActiveFilter] = useState("All");
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
+
+  // Sync search when URL param changes
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q !== null) setSearch(q);
+  }, [searchParams]);
 
   const filtered = recipes.filter((r) => {
     const matchesFilter = activeFilter === "All" || r.category === activeFilter;
@@ -237,15 +244,17 @@ const RecipeList: React.FC = () => {
             className="w-full pl-11 pr-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded-full text-[#F1F5F9] placeholder-[#64748B] text-sm focus:outline-none focus:border-[#14b8a6] transition-colors"
           />
         </div>
-        <div className="flex gap-2 overflow-x-auto pb-0.5 scrollbar-hide">
+        <div className="flex gap-2 flex-wrap">
+          {/* mobile-friendly filter wrap */}
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                activeFilter === f
                   ? "bg-[#14b8a6] text-white"
                   : "bg-[#1E293B] text-[#94A3B8] border border-[#334155] hover:border-[#14b8a6]/50 hover:text-[#F1F5F9]"
-                }`}
+              }`}
             >
               {f}
             </button>

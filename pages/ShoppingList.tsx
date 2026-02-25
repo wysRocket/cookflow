@@ -140,7 +140,7 @@ const ShoppingList: React.FC = () => {
           <div className="flex items-center gap-3 mb-1">
             <Link
               to="/app/meal-planner"
-              className="text-[#64748B] hover:text-[#14b8a6] transition-colors"
+              className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1E293B] border border-[#334155] text-[#94A3B8] hover:text-[#14b8a6] hover:border-[#14b8a6]/50 transition-colors flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
             </Link>

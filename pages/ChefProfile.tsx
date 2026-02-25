@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import {
   MapPin,
@@ -16,6 +16,7 @@ import {
   FlaskConical,
   Bell,
   UserPlus,
+  UserCheck,
   Users,
 } from "lucide-react";
 
@@ -46,7 +47,7 @@ const creations = [
     rating: 4.9,
     reviews: 89,
     image:
-      "https://images.unsplash.com/photo-1514516875225-c603b5cb47ef?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1518492104633-130d0cc84637?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 3,
@@ -141,6 +142,7 @@ const chefProfiles: Record<string, ChefData> = {
 const ChefProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const profile = id ? chefProfiles[id] : undefined;
+  const [followed, setFollowed] = useState(false);
 
   if (!profile) {
     return <Navigate to="/app/chefs" replace />;
@@ -198,8 +200,20 @@ const ChefProfile: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 px-6 py-2.5 bg-[#14b8a6] hover:bg-[#0d9488] text-white font-bold rounded-full transition-colors shadow-lg shadow-teal-900/30">
-                <UserPlus className="w-4 h-4 hidden sm:block" /> Follow
+              <button
+                onClick={() => setFollowed((f) => !f)}
+                className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${
+                  followed
+                    ? "bg-[#1E293B] border border-[#14b8a6] text-[#14b8a6]"
+                    : "bg-[#14b8a6] hover:bg-[#0d9488] text-white shadow-teal-900/30"
+                }`}
+              >
+                {followed ? (
+                  <UserCheck className="w-4 h-4 hidden sm:block" />
+                ) : (
+                  <UserPlus className="w-4 h-4 hidden sm:block" />
+                )}
+                {followed ? "Following" : "Follow"}
               </button>
               <Link
                 to="/app/community"
@@ -260,7 +274,10 @@ const ChefProfile: React.FC = () => {
                   key={item.id}
                   className="bg-[#1E293B] border border-[#334155] rounded-xl overflow-hidden group shadow-lg"
                 >
-                  <div className="relative h-48 overflow-hidden">
+                  <Link
+                    to={`/app/recipes/${profile.featuredRecipeId}`}
+                    className="block relative h-48 overflow-hidden"
+                  >
                     <img
                       src={item.image}
                       alt={item.title}
@@ -270,7 +287,7 @@ const ChefProfile: React.FC = () => {
                     <div className="absolute top-3 right-3 bg-[#1E293B]/80 backdrop-blur text-[#14b8a6] text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1 border border-[#334155]">
                       <Flame className="w-3 h-3" /> {item.time}
                     </div>
-                  </div>
+                  </Link>
                   <div className="p-5">
                     <h3 className="text-lg font-bold text-[#F1F5F9] mb-2">
                       {item.title}

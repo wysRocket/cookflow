@@ -302,7 +302,10 @@ const RecipeDetail: React.FC = () => {
             >
               <Play className="w-4 h-4" /> Start Cooking
             </button>
-            <button className="flex items-center justify-center gap-2 bg-[#1E293B] border border-[#334155] text-[#94A3B8] px-4 py-3 rounded-full font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all">
+            <button
+              onClick={() => navigate("/app/meal-planner")}
+              className="flex items-center justify-center gap-2 bg-[#1E293B] border border-[#334155] text-[#94A3B8] px-4 py-3 rounded-full font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all"
+            >
               <CalendarPlus className="w-4 h-4" />
               <span className="hidden sm:inline text-sm">Add to Plan</span>
             </button>

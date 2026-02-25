@@ -226,11 +226,11 @@ const CookingMode: React.FC = () => {
       <header className="relative z-10 flex items-center justify-between px-6 py-4 flex-shrink-0">
         <Link
           to={`/app/recipes/${id ?? "1"}`}
-          className="flex items-center gap-1.5 text-sm text-[#64748B] hover:text-[#F1F5F9] transition-colors"
+          className="flex items-center gap-2 px-4 py-2 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#14b8a6] transition-all"
         >
-          <ArrowLeft className="w-4 h-4" /> Back to Recipe
+          <ArrowLeft className="w-4 h-4" /> <span>Back</span>
         </Link>
-        <div className="px-4 py-1 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8]">
+        <div className="px-4 py-1.5 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8]">
           Step {currentStep + 1} of {steps.length}
         </div>
         <p className="text-sm text-[#F1F5F9] truncate max-w-[180px] text-right hidden sm:block">
@@ -312,17 +312,17 @@ const CookingMode: React.FC = () => {
           )}
 
           {/* Navigation controls */}
-          <div className="flex items-center justify-between mt-8">
+          <div className="flex flex-col sm:flex-row items-center justify-between mt-8 gap-4">
             <button
               onClick={() => setCurrentStep((s) => Math.max(0, s - 1))}
               disabled={currentStep === 0}
-              className="px-8 py-4 bg-[#1E293B] border border-[#334155] rounded-full text-[#94A3B8] hover:text-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full sm:w-auto px-8 py-4 bg-[#1E293B] border border-[#334155] rounded-full text-[#94A3B8] hover:text-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed transition-all order-2 sm:order-1"
             >
               Previous
             </button>
 
             {/* Step dots */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 order-1 sm:order-2">
               {steps.map((_, i) => (
                 <button
                   key={i}
@@ -343,7 +343,7 @@ const CookingMode: React.FC = () => {
                 setCurrentStep((s) => Math.min(steps.length - 1, s + 1))
               }
               disabled={currentStep === steps.length - 1}
-              className="px-8 py-4 bg-[#14b8a6] rounded-full text-white font-bold shadow-lg shadow-teal-900/30 hover:bg-[#0d9488] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full sm:w-auto px-8 py-4 bg-[#14b8a6] rounded-full text-white font-bold shadow-lg shadow-teal-900/30 hover:bg-[#0d9488] disabled:opacity-40 disabled:cursor-not-allowed transition-all order-3"
             >
               Next Step
             </button>
