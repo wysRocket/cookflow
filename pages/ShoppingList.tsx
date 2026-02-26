@@ -89,11 +89,11 @@ const ShoppingList: React.FC = () => {
         cat.label !== catLabel
           ? cat
           : {
-              ...cat,
-              items: cat.items.map((it) =>
-                it.id === id ? { ...it, checked: !it.checked } : it,
-              ),
-            },
+            ...cat,
+            items: cat.items.map((it) =>
+              it.id === id ? { ...it, checked: !it.checked } : it,
+            ),
+          },
       ),
     );
   };
@@ -114,17 +114,17 @@ const ShoppingList: React.FC = () => {
         cat.label !== catLabel
           ? cat
           : {
-              ...cat,
-              items: [
-                ...cat.items,
-                {
-                  id: nextId++,
-                  name: newItem.trim(),
-                  qty: newQty.trim() || "1",
-                  checked: false,
-                },
-              ],
-            },
+            ...cat,
+            items: [
+              ...cat.items,
+              {
+                id: nextId++,
+                name: newItem.trim(),
+                qty: newQty.trim() || "1",
+                checked: false,
+              },
+            ],
+          },
       ),
     );
     setNewItem("");
@@ -140,7 +140,7 @@ const ShoppingList: React.FC = () => {
           <div className="flex items-center gap-3 mb-1">
             <Link
               to="/app/meal-planner"
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1E293B] border border-[#334155] text-[#94A3B8] hover:text-[#14b8a6] hover:border-[#14b8a6]/50 transition-colors flex-shrink-0"
+              className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1E293B] border-2 border-[#14b8a6]/60 text-[#14b8a6] hover:bg-[#14b8a6]/10 hover:border-[#14b8a6] transition-colors flex-shrink-0"
             >
               <ArrowLeft className="w-4 h-4" />
             </Link>

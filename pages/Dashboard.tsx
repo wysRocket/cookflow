@@ -248,7 +248,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/auth/sign-up?plan=patissier"
+              to="/app/community?upgrade=patissier"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
               Get started
@@ -288,7 +288,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/auth/sign-up?plan=chef-de-partie"
+              to="/app/community?upgrade=chef-de-partie"
               className="w-full py-3 rounded-full bg-gradient-to-r from-[#F59E0B] to-[#14b8a6] hover:from-[#d97706] hover:to-[#ea580c] text-white font-bold transition-colors text-center block"
             >
               Get started
@@ -325,7 +325,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/auth/sign-up?plan=chef-de-cuisine"
+              to="/app/community?upgrade=chef-de-cuisine"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
               Get started

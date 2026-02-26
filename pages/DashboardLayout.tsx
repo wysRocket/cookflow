@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { NavLink, Outlet, Link, useNavigate } from "react-router-dom";
 import { ChefHat, Search, Menu, X, User } from "lucide-react";
 import AuthControls from "../components/AuthControls";
+import Footer from "../components/Footer";
 
 const navItems = [
   { to: "/app/courses", label: "Courses", end: false },
@@ -52,10 +53,9 @@ const DashboardLayout: React.FC = () => {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition-colors relative py-1 ${
-                    isActive
-                      ? "text-[#D4AF37]"
-                      : "text-[#94A3B8] hover:text-[#F1F5F9]"
+                  `text-sm font-medium transition-colors relative py-1 ${isActive
+                    ? "text-[#D4AF37]"
+                    : "text-[#94A3B8] hover:text-[#F1F5F9]"
                   }`
                 }
               >
@@ -76,7 +76,9 @@ const DashboardLayout: React.FC = () => {
         <div className="hidden sm:flex items-center gap-6">
           {/* Search Field */}
           <form onSubmit={handleSearch} className="relative">
-            <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
+            <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]">
+              <Search className="w-4 h-4" />
+            </button>
             <input
               type="text"
               placeholder="Search chefs or recipes"
@@ -120,8 +122,7 @@ const DashboardLayout: React.FC = () => {
                 to={to}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `text-base font-medium transition-colors ${
-                    isActive ? "text-[#D4AF37]" : "text-[#94A3B8]"
+                  `text-base font-medium transition-colors ${isActive ? "text-[#D4AF37]" : "text-[#94A3B8]"
                   }`
                 }
               >
@@ -131,7 +132,9 @@ const DashboardLayout: React.FC = () => {
           </nav>
           <div className="pt-4 border-t border-white/10">
             <form onSubmit={handleSearch} className="relative mb-4">
-              <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]" />
+              <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]">
+                <Search className="w-4 h-4" />
+              </button>
               <input
                 type="text"
                 placeholder="Search..."
@@ -160,37 +163,7 @@ const DashboardLayout: React.FC = () => {
       </main>
 
       {/* App Footer */}
-      <footer className="relative z-10 border-t border-white/5 px-6 py-6 mt-4">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#475569]">
-          <div className="flex items-center gap-2">
-            <ChefHat className="w-4 h-4 text-[#14b8a6]" />
-            <span className="font-serif font-bold text-[#64748B]">
-              COOK<span className="text-[#14b8a6]">FLOW</span>
-            </span>
-            <span className="ml-2">© 2024 CookFlow Europe Ltd.</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link
-              to="/app/settings"
-              className="hover:text-[#14b8a6] transition-colors"
-            >
-              Privacy
-            </Link>
-            <Link
-              to="/app/settings"
-              className="hover:text-[#14b8a6] transition-colors"
-            >
-              Terms
-            </Link>
-            <Link
-              to="/app/community"
-              className="hover:text-[#14b8a6] transition-colors"
-            >
-              Support
-            </Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

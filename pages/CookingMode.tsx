@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock } from "lucide-react";
 
 interface CookingStep {
@@ -166,6 +166,7 @@ const CookingMode: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { name, steps } =
     id && RECIPE_STEPS[id] ? RECIPE_STEPS[id] : DEFAULT_STEPS;
+  const navigate = useNavigate();
 
   const [currentStep, setCurrentStep] = useState(0);
   const [timerLeft, setTimerLeft] = useState(steps[0].timerSeconds ?? 0);
@@ -224,12 +225,12 @@ const CookingMode: React.FC = () => {
 
       {/* Top bar */}
       <header className="relative z-10 flex items-center justify-between px-6 py-4 flex-shrink-0">
-        <Link
-          to={`/app/recipes/${id ?? "1"}`}
+        <button
+          onClick={() => navigate(-1)}
           className="flex items-center gap-2 px-4 py-2 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#14b8a6] transition-all"
         >
           <ArrowLeft className="w-4 h-4" /> <span>Back</span>
-        </Link>
+        </button>
         <div className="px-4 py-1.5 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8]">
           Step {currentStep + 1} of {steps.length}
         </div>
@@ -327,13 +328,12 @@ const CookingMode: React.FC = () => {
                 <button
                   key={i}
                   onClick={() => setCurrentStep(i)}
-                  className={`transition-all rounded-full ${
-                    i < currentStep
+                  className={`transition-all rounded-full ${i < currentStep
                       ? "w-2.5 h-2.5 bg-[#14b8a6]"
                       : i === currentStep
                         ? "w-2.5 h-2.5 ring-2 ring-[#14b8a6] ring-offset-1 ring-offset-[#0F172A]"
                         : "w-2.5 h-2.5 bg-[#334155]"
-                  }`}
+                    }`}
                 />
               ))}
             </div>

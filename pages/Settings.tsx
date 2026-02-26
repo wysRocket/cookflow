@@ -23,14 +23,12 @@ const Toggle: React.FC<ToggleProps> = ({
     type="button"
     onClick={onToggle}
     disabled={disabled}
-    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#0ff0f0] focus:ring-offset-2 focus:ring-offset-[#102222] ${
-      disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-    } ${enabled ? "bg-[#0ff0f0]/30 border border-[#0ff0f0]/40" : "bg-[#234848]"}`}
+    className={`relative inline-flex h-6 w-11 flex-shrink-0 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#0ff0f0] focus:ring-offset-2 focus:ring-offset-[#102222] ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+      } ${enabled ? "bg-[#0ff0f0]/30 border border-[#0ff0f0]/40" : "bg-[#234848]"}`}
   >
     <span
-      className={`inline-block h-4 w-4 transform rounded-full transition shadow-md ${
-        enabled ? "translate-x-6 bg-[#0ff0f0]" : "translate-x-1 bg-slate-400"
-      }`}
+      className={`inline-block h-4 w-4 transform rounded-full transition shadow-md ${enabled ? "translate-x-6 bg-[#0ff0f0]" : "translate-x-1 bg-slate-400"
+        }`}
     />
   </button>
 );
@@ -45,8 +43,8 @@ const Settings: React.FC = () => {
   const sessionUser = useMemo(
     () =>
       session?.user as
-        | { name?: string; email?: string; image?: string }
-        | undefined,
+      | { name?: string; email?: string; image?: string }
+      | undefined,
     [session],
   );
 
@@ -76,6 +74,13 @@ const Settings: React.FC = () => {
   const [addingTag, setAddingTag] = useState(false);
   const [newTagInput, setNewTagInput] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
 
   // Load saved profile from localStorage on mount
   useEffect(() => {
@@ -130,6 +135,41 @@ const Settings: React.FC = () => {
 
   return (
     <>
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-[200] px-5 py-3 rounded-xl text-sm font-semibold text-white shadow-2xl animate-fade-in" style={{ background: "#1E293B", border: "1px solid #0ff0f0", boxShadow: "0 0 20px rgba(15,240,240,0.2)" }}>
+          ✓ {toast}
+        </div>
+      )}
+
+      {/* Upgrade Modal */}
+      {showUpgradeModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm" onClick={() => setShowUpgradeModal(false)}>
+          <div className="w-full max-w-2xl bg-[#0F172A] border border-[#234848] rounded-2xl p-6 shadow-2xl" onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-serif font-bold text-white">Upgrade Your Plan</h2>
+              <button onClick={() => setShowUpgradeModal(false)} className="text-slate-400 hover:text-white text-2xl leading-none">×</button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { name: "Patissier", price: "$79", color: "#38bdf8", features: ["Business Features", "Editable Consumer", "Molecular Textures", "Chef Certificate"] },
+                { name: "Chef de Partie", price: "$199", color: "#d4af37", popular: true, features: ["All Patissier features", "Molecular Features", "Fermentation Suite", "Water-shield Features"] },
+                { name: "Executive Chef", price: "$299", color: "#0ff0f0", features: ["Everything included", "Advanced techniques", "Priority support", "Sourdough browning"] },
+              ].map((plan) => (
+                <div key={plan.name} className={`rounded-xl p-5 flex flex-col gap-3 relative ${plan.popular ? "border-2" : "border"}`} style={{ background: "#152a2a", borderColor: plan.popular ? plan.color : "#234848" }}>
+                  {plan.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full text-black" style={{ background: plan.color }}>Popular</span>}
+                  <p className="font-serif font-bold text-white text-center">{plan.name}</p>
+                  <p className="text-center text-2xl font-bold" style={{ color: plan.color }}>{plan.price}<span className="text-sm font-normal text-slate-400">/mo</span></p>
+                  <ul className="space-y-1.5 flex-1">
+                    {plan.features.map((f) => (<li key={f} className="text-xs text-slate-400 flex items-center gap-2"><span style={{ color: plan.color }}>✓</span>{f}</li>))}
+                  </ul>
+                  <button onClick={() => { setShowUpgradeModal(false); showToast(`Switched to ${plan.name} plan`); }} className="mt-2 w-full py-2 rounded-lg text-sm font-bold text-black transition-all" style={{ background: plan.color }}>Select Plan</button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
       {/* Load Material Symbols font */}
       <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap"
@@ -441,6 +481,7 @@ const Settings: React.FC = () => {
                     </p>
                   </div>
                   <button
+                    onClick={() => setShowUpgradeModal(true)}
                     className="flex items-center gap-2 py-3 px-6 rounded-lg font-bold text-sm text-black transition-all whitespace-nowrap flex-shrink-0"
                     style={{
                       background: "#d4af37",
@@ -486,7 +527,7 @@ const Settings: React.FC = () => {
                         Easier on the eyes in low-light kitchens.
                       </p>
                     </div>
-                    <Toggle enabled={true} onToggle={() => {}} disabled />
+                    <Toggle enabled={true} onToggle={() => { }} disabled />
                   </div>
                   {/* Voice Control */}
                   <div className="flex items-center justify-between py-4">
@@ -576,6 +617,7 @@ const Settings: React.FC = () => {
                         <p className="text-slate-500 text-xs">Expires 12/25</p>
                       </div>
                       <button
+                        onClick={() => showToast("Payment method editor coming soon")}
                         className="ml-auto text-sm hover:text-white transition-colors"
                         style={{ color: "#0ff0f0" }}
                       >
@@ -585,6 +627,7 @@ const Settings: React.FC = () => {
                   </div>
                 </div>
                 <button
+                  onClick={() => showToast("Billing history will be available once your account is live")}
                   className="w-full mt-6 py-2 rounded text-sm text-slate-400 hover:text-white transition-colors"
                   style={{ border: "1px solid #234848" }}
                   onMouseEnter={(e) =>
@@ -685,12 +728,12 @@ const Settings: React.FC = () => {
                           className="px-3 py-1.5 rounded text-xs font-bold text-white transition-colors"
                           style={{ background: "rgb(220,38,38)" }}
                           onMouseEnter={(e) =>
-                            (e.currentTarget.style.background =
-                              "rgb(185,28,28)")
+                          (e.currentTarget.style.background =
+                            "rgb(185,28,28)")
                           }
                           onMouseLeave={(e) =>
-                            (e.currentTarget.style.background =
-                              "rgb(220,38,38)")
+                          (e.currentTarget.style.background =
+                            "rgb(220,38,38)")
                           }
                           onClick={() => {
                             alert(

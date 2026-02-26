@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import {
   ArrowLeft,
   Star,
@@ -303,7 +303,7 @@ const RecipeDetail: React.FC = () => {
               <Play className="w-4 h-4" /> Start Cooking
             </button>
             <button
-              onClick={() => navigate("/app/meal-planner")}
+              onClick={() => navigate("/app/meal-planner", { state: { addedRecipe: { name: recipe.name, image: recipe.image, kcal: recipe.kcal } } })}
               className="flex items-center justify-center gap-2 bg-[#1E293B] border border-[#334155] text-[#94A3B8] px-4 py-3 rounded-full font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all"
             >
               <CalendarPlus className="w-4 h-4" />
@@ -317,12 +317,15 @@ const RecipeDetail: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
         {/* Ingredients */}
         <div className="md:col-span-2 bg-[#1E293B] rounded-2xl border border-[#334155] p-6">
-          <h2 className="text-base font-bold text-[#F1F5F9] mb-4">
-            Ingredients
-            <span className="ml-2 text-xs font-normal text-[#64748B]">
-              {recipe.servings} serving{recipe.servings > 1 ? "s" : ""}
-            </span>
-          </h2>
+          <div className="flex justify-between items-end mb-4">
+            <h2 className="text-base font-bold text-[#F1F5F9]">
+              Ingredients
+              <span className="ml-2 text-xs font-normal text-[#64748B]">
+                {recipe.servings} serving{recipe.servings > 1 ? "s" : ""}
+              </span>
+            </h2>
+            <span className="text-[10px] text-[#64748B] uppercase tracking-wider">Click to mark purchased</span>
+          </div>
           <ul className="space-y-3">
             {recipe.ingredients.map((ing, i) => (
               <li

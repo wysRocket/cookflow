@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import { ChefHat } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -73,26 +73,24 @@ const LandingPage: React.FC = () => {
         <ConsultantForm />
       </main>
       <Footer />
-      <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 2 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 md:hidden w-11/12 max-w-sm"
-      >
-        <Link
-          to="/app/courses"
-          className="block text-center w-full bg-[#14b8a6] text-obsidian font-bold py-4 rounded-full shadow-[0_0_20px_rgba(94,234,212,0.4)] border border-white/20 uppercase tracking-wide text-sm"
-        >
-          Start Cooking
-        </Link>
-      </motion.div>
     </div>
   );
+};
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
 };
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Suspense
         fallback={
           <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
