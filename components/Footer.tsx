@@ -174,58 +174,26 @@ const Footer: React.FC = () => {
           <span className="text-xs text-gray-600 uppercase tracking-widest mr-2">
             Secure Payments
           </span>
+          {/* Apple Pay */}
+          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-full w-full object-contain" />
+          </div>
           {/* Visa */}
-          <div className="h-7 px-3 bg-white rounded flex items-center justify-center">
-            <svg viewBox="0 0 50 16" height="12" aria-label="Visa">
-              <text
-                x="0"
-                y="13"
-                fontFamily="Arial"
-                fontWeight="bold"
-                fontSize="14"
-                fill="#1a1f71"
-              >
-                VISA
-              </text>
-            </svg>
+          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
+            <img src="https://cdn.simpleicons.org/visa/1434CB" alt="Visa" className="h-full w-full object-contain" />
           </div>
           {/* Mastercard */}
-          <div className="h-7 px-2 bg-[#1E293B] border border-white/10 rounded flex items-center gap-1">
-            <div className="w-5 h-5 rounded-full bg-[#eb001b] opacity-90" />
-            <div className="w-5 h-5 rounded-full bg-[#f79e1b] opacity-90 -ml-2" />
+          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-full w-full object-contain" />
           </div>
-          {/* PayPal */}
-          <div className="h-7 px-3 bg-white rounded flex items-center justify-center">
-            <svg viewBox="0 0 60 16" height="12" aria-label="PayPal">
-              <text
-                x="0"
-                y="13"
-                fontFamily="Arial"
-                fontWeight="bold"
-                fontSize="13"
-              >
-                <tspan fill="#003087">Pay</tspan>
-                <tspan fill="#009cde">Pal</tspan>
-              </text>
-            </svg>
-          </div>
-          {/* Apple Pay */}
-          <div className="h-7 px-3 bg-black border border-white/10 rounded flex items-center">
-            <span className="text-white text-[11px] font-semibold tracking-tight">
-              {" "}
-              Pay
-            </span>
-          </div>
-          {/* Stripe badge */}
-          <div className="h-7 px-3 bg-[#635bff] rounded flex items-center">
-            <span className="text-white text-[11px] font-bold tracking-wide">
-              stripe
-            </span>
+          {/* Google Pay */}
+          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-full w-full object-contain" />
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
-          <p>© 2024 CookFlow Europe Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} CookFlow Europe Ltd. All rights reserved.</p>
           <div className="flex gap-4 mt-2 md:mt-0">
             <span>Made in Berlin</span>
             <span>Metric System Standard</span>

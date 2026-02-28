@@ -8,6 +8,7 @@ import {
   Bookmark,
   ChevronRight,
 } from "lucide-react";
+import { recipes } from '../data';
 
 interface Recipe {
   readonly id: number;
@@ -22,163 +23,6 @@ interface Recipe {
   readonly badge?: string;
   readonly badgeColor?: string;
 }
-
-const recipes: Recipe[] = [
-  {
-    id: 1,
-    name: "Honey Glazed Salmon",
-    category: "Dinner",
-    time: "30 min",
-    kcal: 520,
-    rating: 4.9,
-    difficulty: "Easy",
-    tags: ["Seafood", "Healthy"],
-    image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80",
-    badge: "Popular",
-    badgeColor: "bg-[#14b8a6]",
-  },
-  {
-    id: 2,
-    name: "Berry Acai Bowl",
-    category: "Breakfast",
-    time: "10 min",
-    kcal: 310,
-    rating: 4.7,
-    difficulty: "Easy",
-    tags: ["Vegan", "Quick"],
-    image:
-      "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=600&q=80",
-    badge: "Quick",
-    badgeColor: "bg-[#D4AF37]",
-  },
-  {
-    id: 3,
-    name: "Avocado Toast",
-    category: "Breakfast",
-    time: "15 min",
-    kcal: 450,
-    rating: 4.8,
-    difficulty: "Easy",
-    tags: ["Vegetarian", "Quick"],
-    image:
-      "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 4,
-    name: "Spicy Ramen",
-    category: "Dinner",
-    time: "45 min",
-    kcal: 620,
-    rating: 4.6,
-    difficulty: "Medium",
-    tags: ["Japanese", "Spicy"],
-    image:
-      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 5,
-    name: "Greek Salad",
-    category: "Lunch",
-    time: "10 min",
-    kcal: 280,
-    rating: 4.5,
-    difficulty: "Easy",
-    tags: ["Mediterranean", "Healthy"],
-    image:
-      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=600&q=80",
-    badge: "Quick",
-    badgeColor: "bg-[#D4AF37]",
-  },
-  {
-    id: 6,
-    name: "Chocolate Lava Cake",
-    category: "Dessert",
-    time: "25 min",
-    kcal: 480,
-    rating: 4.9,
-    difficulty: "Medium",
-    tags: ["Dessert", "Chocolate"],
-    image:
-      "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80",
-    badge: "Popular",
-    badgeColor: "bg-[#14b8a6]",
-  },
-  {
-    id: 7,
-    name: "Overnight Oats",
-    category: "Breakfast",
-    time: "5 min",
-    kcal: 320,
-    rating: 4.7,
-    difficulty: "Easy",
-    tags: ["Meal Prep", "Healthy"],
-    image:
-      "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 8,
-    name: "Chicken Tacos",
-    category: "Lunch",
-    time: "20 min",
-    kcal: 540,
-    rating: 4.8,
-    difficulty: "Easy",
-    tags: ["Mexican", "Quick"],
-    image:
-      "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 9,
-    name: "Mushroom Risotto",
-    category: "Dinner",
-    time: "40 min",
-    kcal: 580,
-    rating: 4.6,
-    difficulty: "Hard",
-    tags: ["Italian", "Vegetarian"],
-    image:
-      "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 10,
-    name: "Banana Pancakes",
-    category: "Breakfast",
-    time: "20 min",
-    kcal: 380,
-    rating: 4.8,
-    difficulty: "Easy",
-    tags: ["Sweet", "Quick"],
-    image:
-      "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 11,
-    name: "Tom Yum Soup",
-    category: "Dinner",
-    time: "35 min",
-    kcal: 290,
-    rating: 4.7,
-    difficulty: "Medium",
-    tags: ["Thai", "Spicy"],
-    image:
-      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 12,
-    name: "Tiramisu",
-    category: "Dessert",
-    time: "30 min",
-    kcal: 520,
-    rating: 4.9,
-    difficulty: "Medium",
-    tags: ["Italian", "No-Bake"],
-    image:
-      "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80",
-    badge: "Popular",
-    badgeColor: "bg-[#14b8a6]",
-  },
-];
 
 const filters = ["All", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack"];
 
@@ -250,11 +94,10 @@ const RecipeList: React.FC = () => {
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === f
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f
                   ? "bg-[#14b8a6] text-white"
                   : "bg-[#1E293B] text-[#94A3B8] border border-[#334155] hover:border-[#14b8a6]/50 hover:text-[#F1F5F9]"
-              }`}
+                }`}
             >
               {f}
             </button>

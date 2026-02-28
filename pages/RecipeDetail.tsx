@@ -12,177 +12,10 @@ import {
   Circle,
   BarChart2,
 } from "lucide-react";
+import { recipes } from "../data";
+import { Recipe } from "../types";
 
-interface RecipeData {
-  readonly name: string;
-  readonly image: string;
-  readonly rating: number;
-  readonly reviews: number;
-  readonly time: string;
-  readonly kcal: number;
-  readonly servings: number;
-  readonly difficulty: "Easy" | "Medium" | "Hard";
-  readonly description: string;
-  readonly tags: string[];
-  readonly ingredients: string[];
-  readonly steps: { readonly text: string; readonly duration?: string }[];
-}
-
-const recipeData: Record<string, RecipeData> = {
-  "1": {
-    name: "Honey Glazed Salmon",
-    image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=80",
-    rating: 4.9,
-    reviews: 218,
-    time: "30 min",
-    kcal: 520,
-    servings: 2,
-    difficulty: "Easy",
-    description:
-      "A beautifully caramelised salmon fillet with a sticky honey and soy glaze. Rich in omega-3s and packed with flavour, this dish comes together effortlessly.",
-    tags: ["Seafood", "Healthy", "Gluten-Free"],
-    ingredients: [
-      "2 salmon fillets (6 oz each)",
-      "3 tbsp honey",
-      "2 tbsp soy sauce",
-      "1 tbsp olive oil",
-      "2 cloves garlic, minced",
-      "1 tsp ginger, grated",
-      "Salt & pepper to taste",
-      "Fresh lemon, for serving",
-      "Fresh dill, to garnish",
-    ],
-    steps: [
-      {
-        text: "Preheat oven to 400°F (200°C) and line a baking sheet with foil.",
-        duration: "5 min",
-      },
-      {
-        text: "In a small bowl, whisk together honey, soy sauce, garlic, and ginger until combined.",
-      },
-      {
-        text: "Pat salmon dry and season generously with salt and pepper on both sides.",
-      },
-      {
-        text: "Heat olive oil in an oven-safe skillet over medium-high heat until shimmering.",
-      },
-      {
-        text: "Sear salmon skin-side up for 2-3 minutes until golden brown on the surface.",
-        duration: "3 min",
-      },
-      {
-        text: "Flip salmon and brush generously with the honey glaze, coating all surfaces.",
-      },
-      {
-        text: "Transfer to oven and bake for 8-10 minutes until cooked through and glaze is caramelised.",
-        duration: "10 min",
-      },
-      {
-        text: "Serve immediately with lemon wedges, fresh dill, and your choice of sides.",
-      },
-    ],
-  },
-  "4": {
-    name: "Spicy Ramen",
-    image:
-      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
-    rating: 4.6,
-    reviews: 134,
-    time: "45 min",
-    kcal: 620,
-    servings: 2,
-    difficulty: "Medium",
-    description:
-      "A rich, soul-warming ramen bowl with a deeply flavoured miso-chili broth, tender chashu pork, and a perfectly jammy soft-boiled egg.",
-    tags: ["Japanese", "Spicy", "Comfort Food"],
-    ingredients: [
-      "2 packs ramen noodles",
-      "4 cups chicken broth",
-      "2 tbsp miso paste",
-      "1 tbsp chili oil",
-      "2 soft-boiled eggs",
-      "100g chashu pork",
-      "Green onions, sliced",
-      "2 sheets nori",
-      "Sesame seeds to garnish",
-    ],
-    steps: [
-      {
-        text: "Bring chicken broth to a gentle simmer in a large pot over medium heat.",
-        duration: "5 min",
-      },
-      {
-        text: "Whisk in miso paste and chili oil until fully dissolved and broth is fragrant.",
-      },
-      {
-        text: "Cook ramen noodles in a separate pot according to package instructions.",
-        duration: "3 min",
-      },
-      {
-        text: "Prepare soft-boiled eggs: boil for exactly 6 minutes, then transfer to an ice bath.",
-        duration: "6 min",
-      },
-      { text: "Peel eggs and slice chashu pork into thin, even rounds." },
-      { text: "Divide cooked noodles between two deep bowls." },
-      { text: "Ladle hot broth over noodles until just covered." },
-      {
-        text: "Top with egg (halved), pork slices, green onions, nori, and sesame seeds.",
-      },
-    ],
-  },
-};
-
-const defaultRecipe: RecipeData = {
-  name: "Avocado Toast",
-  image:
-    "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=1200&q=80",
-  rating: 4.8,
-  reviews: 312,
-  time: "15 min",
-  kcal: 450,
-  servings: 1,
-  difficulty: "Easy",
-  description:
-    "The ultimate avocado toast — creamy, perfectly seasoned avocado on golden toasted sourdough, topped with a jammy egg and a kick of chili flakes.",
-  tags: ["Vegetarian", "Quick", "Breakfast"],
-  ingredients: [
-    "2 slices sourdough bread",
-    "1 ripe avocado",
-    "Juice of ½ lemon",
-    "¼ tsp red pepper flakes",
-    "Everything bagel seasoning",
-    "Salt & black pepper",
-    "2 eggs (optional)",
-    "Microgreens, to garnish",
-  ],
-  steps: [
-    {
-      text: "Toast the sourdough bread until deep golden and crispy throughout.",
-      duration: "3 min",
-    },
-    {
-      text: "Halve the avocado, remove the pit, and scoop the flesh into a bowl.",
-    },
-    {
-      text: "Mash avocado with lemon juice, a pinch of salt, and black pepper to your preferred texture.",
-    },
-    {
-      text: "If adding eggs, fry in a little butter or poach for 3 minutes in simmering water.",
-      duration: "3 min",
-    },
-    {
-      text: "Spread the avocado mixture generously and evenly over each slice of toast.",
-    },
-    { text: "Top with red pepper flakes and everything bagel seasoning." },
-    { text: "Place egg on top if using, season with a pinch of salt." },
-    {
-      text: "Garnish with microgreens and serve immediately while toast is still warm.",
-    },
-  ],
-};
-
-const difficultyColor: Record<RecipeData["difficulty"], string> = {
+const difficultyColor: Record<Recipe["difficulty"], string> = {
   Easy: "text-[#D4AF37] bg-[#D4AF37]/10",
   Medium: "text-[#14b8a6] bg-[#14b8a6]/10",
   Hard: "text-red-400 bg-red-400/10",
@@ -191,7 +24,8 @@ const difficultyColor: Record<RecipeData["difficulty"], string> = {
 const RecipeDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const recipe = id && recipeData[id] ? recipeData[id] : defaultRecipe;
+  // Find the requested recipe or default to the first one if invalid ID is passed
+  const recipe = recipes.find(r => r.id === Number(id)) || recipes[0];
   const [checked, setChecked] = useState<Set<number>>(new Set());
 
   const toggleIngredient = (i: number) => {

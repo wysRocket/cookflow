@@ -19,6 +19,7 @@ import {
   UserCheck,
   Users,
 } from "lucide-react";
+import { chefs } from "../data";
 
 const showcaseSkills = [
   { icon: <Droplets className="w-4 h-4" />, name: "Saucier Level 3" },
@@ -89,59 +90,9 @@ const connections = [
   },
 ];
 
-type ChefData = {
-  name: string;
-  title: string;
-  city: string;
-  cuisine: string;
-  bio: string;
-  banner: string;
-  avatar: string;
-  featuredRecipeId: number;
-};
-
-const chefProfiles: Record<string, ChefData> = {
-  "1": {
-    name: "Chef Julian Vane",
-    title: "CHEF DE PARTIE",
-    city: "San Francisco, CA",
-    cuisine: "Molecular Gastronomy & Comfort Food",
-    bio: '"Exploring the intersection of molecular gastronomy and comfort food. Obsessed with sustainable sourcing and perfect plating."',
-    banner:
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80",
-    avatar:
-      "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&q=80",
-    featuredRecipeId: 1,
-  },
-  "2": {
-    name: "Chef Marco Pellegrini",
-    title: "SOUS CHEF",
-    city: "Milan, IT",
-    cuisine: "Northern Italian Cuisine",
-    bio: '"Focused on balancing rustic traditions with contemporary plating and ingredient seasonality."',
-    banner:
-      "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&q=80",
-    avatar:
-      "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80",
-    featuredRecipeId: 4,
-  },
-  "3": {
-    name: "Chef Amina Bensalem",
-    title: "PASTRY SPECIALIST",
-    city: "Paris, FR",
-    cuisine: "Modern Pastry & Plated Desserts",
-    bio: '"I break down advanced pastry science into repeatable kitchen rituals for ambitious home cooks."',
-    banner:
-      "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&q=80",
-    avatar:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80",
-    featuredRecipeId: 6,
-  },
-};
-
 const ChefProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const profile = id ? chefProfiles[id] : undefined;
+  const profile = id ? chefs.find(c => c.id === Number(id)) : undefined;
   const [followed, setFollowed] = useState(false);
 
   if (!profile) {
@@ -202,11 +153,10 @@ const ChefProfile: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setFollowed((f) => !f)}
-                className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${
-                  followed
+                className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${followed
                     ? "bg-[#1E293B] border border-[#14b8a6] text-[#14b8a6]"
                     : "bg-[#14b8a6] hover:bg-[#0d9488] text-white shadow-teal-900/30"
-                }`}
+                  }`}
               >
                 {followed ? (
                   <UserCheck className="w-4 h-4 hidden sm:block" />
