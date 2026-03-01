@@ -95,18 +95,12 @@ const Footer: React.FC = () => {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/auth/sign-up"
-                  className="hover:text-[#14b8a6] transition-colors"
-                >
+                <Link to="/" className="hover:text-[#14b8a6] transition-colors">
                   Careers
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/app/community"
-                  className="hover:text-[#14b8a6] transition-colors"
-                >
+                <Link to="/" className="hover:text-[#14b8a6] transition-colors">
                   Press
                 </Link>
               </li>
@@ -119,7 +113,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link
-                  to="/app/settings"
+                  to="/legal/privacy"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   Privacy
@@ -127,7 +121,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/app/settings"
+                  to="/legal/terms"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   Terms
@@ -135,7 +129,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/app/settings"
+                  to="/legal/vat"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   VAT Info
@@ -159,12 +153,21 @@ const Footer: React.FC = () => {
             />
           </div>
           {/* Visa */}
-          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
-            <img
-              src="https://cdn.simpleicons.org/visa/1434CB"
-              alt="Visa"
-              className="h-full w-full object-contain"
-            />
+          <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center px-2">
+            <span
+              style={{
+                color: "#1434CB",
+                fontFamily: '"Arial Black", Arial, sans-serif',
+                fontWeight: 900,
+                fontSize: "13px",
+                fontStyle: "italic",
+                letterSpacing: "0.5px",
+                lineHeight: 1,
+                userSelect: "none",
+              }}
+            >
+              VISA
+            </span>
           </div>
           {/* Mastercard */}
           <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">

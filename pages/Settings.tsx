@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authClient } from "../lib/auth-client";
+import { useAccess, PLAN_LABELS, PLAN_COLORS, Plan } from "../contexts/AccessContext";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 type AuthClientWithSignOut = {
@@ -78,10 +79,22 @@ const Settings: React.FC = () => {
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showCreditModal, setShowCreditModal] = useState(false);
+  const [showSpendModal, setShowSpendModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const [darkMode, setDarkMode] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  const [credits, setCredits] = useState(250);
+
+  // Access context — single source of truth for plan, credits, and unlocks
+  const {
+    plan,
+    credits,
+    addCredits,
+    activatePlan,
+    unlockPlannerMonth,
+    canUseAiRecipe,
+    canBookChef,
+  } = useAccess();
 
   const handleDarkModeToggle = () => {
     showToast("CookFlow is currently only available in Dark Mode");
@@ -210,7 +223,7 @@ const Settings: React.FC = () => {
                 <button
                   key={pack.amount}
                   onClick={() => {
-                    setCredits((c) => c + pack.amount);
+                    addCredits(pack.amount);
                     setShowCreditModal(false);
                     showToast(`Successfully purchased ${pack.amount} credits!`);
                   }}
@@ -243,6 +256,192 @@ const Settings: React.FC = () => {
         </div>
       )}
 
+      {/* Spend Credits Modal */}
+      {showSpendModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setShowSpendModal(false)}
+        >
+          <div
+            className="w-full max-w-md bg-[#0F172A] border border-[#234848] rounded-2xl p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-2">
+              <h2 className="text-xl font-serif font-bold text-white flex items-center gap-2">
+                <span className="material-symbols-outlined text-[#0ff0f0]">
+                  toll
+                </span>
+                Spend Credits
+              </h2>
+              <button
+                onClick={() => setShowSpendModal(false)}
+                className="text-slate-400 hover:text-white text-2xl leading-none"
+              >
+                ×
+              </button>
+            </div>
+            <p className="text-slate-400 text-sm mb-1">
+              Available:{" "}
+              <span className="text-white font-bold">{credits} credits</span>
+            </p>
+            <p className="text-slate-500 text-xs mb-6">
+              Credits unlock premium experiences across CookFlow.
+            </p>
+            <div className="grid grid-cols-1 gap-3">
+              {(
+                [
+                  {
+                    action: "Unlock Meal Planner",
+                    subtitle: "30 days full access",
+                    cost: 100,
+                    icon: "calendar_month",
+                    description:
+                      "Drag-and-drop weekly planner + auto-generated shopping lists.",
+                    onActivate: () => {
+                      unlockPlannerMonth();
+                      setShowSpendModal(false);
+                      showToast("Meal Planner unlocked for 30 days!");
+                      navigate("/app/meal-planner");
+                    },
+                  },
+                  {
+                    action: "Generate AI Recipe",
+                    subtitle: "One custom recipe",
+                    cost: 50,
+                    icon: "auto_awesome",
+                    description:
+                      "Create a tailored recipe based on your skill level and pantry.",
+                    onActivate: () => {
+                      addCredits(-50);
+                      setShowSpendModal(false);
+                      showToast("AI Recipe generation activated!");
+                    },
+                  },
+                  {
+                    action: "Book Chef Session",
+                    subtitle: "30-min 1-on-1 video call",
+                    cost: 150,
+                    icon: "video_camera_front",
+                    description:
+                      "Live session with a CookFlow resident chef. Executive Chef plan required for full history.",
+                    onActivate: () => {
+                      addCredits(-150);
+                      setShowSpendModal(false);
+                      showToast("Chef session booked! Check your email.");
+                    },
+                  },
+                ] as {
+                  action: string;
+                  subtitle: string;
+                  cost: number;
+                  icon: string;
+                  description: string;
+                  onActivate: () => void;
+                }[]
+              ).map((item) => {
+                const canAfford = credits >= item.cost;
+                return (
+                  <button
+                    key={item.action}
+                    disabled={!canAfford}
+                    onClick={item.onActivate}
+                    className={`flex items-start gap-4 p-4 rounded-xl text-left transition-all ${
+                      canAfford
+                        ? "bg-[#102222] border border-[#234848] hover:border-[#0ff0f0]/50"
+                        : "bg-[#0a1a1a] border border-[#1a2e2e] opacity-50 cursor-not-allowed"
+                    }`}
+                  >
+                    <span
+                      className="material-symbols-outlined text-2xl mt-0.5 flex-shrink-0"
+                      style={{ color: canAfford ? "#0ff0f0" : "#4a6a6a" }}
+                    >
+                      {item.icon}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <span className="text-white font-semibold text-sm">
+                            {item.action}
+                          </span>
+                          <span className="text-slate-500 text-xs ml-2">
+                            {item.subtitle}
+                          </span>
+                        </div>
+                        <span
+                          className="text-xs font-bold flex-shrink-0"
+                          style={{ color: canAfford ? "#0ff0f0" : "#4a6a6a" }}
+                        >
+                          {item.cost} cr
+                        </span>
+                      </div>
+                      <p className="text-slate-500 text-xs mt-0.5 leading-snug">
+                        {item.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            {credits < 50 && (
+              <p className="text-xs text-amber-500/80 mt-4 text-center">
+                You need more credits to unlock actions.{" "}
+                <button
+                  onClick={() => {
+                    setShowSpendModal(false);
+                    setShowCreditModal(true);
+                  }}
+                  className="underline hover:text-amber-400 transition-colors"
+                >
+                  Buy Credits
+                </button>
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Cancel Plan Modal */}
+      {showCancelModal && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setShowCancelModal(false)}
+        >
+          <div
+            className="w-full max-w-sm bg-[#0F172A] border border-[#334155] rounded-2xl p-6 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 mb-4">
+              <span className="material-symbols-outlined text-2xl text-red-400">cancel</span>
+              <h2 className="text-lg font-bold text-white font-serif">Cancel Plan</h2>
+            </div>
+            <p className="text-slate-400 text-sm mb-1">
+              You are about to cancel your <span className="text-white font-semibold">{plan ? PLAN_LABELS[plan] : ""}</span> plan.
+            </p>
+            <p className="text-slate-500 text-sm mb-6">
+              All premium access will be removed immediately. Your credits remain untouched.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowCancelModal(false)}
+                className="flex-1 py-2.5 rounded-lg text-sm font-medium border border-[#334155] text-slate-300 hover:bg-[#1e293b] transition-colors"
+              >
+                Keep Plan
+              </button>
+              <button
+                onClick={() => {
+                  activatePlan(null);
+                  setShowCancelModal(false);
+                  showToast("Plan cancelled. You're now on the Free tier.");
+                }}
+                className="flex-1 py-2.5 rounded-lg text-sm font-bold bg-red-500/10 border border-red-500/40 text-red-400 hover:bg-red-500/20 transition-colors"
+              >
+                Confirm Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Upgrade Modal */}
       {showUpgradeModal && (
         <div
@@ -265,94 +464,118 @@ const Settings: React.FC = () => {
               </button>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                {
-                  name: "Patissier",
-                  price: "€79",
-                  color: "#38bdf8",
-                  features: [
-                    "Business Features",
-                    "Editable Consumer",
-                    "Molecular Textures",
-                    "Chef Certificate",
-                  ],
-                },
-                {
-                  name: "Chef de Partie",
-                  price: "€199",
-                  color: "#d4af37",
-                  popular: true,
-                  features: [
-                    "All Patissier features",
-                    "Molecular Features",
-                    "Fermentation Suite",
-                    "Water-shield Features",
-                  ],
-                },
-                {
-                  name: "Executive Chef",
-                  price: "€299",
-                  color: "#0ff0f0",
-                  features: [
-                    "Everything included",
-                    "Advanced techniques",
-                    "Priority support",
-                    "Sourdough browning",
-                  ],
-                },
-              ].map((plan) => (
+              {(
+                [
+                  {
+                    key: "patissier" as Plan,
+                    name: "Patissier",
+                    price: "€79",
+                    color: "#38bdf8",
+                    features: [
+                      "Full recipe library (30 recipes)",
+                      "Chef profiles & portfolios",
+                      "Academy courses",
+                      "Chef certificate",
+                    ],
+                  },
+                  {
+                    key: "chef_de_partie" as Plan,
+                    name: "Chef de Partie",
+                    price: "€199",
+                    color: "#d4af37",
+                    popular: true,
+                    features: [
+                      "Everything in Patissier",
+                      "Weekly meal planner",
+                      "AI recipe generation",
+                      "Auto shopping lists",
+                    ],
+                  },
+                  {
+                    key: "executive_chef" as Plan,
+                    name: "Executive Chef",
+                    price: "€299",
+                    color: "#0ff0f0",
+                    features: [
+                      "Everything included",
+                      "1-on-1 chef sessions",
+                      "Priority support",
+                      "Exclusive masterclasses",
+                    ],
+                  },
+                ] as {
+                  key: Plan;
+                  name: string;
+                  price: string;
+                  color: string;
+                  popular?: boolean;
+                  features: string[];
+                }[]
+              ).map((planItem) => {
+                const isActive = plan === planItem.key;
+                return (
                 <div
-                  key={plan.name}
-                  className={`rounded-xl p-5 flex flex-col gap-3 relative ${plan.popular ? "border-2" : "border"}`}
+                  key={planItem.name}
+                  className={`rounded-xl p-5 flex flex-col gap-3 relative ${planItem.popular ? "border-2" : "border"}`}
                   style={{
-                    background: "#152a2a",
-                    borderColor: plan.popular ? plan.color : "#234848",
+                    background: isActive ? `${planItem.color}12` : "#152a2a",
+                    borderColor: isActive ? planItem.color : planItem.popular ? planItem.color : "#234848",
                   }}
                 >
-                  {plan.popular && (
+                  {planItem.popular && (
                     <span
                       className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full text-black"
-                      style={{ background: plan.color }}
+                      style={{ background: planItem.color }}
                     >
                       Popular
                     </span>
                   )}
+                  {isActive && (
+                    <span
+                      className="absolute top-3 right-3 text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full"
+                      style={{ background: `${planItem.color}25`, color: planItem.color }}
+                    >
+                      Active
+                    </span>
+                  )}
                   <p className="font-serif font-bold text-white text-center">
-                    {plan.name}
+                    {planItem.name}
                   </p>
                   <p
                     className="text-center text-2xl font-bold"
-                    style={{ color: plan.color }}
+                    style={{ color: planItem.color }}
                   >
-                    {plan.price}
+                    {planItem.price}
                     <span className="text-sm font-normal text-slate-400">
                       /mo
                     </span>
                   </p>
                   <ul className="space-y-1.5 flex-1">
-                    {plan.features.map((f) => (
+                    {planItem.features.map((f) => (
                       <li
                         key={f}
                         className="text-xs text-slate-400 flex items-center gap-2"
                       >
-                        <span style={{ color: plan.color }}>✓</span>
+                        <span style={{ color: planItem.color }}>✓</span>
                         {f}
                       </li>
                     ))}
                   </ul>
                   <button
                     onClick={() => {
+                      activatePlan(planItem.key);
                       setShowUpgradeModal(false);
-                      showToast(`Switched to ${plan.name} plan`);
+                      showToast(`${planItem.name} plan activated! Enjoy your new access.`);
                     }}
                     className="mt-2 w-full py-2 rounded-lg text-sm font-bold text-black transition-all"
-                    style={{ background: plan.color }}
+                    style={{ background: planItem.color }}
                   >
-                    Select Plan
+                    {isActive ? "Current Plan" : "Select Plan"}
                   </button>
                 </div>
-              ))}
+              );})}
             </div>
+            <p className="text-center text-xs text-slate-500 mt-4">Demo mode — plans activate instantly. No real payment required.</p>
           </div>
         </div>
       )}
@@ -664,37 +887,47 @@ const Settings: React.FC = () => {
                       Current Tier
                     </p>
                     <h3 className="text-xl md:text-2xl font-bold text-white flex flex-wrap items-center gap-3 font-serif">
-                      Chef de Partie
-                      <span
-                        className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide text-black"
-                        style={{ background: "#d4af37" }}
-                      >
-                        Premium
-                      </span>
+                      {plan ? PLAN_LABELS[plan] : "Free"}
+                      {plan && (
+                        <span
+                          className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide text-black"
+                          style={{ background: PLAN_COLORS[plan] }}
+                        >
+                          Active
+                        </span>
+                      )}
+                      {!plan && (
+                        <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide bg-slate-700 text-slate-300">
+                          No Plan
+                        </span>
+                      )}
                     </h3>
                     <p className="text-slate-400 text-sm mt-1">
-                      €12.00 / month • Billed annually
+                      {plan ? "€ billing active • Demo mode" : "Upgrade to access Recipes, Chefs & Meal Planner"}
                     </p>
                   </div>
                   <button
                     onClick={() => setShowUpgradeModal(true)}
                     className="flex items-center gap-2 py-3 px-6 rounded-lg font-bold text-sm text-black transition-all whitespace-nowrap flex-shrink-0"
                     style={{
-                      background: "#d4af37",
-                      boxShadow: "0 0 20px rgba(212,175,55,0.4)",
+                      background: plan ? PLAN_COLORS[plan] : "#d4af37",
+                      boxShadow: `0 0 20px ${plan ? PLAN_COLORS[plan] : "#d4af37"}40`,
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.background = "#bfa030")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.background = "#d4af37")
-                    }
                   >
                     <span className="material-symbols-outlined text-xl">
                       star
                     </span>
-                    Upgrade to Executive Chef
+                    {plan === "executive_chef" ? "Manage Plan" : "Upgrade Plan"}
                   </button>
+                  {plan && (
+                    <button
+                      onClick={() => setShowCancelModal(true)}
+                      className="flex items-center gap-2 py-3 px-5 rounded-lg text-sm font-medium border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-colors whitespace-nowrap flex-shrink-0"
+                    >
+                      <span className="material-symbols-outlined text-base">cancel</span>
+                      Cancel Plan
+                    </button>
+                  )}
                 </div>
               </section>
 
@@ -874,13 +1107,22 @@ const Settings: React.FC = () => {
                     </p>
                     <p className="text-xs text-slate-400">Available Credits</p>
                   </div>
-                  <button
-                    onClick={() => setShowCreditModal(true)}
-                    className="px-4 py-2 rounded-lg text-sm font-bold text-black transition-all"
-                    style={{ background: "#0ff0f0" }}
-                  >
-                    Buy Credits
-                  </button>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      onClick={() => setShowCreditModal(true)}
+                      className="px-4 py-2 rounded-lg text-sm font-bold text-black transition-all"
+                      style={{ background: "#0ff0f0" }}
+                    >
+                      Buy Credits
+                    </button>
+                    <button
+                      onClick={() => setShowSpendModal(true)}
+                      className="px-4 py-2 rounded-lg text-sm font-medium text-[#0ff0f0] border transition-all hover:bg-[#0ff0f0]/10"
+                      style={{ borderColor: "rgba(15,240,240,0.3)" }}
+                    >
+                      Spend Credits
+                    </button>
+                  </div>
                 </div>
               </div>
 

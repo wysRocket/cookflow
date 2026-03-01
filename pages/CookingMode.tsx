@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock } from "lucide-react";
 import { recipes } from "../data";
 
@@ -246,10 +246,10 @@ const CookingMode: React.FC = () => {
       {/* Top bar */}
       <header className="relative z-10 flex items-center justify-between px-6 py-4 flex-shrink-0">
         <button
-          onClick={() => navigate(`/app/recipes/${id ?? ""}`)}
+          onClick={() => navigate(-1)}
           className="flex items-center gap-2 px-4 py-2 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#14b8a6] transition-all"
         >
-          <ArrowLeft className="w-4 h-4" /> <span>Back to Recipe</span>
+          <ArrowLeft className="w-4 h-4" /> <span>Back</span>
         </button>
         <div className="px-4 py-1.5 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#94A3B8]">
           Step {currentStep + 1} of {steps.length}
@@ -335,11 +335,14 @@ const CookingMode: React.FC = () => {
           {/* Navigation controls */}
           <div className="flex flex-col sm:flex-row items-center justify-between mt-8 gap-4">
             <button
-              onClick={() => setCurrentStep((s) => Math.max(0, s - 1))}
-              disabled={currentStep === 0}
-              className="w-full sm:w-auto px-8 py-4 bg-[#1E293B] border border-[#334155] rounded-full text-[#94A3B8] hover:text-[#F1F5F9] disabled:opacity-40 disabled:cursor-not-allowed transition-all order-2 sm:order-1"
+              onClick={() =>
+                currentStep === 0
+                  ? navigate("/app/courses")
+                  : setCurrentStep((s) => s - 1)
+              }
+              className="w-full sm:w-auto px-8 py-4 bg-[#1E293B] border border-[#334155] rounded-full text-[#94A3B8] hover:text-[#F1F5F9] hover:border-[#14b8a6] transition-all order-2 sm:order-1"
             >
-              Previous
+              {currentStep === 0 ? "All Courses" : "Previous"}
             </button>
 
             {/* Step dots */}

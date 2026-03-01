@@ -1,7 +1,16 @@
 import React, { Suspense, lazy, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { ChefHat } from "lucide-react";
 import { motion } from "framer-motion";
+import { AccessProvider, useAccess } from "./contexts/AccessContext";
+import PremiumGate from "./components/PremiumGate";
 
 // Landing page components
 import Navbar from "./components/Navbar";
@@ -24,10 +33,64 @@ const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
 const MealPlanner = lazy(() => import("./pages/MealPlanner"));
 const ShoppingList = lazy(() => import("./pages/ShoppingList"));
 const Settings = lazy(() => import("./pages/Settings"));
+const LegalPage = lazy(() => import("./pages/LegalPage"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const PublicOnlyRoute = lazy(() => import("./components/PublicOnlyRoute"));
+
+// ── Gated route wrappers ──────────────────────────────────────────────────────
+
+const RecipeListGated: React.FC = () => {
+  const { canAccessRecipes } = useAccess();
+  return (
+    <PremiumGate allowed={canAccessRecipes} section="recipes">
+      <RecipeList />
+    </PremiumGate>
+  );
+};
+
+const RecipeDetailGated: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const { canAccessRecipe } = useAccess();
+  const numId = Number(id);
+  return (
+    <PremiumGate allowed={canAccessRecipe(numId)} section="recipe" itemId={numId}>
+      <RecipeDetail />
+    </PremiumGate>
+  );
+};
+
+const ChefListGated: React.FC = () => {
+  const { canAccessChefs } = useAccess();
+  return (
+    <PremiumGate allowed={canAccessChefs} section="chefs">
+      <ChefList />
+    </PremiumGate>
+  );
+};
+
+const ChefProfileGated: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const { canAccessChef } = useAccess();
+  const numId = Number(id);
+  return (
+    <PremiumGate allowed={canAccessChef(numId)} section="chef" itemId={numId}>
+      <ChefProfile />
+    </PremiumGate>
+  );
+};
+
+const MealPlannerGated: React.FC = () => {
+  const { canAccessPlanner } = useAccess();
+  return (
+    <PremiumGate allowed={canAccessPlanner} section="planner">
+      <MealPlanner />
+    </PremiumGate>
+  );
+};
+
+// ── Landing page ──────────────────────────────────────────────────────────────
 
 const LandingPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -89,51 +152,55 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Suspense
-        fallback={
-          <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
-            <p className="text-sm tracking-widest uppercase text-[#94A3B8]">
-              Loading...
-            </p>
-          </div>
-        }
-      >
-        <Routes>
-          {/* Landing page */}
-          <Route path="/" element={<LandingPage />} />
-          <Route element={<PublicOnlyRoute />}>
-            <Route path="/auth/sign-in" element={<SignIn />} />
-            <Route path="/auth/sign-up" element={<SignUp />} />
-          </Route>
-
-          <Route element={<ProtectedRoute />}>
-            {/* App dashboard */}
-            <Route path="/app" element={<DashboardLayout />}>
-              <Route index element={<Navigate to="/app/courses" replace />} />
-              <Route path="courses" element={<Dashboard />} />
-              <Route path="courses/:id" element={<CookingMode />} />
-              <Route path="chefs" element={<ChefList />} />
-              <Route path="chef/:id" element={<ChefProfile />} />
-              <Route path="community" element={<Community />} />
-              <Route path="recipes" element={<RecipeList />} />
-              <Route path="recipes/:id" element={<RecipeDetail />} />
-              <Route path="meal-planner" element={<MealPlanner />} />
-              <Route path="shopping-list" element={<ShoppingList />} />
-              <Route path="settings" element={<Settings />} />
-              <Route
-                path="masterclass"
-                element={<Navigate to="/app/courses" replace />}
-              />
+    <AccessProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Suspense
+          fallback={
+            <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
+              <p className="text-sm tracking-widest uppercase text-[#94A3B8]">
+                Loading...
+              </p>
+            </div>
+          }
+        >
+          <Routes>
+            {/* Landing page */}
+            <Route path="/" element={<LandingPage />} />
+            {/* Legal pages — no auth required */}
+            <Route path="/legal/:page" element={<LegalPage />} />
+            <Route element={<PublicOnlyRoute />}>
+              <Route path="/auth/sign-in" element={<SignIn />} />
+              <Route path="/auth/sign-up" element={<SignUp />} />
             </Route>
-          </Route>
 
-          {/* Catch-all */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+            <Route element={<ProtectedRoute />}>
+              {/* App dashboard */}
+              <Route path="/app" element={<DashboardLayout />}>
+                <Route index element={<Navigate to="/app/courses" replace />} />
+                <Route path="courses" element={<Dashboard />} />
+                <Route path="courses/:id" element={<CookingMode />} />
+                <Route path="chefs" element={<ChefListGated />} />
+                <Route path="chef/:id" element={<ChefProfileGated />} />
+                <Route path="community" element={<Community />} />
+                <Route path="recipes" element={<RecipeListGated />} />
+                <Route path="recipes/:id" element={<RecipeDetailGated />} />
+                <Route path="meal-planner" element={<MealPlannerGated />} />
+                <Route path="shopping-list" element={<ShoppingList />} />
+                <Route path="settings" element={<Settings />} />
+                <Route
+                  path="masterclass"
+                  element={<Navigate to="/app/courses" replace />}
+                />
+              </Route>
+            </Route>
+
+            {/* Catch-all */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </AccessProvider>
   );
 };
 

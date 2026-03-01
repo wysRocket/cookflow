@@ -75,6 +75,87 @@ const academyCourses = [
     image:
       "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
   },
+  {
+    id: 9,
+    title: "Architectural Desserts",
+    instructor: "VIENNA",
+    timeAgo: "1 year ago",
+    details: "9 lessons",
+    image:
+      "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 10,
+    title: "Japanese Knife Mastery",
+    instructor: "TOKYO",
+    timeAgo: "8 months ago",
+    details: "16 lessons",
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 11,
+    title: "Meze & Live-Fire Cooking",
+    instructor: "ISTANBUL",
+    timeAgo: "5 months ago",
+    details: "10 lessons",
+    image:
+      "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 12,
+    title: "Spice Alchemy",
+    instructor: "MARRAKECH",
+    timeAgo: "3 months ago",
+    details: "8 lessons",
+    image:
+      "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 13,
+    title: "Mole & Masa",
+    instructor: "MEXICO CITY",
+    timeAgo: "2 months ago",
+    details: "14 lessons",
+    image:
+      "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 14,
+    title: "Dim Sum Architecture",
+    instructor: "SHANGHAI",
+    timeAgo: "4 months ago",
+    details: "12 lessons",
+    image:
+      "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 15,
+    title: "Ceviche & Citrus Chemistry",
+    instructor: "LIMA",
+    timeAgo: "6 months ago",
+    details: "11 lessons",
+    image:
+      "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 16,
+    title: "Thai Curry Science",
+    instructor: "BANGKOK",
+    timeAgo: "7 months ago",
+    details: "9 lessons",
+    image:
+      "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 17,
+    title: "Smoke & Char Mastery",
+    instructor: "OAXACA",
+    timeAgo: "1 month ago",
+    details: "13 lessons",
+    image:
+      "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+  },
 ];
 
 const Dashboard: React.FC = () => {
