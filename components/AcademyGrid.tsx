@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   motion,
   useMotionValue,
@@ -15,6 +15,7 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
   module,
   index,
 }) => {
+  const navigate = useNavigate();
   const ref = useRef<HTMLDivElement>(null);
   const [showTip, setShowTip] = useState(false);
 
@@ -76,7 +77,10 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
         className="group relative h-full w-full rounded-xl cursor-pointer"
       >
         {/* Card Background Container */}
-        <div className="absolute inset-0 rounded-xl overflow-hidden bg-obsidian border border-white/10 shadow-2xl">
+        <div
+          onClick={() => navigate('/app/courses')}
+          className="absolute inset-0 rounded-xl overflow-hidden bg-obsidian border border-white/10 shadow-2xl"
+        >
           {/* Base Image */}
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10" />
           <img
@@ -96,6 +100,7 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
 
         {/* Floating Content */}
         <div
+          onClick={() => navigate('/app/courses')}
           className="absolute inset-0 z-30 p-6 flex flex-col justify-end"
           style={{ transform: "translateZ(40px)" }}
         >
@@ -164,9 +169,14 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
             </div>
 
             <div className="flex items-center justify-between border-t border-white/20 pt-4 backdrop-blur-sm bg-black/20 rounded px-2 -mx-2">
-              <span className="text-xl font-bold text-white">
-                €{module.price}
-              </span>
+              <div className="flex flex-col">
+                <span className="text-xl font-bold text-white">
+                  €{module.price}
+                </span>
+                <span className="text-[10px] text-[#14b8a6] font-bold tracking-wider uppercase">
+                  or {module.price * 100} Credits
+                </span>
+              </div>
               <span className="text-xs text-gray-300">Full Access</span>
             </div>
           </div>

@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { NavLink, Outlet, Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import {
+  NavLink,
+  Outlet,
+  Link,
+  useNavigate,
+  useLocation,
+  useSearchParams,
+} from "react-router-dom";
 import { ChefHat, Search, Menu, X, User } from "lucide-react";
 import AuthControls from "../components/AuthControls";
 import Footer from "../components/Footer";
@@ -16,13 +23,34 @@ const DashboardLayout: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    setSearchQuery(q || "");
+  }, [searchParams]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      navigate(`/app/recipes?q=${encodeURIComponent(searchQuery.trim())}`);
-      setSearchQuery("");
+      if (location.pathname.startsWith("/app/courses")) {
+        navigate(`/app/courses?q=${encodeURIComponent(searchQuery.trim())}`);
+      } else if (location.pathname.startsWith("/app/chefs")) {
+        navigate(`/app/chefs?q=${encodeURIComponent(searchQuery.trim())}`);
+      } else {
+        navigate(`/app/recipes?q=${encodeURIComponent(searchQuery.trim())}`);
+      }
+    } else {
+      if (location.pathname.startsWith("/app/courses")) {
+        navigate(`/app/courses`);
+      } else if (location.pathname.startsWith("/app/chefs")) {
+        navigate(`/app/chefs`);
+      } else {
+        navigate(`/app/recipes`);
+      }
     }
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -53,9 +81,10 @@ const DashboardLayout: React.FC = () => {
                 key={to}
                 to={to}
                 className={({ isActive }) =>
-                  `text-sm font-medium transition-colors relative py-1 ${isActive
-                    ? "text-[#D4AF37]"
-                    : "text-[#94A3B8] hover:text-[#F1F5F9]"
+                  `text-sm font-medium transition-colors relative py-1 ${
+                    isActive
+                      ? "text-[#D4AF37]"
+                      : "text-[#94A3B8] hover:text-[#F1F5F9]"
                   }`
                 }
               >
@@ -76,12 +105,15 @@ const DashboardLayout: React.FC = () => {
         <div className="hidden sm:flex items-center gap-6">
           {/* Search Field */}
           <form onSubmit={handleSearch} className="relative">
-            <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]">
+            <button
+              type="submit"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]"
+            >
               <Search className="w-4 h-4" />
             </button>
             <input
               type="text"
-              placeholder="Search chefs or recipes"
+              placeholder="Search current section..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-white/5 border border-white/10 rounded-full py-2 pl-9 pr-4 text-sm text-[#F1F5F9] focus:outline-none focus:border-[#14b8a6] focus:bg-white/10 transition-colors w-64 placeholder-[#64748B]"
@@ -122,7 +154,8 @@ const DashboardLayout: React.FC = () => {
                 to={to}
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
-                  `text-base font-medium transition-colors ${isActive ? "text-[#D4AF37]" : "text-[#94A3B8]"
+                  `text-base font-medium transition-colors ${
+                    isActive ? "text-[#D4AF37]" : "text-[#94A3B8]"
                   }`
                 }
               >
@@ -132,7 +165,10 @@ const DashboardLayout: React.FC = () => {
           </nav>
           <div className="pt-4 border-t border-white/10">
             <form onSubmit={handleSearch} className="relative mb-4">
-              <button type="submit" className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]">
+              <button
+                type="submit"
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8] hover:text-[#14b8a6]"
+              >
                 <Search className="w-4 h-4" />
               </button>
               <input

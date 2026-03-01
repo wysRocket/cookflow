@@ -111,12 +111,12 @@ const INITIAL_POSTS: Post[] = [
 const TABS = ["All", "Following", "Trending", "Questions"] as const;
 type Tab = (typeof TABS)[number];
 
-const TRENDING_TOPICS = [
-  { tag: "Knife Skills", count: 234 },
-  { tag: "Pastry", count: 189 },
-  { tag: "Japanese", count: 156 },
-  { tag: "Molecular", count: 112 },
-  { tag: "Fermentation", count: 98 },
+const TRENDING_TAGS = [
+  "Knife Skills",
+  "Pastry",
+  "Japanese",
+  "Molecular",
+  "Fermentation",
 ];
 
 const FEATURED_CHEFS = [
@@ -153,6 +153,9 @@ const Community: React.FC = () => {
   const [showNewPost, setShowNewPost] = useState(false);
   const [newContent, setNewContent] = useState("");
   const [newTags, setNewTags] = useState("");
+  const [replyingTo, setReplyingTo] = useState<number | null>(null);
+  const [replyContent, setReplyContent] = useState("");
+  const [shareToast, setShareToast] = useState<number | null>(null);
 
   const handleNewPostSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -204,6 +207,13 @@ const Community: React.FC = () => {
       prev.map((p) => (p.id !== id ? p : { ...p, bookmarked: !p.bookmarked })),
     );
   };
+
+  const trendingTopics = TRENDING_TAGS.map((tag) => ({
+    tag,
+    count: posts.filter((p) =>
+      p.tags.some((t) => t.toLowerCase() === tag.toLowerCase()),
+    ).length,
+  }));
 
   const displayed = (() => {
     let result =
@@ -412,11 +422,17 @@ const Community: React.FC = () => {
                   />
                   {post.likes}
                 </button>
-                <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-[#64748B] hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors">
+                <button
+                  onClick={() => alert("Comments section coming soon!")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-[#64748B] hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors"
+                >
                   <MessageCircle className="w-4 h-4" />
                   {post.comments}
                 </button>
-                <button className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-[#64748B] hover:text-[#F1F5F9] hover:bg-[#334155] transition-colors">
+                <button
+                  onClick={() => alert("Share feature coming soon!")}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-[#64748B] hover:text-[#F1F5F9] hover:bg-[#334155] transition-colors"
+                >
                   <Share2 className="w-4 h-4" />
                 </button>
                 <button
@@ -491,7 +507,7 @@ const Community: React.FC = () => {
               </h3>
             </div>
             <div className="space-y-2">
-              {TRENDING_TOPICS.map((topic) => (
+              {trendingTopics.map((topic) => (
                 <button
                   key={topic.tag}
                   onClick={() => handleTagClick(topic.tag)}

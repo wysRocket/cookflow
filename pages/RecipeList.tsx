@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import {
-  Search,
-  Clock,
-  Flame,
-  Star,
-  Bookmark,
-  ChevronRight,
-} from "lucide-react";
-import { recipes } from '../data';
+import { Clock, Flame, Star, Bookmark, ChevronRight } from "lucide-react";
+import { recipes } from "../data";
 
 interface Recipe {
   readonly id: number;
@@ -38,15 +31,19 @@ const RecipeList: React.FC = () => {
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
 
-  // Sync search when URL param changes
   useEffect(() => {
     const q = searchParams.get("q");
-    if (q !== null) setSearch(q);
+    setSearch(q ?? "");
   }, [searchParams]);
 
   const filtered = recipes.filter((r) => {
     const matchesFilter = activeFilter === "All" || r.category === activeFilter;
-    const matchesSearch = r.name.toLowerCase().includes(search.toLowerCase());
+    const searchLower = search.toLowerCase();
+    const matchesSearch =
+      r.name.toLowerCase().includes(searchLower) ||
+      r.category.toLowerCase().includes(searchLower) ||
+      r.tags.some((tag) => tag.toLowerCase().includes(searchLower)) ||
+      r.difficulty.toLowerCase().includes(searchLower);
     return matchesFilter && matchesSearch;
   });
 
@@ -78,26 +75,17 @@ const RecipeList: React.FC = () => {
 
       {/* Filter bar */}
       <div className="flex flex-col sm:flex-row gap-3">
-        <div className="relative flex-1">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
-          <input
-            type="text"
-            placeholder="Search recipes..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded-full text-[#F1F5F9] placeholder-[#64748B] text-sm focus:outline-none focus:border-[#14b8a6] transition-colors"
-          />
-        </div>
         <div className="flex gap-2 flex-wrap">
           {/* mobile-friendly filter wrap */}
           {filters.map((f) => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${activeFilter === f
+              className={`flex-shrink-0 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                activeFilter === f
                   ? "bg-[#14b8a6] text-white"
                   : "bg-[#1E293B] text-[#94A3B8] border border-[#334155] hover:border-[#14b8a6]/50 hover:text-[#F1F5F9]"
-                }`}
+              }`}
             >
               {f}
             </button>

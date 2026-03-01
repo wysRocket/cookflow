@@ -25,8 +25,12 @@ const RecipeDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   // Find the requested recipe or default to the first one if invalid ID is passed
-  const recipe = recipes.find(r => r.id === Number(id)) || recipes[0];
+  const recipe = recipes.find((r) => r.id === Number(id)) || recipes[0];
   const [checked, setChecked] = useState<Set<number>>(new Set());
+
+  React.useEffect(() => {
+    setChecked(new Set());
+  }, [id]);
 
   const toggleIngredient = (i: number) => {
     setChecked((prev) => {
@@ -68,7 +72,7 @@ const RecipeDetail: React.FC = () => {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className="w-4 h-4 text-amber-400 fill-amber-400"
+                  className={`w-4 h-4 ${i < Math.round(recipe.rating) ? "text-amber-400 fill-amber-400" : "text-gray-600"}`}
                 />
               ))}
               <span className="text-[#14b8a6] font-semibold text-sm">
@@ -137,7 +141,17 @@ const RecipeDetail: React.FC = () => {
               <Play className="w-4 h-4" /> Start Cooking
             </button>
             <button
-              onClick={() => navigate("/app/meal-planner", { state: { addedRecipe: { name: recipe.name, image: recipe.image, kcal: recipe.kcal } } })}
+              onClick={() =>
+                navigate("/app/meal-planner", {
+                  state: {
+                    addedRecipe: {
+                      name: recipe.name,
+                      image: recipe.image,
+                      kcal: recipe.kcal,
+                    },
+                  },
+                })
+              }
               className="flex items-center justify-center gap-2 bg-[#1E293B] border border-[#334155] text-[#94A3B8] px-4 py-3 rounded-full font-medium hover:border-[#D4AF37] hover:text-[#D4AF37] transition-all"
             >
               <CalendarPlus className="w-4 h-4" />
@@ -158,7 +172,9 @@ const RecipeDetail: React.FC = () => {
                 {recipe.servings} serving{recipe.servings > 1 ? "s" : ""}
               </span>
             </h2>
-            <span className="text-[10px] text-[#64748B] uppercase tracking-wider">Click to mark purchased</span>
+            <span className="text-[10px] text-[#64748B] uppercase tracking-wider">
+              Click to mark purchased
+            </span>
           </div>
           <ul className="space-y-3">
             {recipe.ingredients.map((ing, i) => (

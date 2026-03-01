@@ -1,10 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { MapPin, Star, BookOpen, Users, Search } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { MapPin, Star, BookOpen, Users } from "lucide-react";
 import { chefs } from "../data";
 
 const ChefList: React.FC = () => {
-  const [search, setSearch] = useState("");
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") ?? "");
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    setSearch(q ?? "");
+  }, [searchParams]);
 
   const filtered = chefs.filter(
     (c) =>
@@ -24,16 +30,6 @@ const ChefList: React.FC = () => {
           <p className="text-[#94A3B8] mt-1">
             Learn from world-class culinary experts
           </p>
-        </div>
-        <div className="relative">
-          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B]" />
-          <input
-            type="text"
-            placeholder="Search chefs or cuisine..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full sm:w-64 pl-9 pr-4 py-2.5 bg-[#1E293B] border border-[#334155] rounded-full text-sm text-[#F1F5F9] placeholder-[#64748B] focus:outline-none focus:border-[#14b8a6] transition-colors"
-          />
         </div>
       </div>
 

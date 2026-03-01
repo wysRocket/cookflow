@@ -67,4 +67,5 @@ export interface Chef {
   readonly banner: string;
   readonly avatar: string;
   readonly featuredRecipeId: number;
+  readonly creations: number[];
 }

@@ -74,11 +74,14 @@ const Membership: React.FC = () => {
               <h3 className="font-serif text-2xl text-white mb-2">
                 {tier.name}
               </h3>
-              <div className="flex items-baseline justify-center gap-1 mb-6">
-                <span className="text-4xl font-bold text-white">
-                  €{tier.price}
-                </span>
-                <span className="text-gray-500 text-sm">/month</span>
+              <div className="flex flex-col items-center justify-center mb-6">
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl font-bold text-white">
+                    €{tier.price}
+                  </span>
+                  <span className="text-gray-500 text-sm">/month</span>
+                </div>
+                <span className="text-[#14b8a6] text-xs font-medium mt-1">or {tier.price * 100} Credits</span>
               </div>
 
               <ul className="space-y-4 mb-8 text-left">

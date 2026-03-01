@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Cloud, Beaker, Scissors, Check } from "lucide-react";
 
 const academyCourses = [
@@ -41,80 +41,105 @@ const academyCourses = [
   },
   {
     id: 5,
-    title: "Artisan Fathers Pastry",
-    instructor: "ROUEN",
-    timeAgo: "11 years ago",
-    details: "21 details",
+    title: "Seafood Butchery",
+    instructor: "MARSEILLE",
+    timeAgo: "3 years ago",
+    details: "14 lessons",
     image:
-      "https://images.unsplash.com/photo-1606890737304-57a1ca8a5b62?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 6,
-    title: "Diacomountless Bonanos",
-    instructor: "OSLO",
-    timeAgo: "05 years ago",
-    details: "15 details",
+    title: "Oenology & Pairing",
+    instructor: "BORDEAUX",
+    timeAgo: "2 years ago",
+    details: "6 lessons",
     image:
-      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 7,
-    title: "The Modular Mementos",
-    instructor: "COPENHAGEN",
-    timeAgo: "7 years ago",
-    details: "18 details",
+    title: "Plant-Based Molecular",
+    instructor: "BERLIN",
+    timeAgo: "1 year ago",
+    details: "11 lessons",
     image:
       "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: 8,
-    title: "Nose-to-Tail Workshop",
-    instructor: "COPENHAGEN",
-    timeAgo: "01 years ago",
-    details: "27 details",
+    title: "The New Mother Sauces",
+    instructor: "LYON",
+    timeAgo: "6 months ago",
+    details: "18 lessons",
     image:
-      "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
 const Dashboard: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("q") ?? "");
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    setSearch(q ?? "");
+  }, [searchParams]);
+
+  const filteredCourses = academyCourses.filter(
+    (course) =>
+      course.title.toLowerCase().includes(search.toLowerCase()) ||
+      course.instructor.toLowerCase().includes(search.toLowerCase()),
+  );
+
   return (
     <div className="space-y-24 pb-20">
       {/* The Academy Section */}
       <section className="text-center">
-        <h2 className="text-3xl md:text-4xl font-serif text-[#F1F5F9] mb-12 tracking-tight">
-          The Academy
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
-          {academyCourses.map((course) => (
-            <Link
-              key={course.id}
-              to={`/app/courses/${course.id}`}
-              className="bg-[#1E293B] rounded-2xl overflow-hidden border border-[#334155] hover:border-[#D4AF37]/50 transition-colors group shadow-lg"
-            >
-              <div className="relative h-48 overflow-hidden p-3 pb-0">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-transparent to-transparent opacity-60" />
-              </div>
-              <div className="p-5">
-                <p className="text-[10px] font-bold text-[#14b8a6] uppercase tracking-widest mb-1">
-                  {course.instructor}
-                </p>
-                <h3 className="text-lg font-semibold text-[#F1F5F9] leading-tight mb-2 group-hover:text-[#D4AF37] transition-colors">
-                  {course.title}
-                </h3>
-                <p className="text-xs text-[#64748B]">
-                  {course.timeAgo} • {course.details}
-                </p>
-              </div>
-            </Link>
-          ))}
+        <div className="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
+          <h2 className="text-3xl md:text-4xl font-serif text-[#F1F5F9] tracking-tight mx-auto">
+            The Academy
+          </h2>
         </div>
+
+        {filteredCourses.length === 0 ? (
+          <div className="py-12 border border-dashed border-[#334155] rounded-2xl">
+            <p className="text-[#94A3B8]">
+              No courses found matching "{search}"
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+            {filteredCourses.map((course) => (
+              <Link
+                key={course.id}
+                to={`/app/courses/${course.id}`}
+                className="bg-[#1E293B] rounded-2xl overflow-hidden border border-[#334155] hover:border-[#D4AF37]/50 transition-colors group shadow-lg"
+              >
+                <div className="relative h-48 overflow-hidden p-3 pb-0">
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#1E293B] via-transparent to-transparent opacity-60" />
+                </div>
+                <div className="p-5">
+                  <p className="text-[10px] font-bold text-[#14b8a6] uppercase tracking-widest mb-1">
+                    {course.instructor}
+                  </p>
+                  <h3 className="text-lg font-semibold text-[#F1F5F9] leading-tight mb-2 group-hover:text-[#D4AF37] transition-colors">
+                    {course.title}
+                  </h3>
+                  <p className="text-xs text-[#64748B]">
+                    {course.timeAgo} • {course.details}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Signature CookFlows Timeline */}
@@ -139,8 +164,8 @@ const Dashboard: React.FC = () => {
               The 72-Hour Sourdough
             </h3>
             <p className="text-sm text-[#94A3B8] leading-relaxed max-w-[250px]">
-              Discovering high sourdough concept of the Discommousless Bonanos
-              in detail.
+              Master the biology of wild yeast. Create the perfect open crumb
+              structure using ancient grains.
             </p>
           </div>
 
@@ -172,8 +197,8 @@ const Dashboard: React.FC = () => {
               The Molecular Bistro
             </h3>
             <p className="text-sm text-[#94A3B8] leading-relaxed max-w-[250px]">
-              CookFlows arrives coming with Welcome extras on initiation and
-              argents back.
+              Deconstruct classic French mother sauces into foams, gels, and
+              soils for modern plating.
             </p>
           </div>
 
@@ -226,7 +251,7 @@ const Dashboard: React.FC = () => {
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#D4AF37] text-4xl font-bold tracking-tight">
-                $79
+                €79
               </span>
               <span className="text-[#64748B]">/mo</span>
             </div>
@@ -248,7 +273,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/app/community?upgrade=patissier"
+              to="/auth/sign-up"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
               Get started
@@ -265,7 +290,7 @@ const Dashboard: React.FC = () => {
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#F1F5F9] text-5xl font-bold tracking-tight">
-                $199
+                €199
               </span>
               <span className="text-[#94A3B8]">/mo</span>
             </div>
@@ -288,7 +313,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/app/community?upgrade=chef-de-partie"
+              to="/auth/sign-up"
               className="w-full py-3 rounded-full bg-gradient-to-r from-[#F59E0B] to-[#14b8a6] hover:from-[#d97706] hover:to-[#ea580c] text-white font-bold transition-colors text-center block"
             >
               Get started
@@ -302,7 +327,7 @@ const Dashboard: React.FC = () => {
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#38bdf8] text-4xl font-bold tracking-tight">
-                $299
+                €299
               </span>
               <span className="text-[#64748B]">/mo</span>
             </div>
@@ -325,7 +350,7 @@ const Dashboard: React.FC = () => {
               ))}
             </ul>
             <Link
-              to="/app/community?upgrade=chef-de-cuisine"
+              to="/auth/sign-up"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
               Get started

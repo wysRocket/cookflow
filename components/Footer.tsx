@@ -1,5 +1,5 @@
 import React from "react";
-import { Instagram, Twitter, Youtube, ChefHat } from "lucide-react";
+import { ChefHat } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Footer: React.FC = () => {
@@ -7,39 +7,18 @@ const Footer: React.FC = () => {
     <footer className="bg-obsidian border-t border-white/5 pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-12">
-          <Link to="/" className="flex items-center gap-2 mb-4 md:mb-0">
+          <Link
+            to="/"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="flex items-center gap-2 mb-4 md:mb-0"
+          >
             <ChefHat className="h-6 w-6 text-[#14b8a6]" />
             <span className="font-serif text-xl font-bold tracking-wider text-white">
               COOK<span className="text-[#14b8a6]">FLOW</span>
             </span>
           </Link>
 
-          <div className="flex gap-6">
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </a>
-            <a
-              href="https://twitter.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Twitter"
-            >
-              <Twitter className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </a>
-            <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube"
-            >
-              <Youtube className="w-5 h-5 text-gray-400 hover:text-white cursor-pointer transition-colors" />
-            </a>
-          </div>
+          <div className="flex gap-6">{/* Social media icons removed */}</div>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 border-b border-white/5 pb-12">
@@ -97,7 +76,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/app/recipes"
+                  to="/app/shopping-list"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   Ingredient Map
@@ -111,10 +90,7 @@ const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <Link
-                  to="/app/chefs"
-                  className="hover:text-[#14b8a6] transition-colors"
-                >
+                <Link to="/" className="hover:text-[#14b8a6] transition-colors">
                   About
                 </Link>
               </li>
@@ -176,24 +152,43 @@ const Footer: React.FC = () => {
           </span>
           {/* Apple Pay */}
           <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg" alt="Apple Pay" className="h-full w-full object-contain" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg"
+              alt="Apple Pay"
+              className="h-full w-full object-contain"
+            />
           </div>
           {/* Visa */}
           <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
-            <img src="https://cdn.simpleicons.org/visa/1434CB" alt="Visa" className="h-full w-full object-contain" />
+            <img
+              src="https://cdn.simpleicons.org/visa/1434CB"
+              alt="Visa"
+              className="h-full w-full object-contain"
+            />
           </div>
           {/* Mastercard */}
           <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-full w-full object-contain" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+              alt="Mastercard"
+              className="h-full w-full object-contain"
+            />
           </div>
           {/* Google Pay */}
           <div className="h-8 w-[60px] bg-white rounded-md flex items-center justify-center p-1.5">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg" alt="Google Pay" className="h-full w-full object-contain" />
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Google_Pay_Logo.svg"
+              alt="Google Pay"
+              className="h-full w-full object-contain"
+            />
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
-          <p>© {new Date().getFullYear()} CookFlow Europe Ltd. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} CookFlow Europe Ltd. All rights
+            reserved.
+          </p>
           <div className="flex gap-4 mt-2 md:mt-0">
             <span>Made in Berlin</span>
             <span>Metric System Standard</span>

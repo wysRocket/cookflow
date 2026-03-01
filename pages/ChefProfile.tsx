@@ -19,7 +19,7 @@ import {
   UserCheck,
   Users,
 } from "lucide-react";
-import { chefs } from "../data";
+import { chefs, recipes } from "../data";
 
 const showcaseSkills = [
   { icon: <Droplets className="w-4 h-4" />, name: "Saucier Level 3" },
@@ -29,48 +29,7 @@ const showcaseSkills = [
   { icon: <FlaskConical className="w-4 h-4" />, name: "Fermentation" },
 ];
 
-const creations = [
-  {
-    id: 1,
-    title: "Wild Truffle Risotto",
-    desc: "A creamy arborio rice dish finished with aged parmesan...",
-    time: "45m",
-    rating: 4.8,
-    reviews: 124,
-    image:
-      "https://images.unsplash.com/photo-1595295333158-4742f28fbd85?auto=format&fit=crop&q=80",
-  },
-  {
-    id: 2,
-    title: "Pan-Seared Duck Breast",
-    desc: "Crispy skin duck breast served with a red wine reduction an...",
-    time: "1h 20m",
-    rating: 4.9,
-    reviews: 89,
-    image:
-      "https://images.unsplash.com/photo-1518492104633-130d0cc84637?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    title: "Deconstructed Lemon Tart",
-    desc: "A modern take on the classic, featuring yuzu curd, meringu...",
-    time: "2h",
-    rating: 4.7,
-    reviews: 56,
-    image:
-      "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "A5 Wagyu & Chimichurri",
-    desc: "Simple preparation letting the premium beef shine,...",
-    time: "15m",
-    rating: 4.9,
-    reviews: 210,
-    image:
-      "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&q=80",
-  },
-];
+
 
 const connections = [
   {
@@ -154,8 +113,8 @@ const ChefProfile: React.FC = () => {
               <button
                 onClick={() => setFollowed((f) => !f)}
                 className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${followed
-                    ? "bg-[#1E293B] border border-[#14b8a6] text-[#14b8a6]"
-                    : "bg-[#14b8a6] hover:bg-[#0d9488] text-white shadow-teal-900/30"
+                  ? "bg-[#1E293B] border border-[#14b8a6] text-[#14b8a6]"
+                  : "bg-[#14b8a6] hover:bg-[#0d9488] text-white shadow-teal-900/30"
                   }`}
               >
                 {followed ? (
@@ -219,53 +178,56 @@ const ChefProfile: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {creations.map((item) => (
-                <div
-                  key={item.id}
-                  className="bg-[#1E293B] border border-[#334155] rounded-xl overflow-hidden group shadow-lg"
-                >
-                  <Link
-                    to={`/app/recipes/${profile.featuredRecipeId}`}
-                    className="block relative h-48 overflow-hidden"
+              {profile.creations.map((recipeId) => {
+                const item = recipes.find(r => r.id === recipeId);
+                if (!item) return null;
+                return (
+                  <div
+                    key={item.id}
+                    className="bg-[#1E293B] border border-[#334155] rounded-xl overflow-hidden group shadow-lg"
                   >
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      loading="lazy"
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute top-3 right-3 bg-[#1E293B]/80 backdrop-blur text-[#14b8a6] text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1 border border-[#334155]">
-                      <Flame className="w-3 h-3" /> {item.time}
-                    </div>
-                  </Link>
-                  <div className="p-5">
-                    <h3 className="text-lg font-bold text-[#F1F5F9] mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-[#94A3B8] line-clamp-2 mb-4">
-                      {item.desc}
-                    </p>
-                    <div className="flex items-center justify-between border-t border-[#334155] pt-4">
-                      <div className="flex items-center gap-1 text-amber-400">
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <Star className="w-4 h-4 fill-current" />
-                        <span className="text-[#64748B] text-xs ml-1">
-                          ({item.reviews})
-                        </span>
+                    <Link
+                      to={`/app/recipes/${item.id}`}
+                      className="block relative h-48 overflow-hidden"
+                    >
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute top-3 right-3 bg-[#1E293B]/80 backdrop-blur text-[#14b8a6] text-xs font-bold px-2.5 py-1 rounded flex items-center gap-1 border border-[#334155]">
+                        <Flame className="w-3 h-3" /> {item.time}
                       </div>
-                      <Link
-                        to={`/app/recipes/${profile.featuredRecipeId}`}
-                        className="text-xs font-bold text-[#D4AF37] hover:text-[#c9a227] flex items-center gap-1 transition-colors uppercase tracking-widest"
-                      >
-                        Recipe <ArrowRight className="w-3 h-3" />
-                      </Link>
+                    </Link>
+                    <div className="p-5">
+                      <h3 className="text-lg font-bold text-[#F1F5F9] mb-2">
+                        {item.name}
+                      </h3>
+                      <p className="text-sm text-[#94A3B8] line-clamp-2 mb-4">
+                        {item.description}
+                      </p>
+                      <div className="flex items-center justify-between border-t border-[#334155] pt-4">
+                        <div className="flex items-center gap-1 text-amber-400">
+                          <Star className="w-4 h-4 fill-current" />
+                          <span className="text-sm font-bold text-[#F1F5F9] ml-1">
+                            {item.rating}
+                          </span>
+                          <span className="text-[#64748B] text-xs ml-1">
+                            ({item.reviews})
+                          </span>
+                        </div>
+                        <Link
+                          to={`/app/recipes/${item.id}`}
+                          className="text-xs font-bold text-[#D4AF37] hover:text-[#c9a227] flex items-center gap-1 transition-colors uppercase tracking-widest"
+                        >
+                          Recipe <ArrowRight className="w-3 h-3" />
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>

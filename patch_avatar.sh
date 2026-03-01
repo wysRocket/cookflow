@@ -1,0 +1,2 @@
+sed -i '' 's|<div\n                      className="relative group cursor-pointer"\n                      onClick={() =>\n                        document.getElementById("avatar-upload")?.click()\n                      }\n                    >|<label\n                      htmlFor="avatar-upload"\n                      className="relative group cursor-pointer block"\n                    >|' pages/Settings.tsx
+sed -i '' 's|</label>\n                      <input|</label>\n                      <input|' pages/Settings.tsx 
