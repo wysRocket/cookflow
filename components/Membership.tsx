@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const tiers = [
   {
     name: "Commis",
-    price: 15,
+    price: 79,
     features: [
       "Access to all Standard Recipes",
       "Monthly Technique Workshop",
@@ -18,7 +18,7 @@ const tiers = [
   },
   {
     name: "Chef de Partie",
-    price: 29,
+    price: 199,
     features: [
       "Everything in Commis",
       "Full Academy Access (6 Cities)",
@@ -32,7 +32,7 @@ const tiers = [
   },
   {
     name: "Executive",
-    price: 89,
+    price: 299,
     features: [
       "Everything in Chef de Partie",
       "1-on-1 Mentor Feedback",
@@ -81,7 +81,9 @@ const Membership: React.FC = () => {
                   </span>
                   <span className="text-gray-500 text-sm">/month</span>
                 </div>
-                <span className="text-[#14b8a6] text-xs font-medium mt-1">or {tier.price * 100} Credits</span>
+                <span className="text-[#14b8a6] text-xs font-medium mt-1">
+                  or {tier.price * 100} Credits
+                </span>
               </div>
 
               <ul className="space-y-4 mb-8 text-left">
