@@ -27,6 +27,9 @@ jobs:
         run: npm run build
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          VITE_REQUIRE_AUTH: "true"
+          VITE_AUTH_URL: "https://cookflow-auth.onrender.com"
+          VITE_AUTH_PROXY_TARGET: "https://cookflow-auth.onrender.com"
 
       - name: Archive production build
         run: cd dist && zip -r ../dist.zip .
