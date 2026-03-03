@@ -1,10 +1,55 @@
 import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { betterAuth } from 'better-auth';
 import { memoryAdapter } from 'better-auth/adapters/memory';
 import mysql from 'mysql2/promise';
 import { toNodeHandler } from 'better-auth/node';
 
-const port = Number(process.env.AUTH_PORT ?? 8787);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const STATIC_DIR = path.resolve(__dirname, '..', 'public');
+
+const MIME = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript',
+  '.mjs': 'application/javascript',
+  '.css': 'text/css',
+  '.json': 'application/json',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.gif': 'image/gif',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon',
+  '.woff': 'font/woff',
+  '.woff2': 'font/woff2',
+  '.ttf': 'font/ttf',
+  '.webp': 'image/webp',
+};
+
+function serveStatic(req, res) {
+  const urlPath = req.url.split('?')[0];
+  let filePath = path.join(STATIC_DIR, urlPath === '/' ? 'index.html' : urlPath);
+
+  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
+    // SPA fallback — serve index.html for all unknown paths
+    filePath = path.join(STATIC_DIR, 'index.html');
+  }
+
+  if (!fs.existsSync(filePath)) {
+    res.writeHead(404);
+    res.end('Not found');
+    return;
+  }
+
+  const ext = path.extname(filePath).toLowerCase();
+  const contentType = MIME[ext] ?? 'application/octet-stream';
+  res.writeHead(200, { 'content-type': contentType });
+  fs.createReadStream(filePath).pipe(res);
+}
+
+const port = Number(process.env.PORT ?? process.env.AUTH_PORT ?? 8787);
 
 function buildDatabase() {
   const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
@@ -57,8 +102,7 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  res.writeHead(404, { 'content-type': 'application/json' });
-  res.end(JSON.stringify({ error: 'Not found' }));
+  serveStatic(req, res);
 });
 
 server.listen(port, () => {
