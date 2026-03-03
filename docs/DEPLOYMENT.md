@@ -2,11 +2,11 @@
 
 ## Architecture
 
-| Layer | Where | Status |
-|---|---|---|
-| Frontend (React SPA) | Hostinger static hosting | ✅ Live at `https://eurocookflow.com` |
-| Auth Server (Node.js) | **Render.com free tier** | ⏳ Needs 5-min setup (see below) |
-| Database (MySQL) | Hostinger shared DB | ✅ Schema already applied |
+| Layer                 | Where                    | Status                                |
+| --------------------- | ------------------------ | ------------------------------------- |
+| Frontend (React SPA)  | Hostinger static hosting | ✅ Live at `https://eurocookflow.com` |
+| Auth Server (Node.js) | **Render.com free tier** | ⏳ Needs 5-min setup (see below)      |
+| Database (MySQL)      | Hostinger shared DB      | ✅ Schema already applied             |
 
 Hostinger's shared hosting plan **does not** run persistent Node.js processes — it only serves static files and PHP. The auth server must live on a platform that supports persistent Node.js (Render, Railway, Fly.io, etc.).
 
@@ -25,13 +25,13 @@ Hostinger's shared hosting plan **does not** run persistent Node.js processes �
    - **Plan**: Free
 5. Under **Environment Variables**, add:
 
-   | Key | Value |
-   |---|---|
+   | Key                  | Value                                          |
+   | -------------------- | ---------------------------------------------- |
    | `BETTER_AUTH_SECRET` | `yyTcNwdxchDRsySB9GkEM9kifA/qOCuPW890iPVZmz8=` |
-   | `DB_HOST` | `localhost` |
-   | `DB_USER` | `cookflow_user` |
-   | `DB_PASSWORD` | `2vsTF\|L>s9A8n5u` |
-   | `DB_NAME` | `cookflow` |
+   | `DB_HOST`            | `localhost`                                    |
+   | `DB_USER`            | `cookflow_user`                                |
+   | `DB_PASSWORD`        | `2vsTF\|L>s9A8n5u`                             |
+   | `DB_NAME`            | `cookflow`                                     |
 
    > **Note:** `BETTER_AUTH_URL` and `COOKFLOW_FRONTEND_URL` will be set in Step 2 once you have the Render URL.
 
@@ -44,10 +44,10 @@ Hostinger's shared hosting plan **does not** run persistent Node.js processes �
 
 Once deployed, go to your Render service → **Environment** and add:
 
-| Key | Value |
-|---|---|
-| `BETTER_AUTH_URL` | `https://cookflow-auth.onrender.com` |
-| `COOKFLOW_FRONTEND_URL` | `https://eurocookflow.com` |
+| Key                     | Value                                |
+| ----------------------- | ------------------------------------ |
+| `BETTER_AUTH_URL`       | `https://cookflow-auth.onrender.com` |
+| `COOKFLOW_FRONTEND_URL` | `https://eurocookflow.com`           |
 
 Then click **Save Changes** — Render will restart automatically.
 
@@ -116,23 +116,22 @@ DB_NAME=cookflow
 
 ## Environment Variables Reference
 
-| Variable | Description | Required |
-|---|---|---|
-| `BETTER_AUTH_URL` | Public URL of the auth server | Yes |
-| `BETTER_AUTH_SECRET` | 32+ char secret for JWT signing | Yes |
-| `COOKFLOW_FRONTEND_URL` | Frontend origin for CORS | Yes |
-| `PORT` | Port to listen on (injected by hosting platform) | Set by platform |
-| `AUTH_PORT` | Fallback port if `PORT` not set | Optional (default 8787) |
-| `DB_HOST` | MySQL hostname | Yes |
-| `DB_PORT` | MySQL port | Optional (default 3306) |
-| `DB_USER` | MySQL username | Yes |
-| `DB_PASSWORD` | MySQL password | Yes |
-| `DB_NAME` | MySQL database name | Yes |
+| Variable                | Description                                      | Required                |
+| ----------------------- | ------------------------------------------------ | ----------------------- |
+| `BETTER_AUTH_URL`       | Public URL of the auth server                    | Yes                     |
+| `BETTER_AUTH_SECRET`    | 32+ char secret for JWT signing                  | Yes                     |
+| `COOKFLOW_FRONTEND_URL` | Frontend origin for CORS                         | Yes                     |
+| `PORT`                  | Port to listen on (injected by hosting platform) | Set by platform         |
+| `AUTH_PORT`             | Fallback port if `PORT` not set                  | Optional (default 8787) |
+| `DB_HOST`               | MySQL hostname                                   | Yes                     |
+| `DB_PORT`               | MySQL port                                       | Optional (default 3306) |
+| `DB_USER`               | MySQL username                                   | Yes                     |
+| `DB_PASSWORD`           | MySQL password                                   | Yes                     |
+| `DB_NAME`               | MySQL database name                              | Yes                     |
 
-
-   ```bash
-   VITE_REQUIRE_AUTH=true VITE_AUTH_URL=https://eurocookflow.com npm run build
-   ```
+```bash
+VITE_REQUIRE_AUTH=true VITE_AUTH_URL=https://eurocookflow.com npm run build
+```
 
 2. Deploy via Hostinger API (or zip `dist/` and upload):
    ```bash
