@@ -25,4 +25,4 @@ try {
   // .env not found — use environment variables as-is
 }
 
-await import('./server/auth-server.mjs');
+await import('./auth-server.mjs');
