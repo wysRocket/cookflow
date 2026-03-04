@@ -215,8 +215,7 @@ const PremiumGate: React.FC<PremiumGateProps> = ({
       fireToast("Meal Planner unlocked for 30 days!");
     }
     setShowUnlockModal(false);
-    // Navigate to trigger re-render / re-check
-    navigate(0);
+    // Access state updates are enough to re-render gate checks.
   };
 
   return (
@@ -302,7 +301,6 @@ const PremiumGate: React.FC<PremiumGateProps> = ({
                       activatePlan(plan.key);
                       setShowPlansModal(false);
                       fireToast(`${plan.name} plan activated!`);
-                      setTimeout(() => navigate(0), 600);
                     }}
                     className="mt-2 w-full py-2 rounded-lg text-sm font-bold text-black transition-all"
                     style={{ background: plan.color }}

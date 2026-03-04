@@ -1,27 +1,17 @@
-import React, { Suspense, lazy, useEffect, useState } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import {
   BrowserRouter,
   Routes,
   Route,
   Navigate,
+  Link,
   useLocation,
   useParams,
 } from "react-router-dom";
-import { ChefHat } from "lucide-react";
-import { motion } from "framer-motion";
 import { AccessProvider, useAccess } from "./contexts/AccessContext";
 import PremiumGate from "./components/PremiumGate";
 
-// Landing page components
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import AcademyGrid from "./components/AcademyGrid";
-import RitualList from "./components/RitualList";
-import Membership from "./components/Membership";
-import Testimonials from "./components/Testimonials";
-import ConsultantForm from "./components/ConsultantForm";
-import Footer from "./components/Footer";
-
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 const DashboardLayout = lazy(() => import("./pages/DashboardLayout"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 const CookingMode = lazy(() => import("./pages/CookingMode"));
@@ -38,6 +28,30 @@ const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 const PublicOnlyRoute = lazy(() => import("./components/PublicOnlyRoute"));
+
+const NotFoundPage: React.FC = () => (
+  <div className="min-h-screen bg-[#0F172A] text-[#F1F5F9] px-6 flex flex-col items-center justify-center gap-4 text-center">
+    <p className="text-xs tracking-[0.2em] uppercase text-[#64748B]">404</p>
+    <h1 className="text-3xl font-serif">Page not found</h1>
+    <p className="text-sm text-[#94A3B8] max-w-md">
+      This route does not exist. Use one of the primary entry points below.
+    </p>
+    <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+      <Link
+        to="/"
+        className="px-4 py-2 rounded-lg border border-[#334155] hover:border-[#14b8a6] transition-colors"
+      >
+        Home
+      </Link>
+      <Link
+        to="/app/courses"
+        className="px-4 py-2 rounded-lg bg-[#14b8a6] text-[#0F172A] font-semibold hover:bg-[#2dd4bf] transition-colors"
+      >
+        App
+      </Link>
+    </div>
+  </div>
+);
 
 // ── Gated route wrappers ──────────────────────────────────────────────────────
 
@@ -87,56 +101,6 @@ const MealPlannerGated: React.FC = () => {
     <PremiumGate allowed={canAccessPlanner} section="planner">
       <MealPlanner />
     </PremiumGate>
-  );
-};
-
-// ── Landing page ──────────────────────────────────────────────────────────────
-
-const LandingPage: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 1.2, opacity: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="flex flex-col items-center gap-4"
-        >
-          <ChefHat className="w-16 h-16 text-[#14b8a6]" />
-          <p className="text-white font-serif tracking-[0.3em] text-sm animate-pulse">
-            INITIALIZING KITCHEN
-          </p>
-        </motion.div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-obsidian text-gray-200 selection:bg-[#14b8a6] selection:text-obsidian">
-      <Navbar />
-      <main>
-        <Hero />
-        <AcademyGrid />
-        <RitualList />
-        <Testimonials />
-        <Membership />
-        <ConsultantForm />
-      </main>
-      <Footer />
-    </div>
   );
 };
 
@@ -196,7 +160,7 @@ const App: React.FC = () => {
             </Route>
 
             {/* Catch-all */}
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
       </BrowserRouter>
