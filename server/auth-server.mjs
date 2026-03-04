@@ -40,7 +40,7 @@ function insideStaticDir(filePath) {
 function getCacheHeaders(urlPath, ext) {
   if (ext === '.html') {
     return {
-      'cache-control': 'no-cache, no-store, must-revalidate',
+      'cache-control': 'no-cache, max-age=0, must-revalidate',
       pragma: 'no-cache',
       expires: '0',
     };
