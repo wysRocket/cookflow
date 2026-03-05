@@ -9,6 +9,7 @@ import {
   useParams,
 } from "react-router-dom";
 import { AccessProvider, useAccess } from "./contexts/AccessContext";
+import { AuthProvider } from "./contexts/AuthContext";
 import PremiumGate from "./components/PremiumGate";
 
 const LandingPage = lazy(() => import("./pages/LandingPage"));
@@ -117,53 +118,55 @@ const ScrollToTop: React.FC = () => {
 const App: React.FC = () => {
   return (
     <AccessProvider>
-      <BrowserRouter>
-        <ScrollToTop />
-        <Suspense
-          fallback={
-            <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
-              <p className="text-sm tracking-widest uppercase text-[#94A3B8]">
-                Loading...
-              </p>
-            </div>
-          }
-        >
-          <Routes>
-            {/* Landing page */}
-            <Route path="/" element={<LandingPage />} />
-            {/* Legal pages — no auth required */}
-            <Route path="/legal/:page" element={<LegalPage />} />
-            <Route element={<PublicOnlyRoute />}>
-              <Route path="/auth/sign-in" element={<SignIn />} />
-              <Route path="/auth/sign-up" element={<SignUp />} />
-            </Route>
-
-            <Route element={<ProtectedRoute />}>
-              {/* App dashboard */}
-              <Route path="/app" element={<DashboardLayout />}>
-                <Route index element={<Navigate to="/app/courses" replace />} />
-                <Route path="courses" element={<Dashboard />} />
-                <Route path="courses/:id" element={<CookingMode />} />
-                <Route path="chefs" element={<ChefListGated />} />
-                <Route path="chef/:id" element={<ChefProfileGated />} />
-                <Route path="community" element={<Community />} />
-                <Route path="recipes" element={<RecipeListGated />} />
-                <Route path="recipes/:id" element={<RecipeDetailGated />} />
-                <Route path="meal-planner" element={<MealPlannerGated />} />
-                <Route path="shopping-list" element={<ShoppingList />} />
-                <Route path="settings" element={<Settings />} />
-                <Route
-                  path="masterclass"
-                  element={<Navigate to="/app/courses" replace />}
-                />
+      <AuthProvider>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Suspense
+            fallback={
+              <div className="min-h-screen bg-obsidian text-[#F1F5F9] flex items-center justify-center">
+                <p className="text-sm tracking-widest uppercase text-[#94A3B8]">
+                  Loading...
+                </p>
+              </div>
+            }
+          >
+            <Routes>
+              {/* Landing page */}
+              <Route path="/" element={<LandingPage />} />
+              {/* Legal pages — no auth required */}
+              <Route path="/legal/:page" element={<LegalPage />} />
+              <Route element={<PublicOnlyRoute />}>
+                <Route path="/auth/sign-in" element={<SignIn />} />
+                <Route path="/auth/sign-up" element={<SignUp />} />
               </Route>
-            </Route>
 
-            {/* Catch-all */}
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+              <Route element={<ProtectedRoute />}>
+                {/* App dashboard */}
+                <Route path="/app" element={<DashboardLayout />}>
+                  <Route index element={<Navigate to="/app/courses" replace />} />
+                  <Route path="courses" element={<Dashboard />} />
+                  <Route path="courses/:id" element={<CookingMode />} />
+                  <Route path="chefs" element={<ChefListGated />} />
+                  <Route path="chef/:id" element={<ChefProfileGated />} />
+                  <Route path="community" element={<Community />} />
+                  <Route path="recipes" element={<RecipeListGated />} />
+                  <Route path="recipes/:id" element={<RecipeDetailGated />} />
+                  <Route path="meal-planner" element={<MealPlannerGated />} />
+                  <Route path="shopping-list" element={<ShoppingList />} />
+                  <Route path="settings" element={<Settings />} />
+                  <Route
+                    path="masterclass"
+                    element={<Navigate to="/app/courses" replace />}
+                  />
+                </Route>
+              </Route>
+
+              {/* Catch-all */}
+              <Route path="*" element={<NotFoundPage />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </AuthProvider>
     </AccessProvider>
   );
 };

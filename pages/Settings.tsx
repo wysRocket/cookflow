@@ -1,12 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authClient } from "../lib/auth-client";
+import { signOut } from "firebase/auth";
+import { auth } from "../lib/firebase";
+import { useAuth } from "../contexts/AuthContext";
 import { useAccess, PLAN_LABELS, PLAN_COLORS, Plan } from "../contexts/AccessContext";
-
-// ── Types ──────────────────────────────────────────────────────────────────────
-type AuthClientWithSignOut = {
-  signOut: () => Promise<{ error?: { message?: string } | null }>;
-};
 
 // ── Toggle Component ────────────────────────────────────────────────────────────
 interface ToggleProps {
@@ -41,14 +38,13 @@ const Settings: React.FC = () => {
   const navigate = useNavigate();
   const shouldEnforceAuth =
     (import.meta as any).env.VITE_REQUIRE_AUTH === "true";
-  const { data: session } = authClient.useSession();
+  const { user: firebaseUser } = useAuth();
 
   const sessionUser = useMemo(
-    () =>
-      session?.user as
-        | { name?: string; email?: string; image?: string }
-        | undefined,
-    [session],
+    () => firebaseUser
+      ? { name: firebaseUser.displayName ?? undefined, email: firebaseUser.email ?? undefined, image: firebaseUser.photoURL ?? undefined }
+      : undefined,
+    [firebaseUser],
   );
 
   // Profile state
@@ -159,8 +155,7 @@ const Settings: React.FC = () => {
   const handleSignOut = async () => {
     setIsSigningOut(true);
     try {
-      const client = authClient as unknown as AuthClientWithSignOut;
-      await client.signOut();
+      await signOut(auth);
     } finally {
       setIsSigningOut(false);
       navigate("/auth/sign-in", { replace: true });
@@ -1159,7 +1154,7 @@ const Settings: React.FC = () => {
               >
                 <button
                   onClick={handleSignOut}
-                  disabled={isSigningOut || !session}
+                  disabled={isSigningOut || !firebaseUser}
                   className="flex items-center gap-2 text-sm font-medium transition-colors text-red-400 hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="material-symbols-outlined text-lg">
