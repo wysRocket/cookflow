@@ -15,4 +15,5 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
-export const db = getFirestore(app);
+// Connect to the specific named database "u-cf" instead of "(default)"
+export const db = getFirestore(app, "u-cf");
