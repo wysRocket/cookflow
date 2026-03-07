@@ -7,7 +7,7 @@ import {
   useLocation,
   useSearchParams,
 } from "react-router-dom";
-import { ChefHat, Search, Menu, X, User } from "lucide-react";
+import { ChefHat, Search, Menu, X } from "lucide-react";
 import AuthControls from "../components/AuthControls";
 import Footer from "../components/Footer";
 
@@ -121,12 +121,6 @@ const DashboardLayout: React.FC = () => {
           </form>
 
           <div className="flex items-center gap-4 border-l border-white/10 pl-6">
-            <NavLink
-              to="/app/settings"
-              className="relative text-[#94A3B8] hover:text-[#F1F5F9] transition-colors"
-            >
-              <User className="w-5 h-5" />
-            </NavLink>
             <AuthControls />
           </div>
         </div>
@@ -179,15 +173,8 @@ const DashboardLayout: React.FC = () => {
                 className="w-full bg-black/50 border border-white/10 rounded-lg py-2 pl-9 pr-4 text-sm text-[#F1F5F9] focus:outline-none focus:border-[#14b8a6]"
               />
             </form>
-            <div className="flex items-center justify-between mt-4">
+            <div className="flex items-center justify-end mt-4">
               <AuthControls mobile />
-              <NavLink
-                to="/app/settings"
-                onClick={() => setMobileMenuOpen(false)}
-                className="relative text-[#94A3B8] hover:text-[#F1F5F9]"
-              >
-                <User className="w-5 h-5" />
-              </NavLink>
             </div>
           </div>
         </div>

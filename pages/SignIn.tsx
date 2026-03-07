@@ -65,6 +65,7 @@ const SignIn: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
               className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#14b8a6]"
             />
           </div>
@@ -78,6 +79,7 @@ const SignIn: React.FC = () => {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
               className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#14b8a6]"
             />
           </div>

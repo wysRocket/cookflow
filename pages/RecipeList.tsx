@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Clock, Flame, Star, Bookmark, ChevronRight } from "lucide-react";
+import { Clock, Flame, Star, Bookmark, ChevronRight, Sparkles } from "lucide-react";
 import { recipes } from "../data";
+import { useAccess } from "../contexts/AccessContext";
 
 interface Recipe {
   readonly id: number;
@@ -31,6 +32,8 @@ const RecipeList: React.FC = () => {
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
 
+  const { credits, addCredits } = useAccess();
+
   useEffect(() => {
     const q = searchParams.get("q");
     setSearch(q ?? "");
@@ -56,10 +59,19 @@ const RecipeList: React.FC = () => {
     });
   };
 
+  const handleGenerateAiRecipe = () => {
+    if (credits >= 1) {
+      addCredits(-1);
+      window.alert("Generating AI Recipe...\nAI Recipe generated! Check your saved items.");
+    } else {
+      window.alert("Not enough credits. Upgrade or purchase more.");
+    }
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-end justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-[#F1F5F9] tracking-tight">
             Recipes
@@ -68,9 +80,18 @@ const RecipeList: React.FC = () => {
             Discover and save your favourite dishes
           </p>
         </div>
-        <span className="text-sm text-[#64748B]">
-          {filtered.length} recipes
-        </span>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={handleGenerateAiRecipe}
+            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#14b8a6] to-[#0d9488] hover:from-[#0d9488] hover:to-[#0f766e] shadow-lg hover:shadow-[#14b8a6]/20 text-white text-sm font-semibold rounded-lg transition-all"
+          >
+            <Sparkles className="w-4 h-4" />
+            Generate with AI ({credits} Credits)
+          </button>
+          <span className="text-sm text-[#64748B]">
+            {filtered.length} recipes
+          </span>
+        </div>
       </div>
 
       {/* Filter bar */}

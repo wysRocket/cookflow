@@ -391,7 +391,7 @@ export const chefs: Chef[] = [
     city: "Florence, IT",
     focus: "Fire Cooking & Whole Animal",
     image:
-      "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?auto=format&fit=crop&w=600&q=80",
+      "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=1200&q=80",
     rating: 4.6,
     students: 1780,
     courses: 6,
@@ -726,7 +726,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Meal Prep", "Healthy", "Vegan Option"],
     image:
-      "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=1200&q=80",
     description:
       "The perfect make-ahead breakfast. Creamy oats steeped in milk, naturally sweetened with maple syrup, and ready to grab-and-go in the morning.",
     ingredients: [
@@ -879,7 +879,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Sweet", "Quick", "Weekend"],
     image:
-      "https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=80",
     description:
       "Fluffy, tender, edge-crispy pancakes with a gorgeous natural sweetness from overripe bananas. Perfect for a cozy weekend morning.",
     ingredients: [
@@ -1408,7 +1408,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Mexican", "Street Food", "Quick"],
     image:
-      "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1604503468506-a8da13d82791?auto=format&fit=crop&w=1200&q=80",
     badge: "Quick",
     badgeColor: "bg-[#D4AF37]",
     description:
@@ -1611,7 +1611,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Seafood", "Fire Cooking", "Italian"],
     image:
-      "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1519984388953-d2406bc725e1?auto=format&fit=crop&w=1200&q=80",
     description:
       "A whole sea bass stuffed with lemon, fennel, and herbs, cooked directly over wood coals until the skin blisters and peels away in crisp, smoky sheets.",
     ingredients: [
@@ -1830,7 +1830,7 @@ export const recipes: Recipe[] = [
     difficulty: "Hard",
     tags: ["Pork", "Japanese", "Noodles"],
     image:
-      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=1200&q=80",
     description:
       "A milky, cloud-white pork bone broth simmered at a rolling boil for hours, served with fresh ramen noodles, chashu pork, and a perfectly soft-boiled marinated egg.",
     ingredients: [

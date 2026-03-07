@@ -44,6 +44,17 @@ const ConsultantForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setStep(2);
+    
+    // Save to localStorage for SignUp to pick up and store in Firestore
+    const profileData = {
+      firstName: name.split(" ")[0] || "",
+      lastName: name.split(" ").slice(1).join(" ") || "",
+      name,
+      skillLevel,
+      interests: Array.from(selectedTags),
+      bio: goals,
+    };
+    localStorage.setItem("cookflow_profile", JSON.stringify(profileData));
   };
 
   return (

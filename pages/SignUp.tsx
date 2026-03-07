@@ -5,7 +5,8 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { auth, googleProvider } from "../lib/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { auth, googleProvider, db } from "../lib/firebase";
 
 const SignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -18,6 +19,19 @@ const SignUp: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
+  const saveProfileData = async (uid: string) => {
+    try {
+      const stored = localStorage.getItem("cookflow_profile");
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        await setDoc(doc(db, "users", uid), parsed, { merge: true });
+        localStorage.removeItem("cookflow_profile");
+      }
+    } catch (e) {
+      console.error("Failed to save profile on signup", e);
+    }
+  };
+
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     setLoading(true);
@@ -28,6 +42,7 @@ const SignUp: React.FC = () => {
       if (name.trim()) {
         await updateProfile(user, { displayName: name.trim() });
       }
+      await saveProfileData(user.uid);
       navigate(next, { replace: true });
     } catch (err: any) {
       const msg =
@@ -45,7 +60,8 @@ const SignUp: React.FC = () => {
   const handleGoogle = async () => {
     setError(null);
     try {
-      await signInWithPopup(auth, googleProvider);
+      const { user } = await signInWithPopup(auth, googleProvider);
+      await saveProfileData(user.uid);
       navigate(next, { replace: true });
     } catch (err: any) {
       if (err?.code !== "auth/popup-closed-by-user") {
@@ -86,6 +102,7 @@ const SignUp: React.FC = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="username"
               className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#14b8a6]"
             />
           </div>
@@ -100,6 +117,7 @@ const SignUp: React.FC = () => {
               minLength={6}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              autoComplete="new-password"
               className="w-full bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[#14b8a6]"
             />
           </div>

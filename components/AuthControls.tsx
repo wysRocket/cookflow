@@ -60,13 +60,13 @@ const AuthControls: React.FC<AuthControlsProps> = ({ mobile = false }) => {
     return (
       <div className="flex items-center justify-between mt-4">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#D4AF37] flex items-center justify-center overflow-hidden">
+          <Link to="/app/settings" className="w-8 h-8 rounded-full bg-gradient-to-br from-[#14b8a6] to-[#D4AF37] flex items-center justify-center overflow-hidden hover:ring-2 hover:ring-[#14b8a6] transition-all">
             {user.photoURL ? (
               <img src={user.photoURL} alt={displayName} className="w-full h-full object-cover" />
             ) : (
               <User className="w-4 h-4 text-white" />
             )}
-          </div>
+          </Link>
           <span className="text-sm font-medium text-[#F1F5F9] truncate">
             {displayName}
           </span>
@@ -85,7 +85,7 @@ const AuthControls: React.FC<AuthControlsProps> = ({ mobile = false }) => {
 
   return (
     <div className="flex items-center gap-3">
-      <div className="w-9 h-9 rounded-full overflow-hidden border border-[#334155]">
+      <Link to="/app/settings" className="w-9 h-9 rounded-full overflow-hidden border border-[#334155] hover:border-[#14b8a6] hover:ring-2 hover:ring-[#14b8a6]/50 transition-all cursor-pointer block">
         {user.photoURL ? (
           <img src={user.photoURL} alt={displayName} className="w-full h-full object-cover" />
         ) : (
@@ -93,7 +93,7 @@ const AuthControls: React.FC<AuthControlsProps> = ({ mobile = false }) => {
             <User className="w-5 h-5 text-white" />
           </div>
         )}
-      </div>
+      </Link>
       <div className="leading-tight">
         <p className="text-xs font-semibold text-[#F1F5F9] truncate max-w-[160px]">
           {displayName}

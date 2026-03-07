@@ -26,7 +26,7 @@ const RECIPE_BANK: PlanEntry[] = [
   {
     name: "Overnight Oats",
     image:
-      "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=200&q=60",
+      "https://images.unsplash.com/photo-1499028344343-cd173ffc68a9?auto=format&fit=crop&w=400&q=80",
     kcal: 320,
   },
   {

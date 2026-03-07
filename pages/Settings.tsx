@@ -1,7 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
-import { auth } from "../lib/firebase";
+import { updateProfile, signOut } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { auth, db } from "../lib/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { useAccess, PLAN_LABELS, PLAN_COLORS, Plan } from "../contexts/AccessContext";
 
@@ -38,29 +39,17 @@ const Settings: React.FC = () => {
   const navigate = useNavigate();
   const shouldEnforceAuth =
     (import.meta as any).env.VITE_REQUIRE_AUTH === "true";
-  const { user: firebaseUser } = useAuth();
-
-  const sessionUser = useMemo(
-    () => firebaseUser
-      ? { name: firebaseUser.displayName ?? undefined, email: firebaseUser.email ?? undefined, image: firebaseUser.photoURL ?? undefined }
-      : undefined,
-    [firebaseUser],
-  );
-
+  const { user } = useAuth();
   // Profile state
-  const [firstName, setFirstName] = useState(
-    sessionUser?.name?.split(" ")[0] ?? "Julian",
-  );
-  const [lastName, setLastName] = useState(
-    sessionUser?.name?.split(" ").slice(1).join(" ") ?? "Vandermerwe",
-  );
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [bio, setBio] = useState(
-    "Aspiring home cook specializing in French pastry. Love experimenting with sous-vide techniques.",
+    "Passionate home cook looking to explore advanced techniques."
   );
-  const [interests, setInterests] = useState([
-    "Pastry",
-    "Sous-vide",
-    "Italian",
+  const [city, setCity] = useState("San Francisco, CA");
+  const [interests, setInterests] = useState<string[]>([
+    "Modernist",
+    "Fermentation",
   ]);
 
   // Preferences state
@@ -69,7 +58,7 @@ const Settings: React.FC = () => {
 
   // UI state
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false); // Changed from 'saved' to 'isSaving'
   const [addingTag, setAddingTag] = useState(false);
   const [newTagInput, setNewTagInput] = useState("");
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -88,8 +77,6 @@ const Settings: React.FC = () => {
     addCredits,
     activatePlan,
     unlockPlannerMonth,
-    canUseAiRecipe,
-    canBookChef,
   } = useAccess();
 
   const handleDarkModeToggle = () => {
@@ -115,34 +102,55 @@ const Settings: React.FC = () => {
     setTimeout(() => setToast(null), 3000);
   };
 
-  // Load saved profile from localStorage on mount
+  // Sync with Firestore profile
   useEffect(() => {
-    try {
-      const stored = JSON.parse(
-        localStorage.getItem("cookflow_profile") || "{}",
-      );
-      if (stored.firstName) setFirstName(stored.firstName);
-      if (stored.lastName) setLastName(stored.lastName);
-      if (stored.bio) setBio(stored.bio);
-      if (stored.interests) setInterests(stored.interests);
-    } catch {
-      /* ignore */
-    }
-  }, []);
+    if (user) {
+      const fetchProfile = async () => {
+        try {
+          const docRef = doc(db, "users", user.uid);
+          const docSnap = await getDoc(docRef);
 
-  const displayEmail = sessionUser?.email ?? "chef.alex@cookflow.app";
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            if (data.firstName) setFirstName(data.firstName);
+            if (data.lastName) setLastName(data.lastName);
+            if (data.bio) setBio(data.bio);
+            if (data.city) setCity(data.city);
+            if (data.interests) setInterests(data.interests);
+          }
+        } catch (error) {
+          console.error("Error fetching profile", error);
+        }
+      };
 
-  const handleSave = () => {
-    try {
-      localStorage.setItem(
-        "cookflow_profile",
-        JSON.stringify({ firstName, lastName, bio, interests }),
-      );
-    } catch {
-      /* quota exceeded or private mode */
+      fetchProfile();
     }
-    setSaved(true);
-    setTimeout(() => setSaved(false), 2000);
+  }, [user]);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      if (user) {
+        const fullName = `${firstName} ${lastName}`.trim();
+        await updateProfile(user, { displayName: fullName });
+
+        // Save extended settings to Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          firstName,
+          lastName,
+          bio,
+          city,
+          interests
+        }, { merge: true });
+      }
+
+      showToast("Profile Settings saved successfully");
+    } catch (error) {
+      console.error(error);
+      showToast("Failed to save Profile Settings");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const commitNewTag = () => {
@@ -641,15 +649,17 @@ const Settings: React.FC = () => {
                 Cancel
               </button>
               <button
+                type="button"
                 onClick={handleSave}
+                disabled={isSaving}
                 className="px-6 py-2 rounded-lg text-sm font-bold transition-all"
                 style={{
                   background: "#0ff0f0",
-                  color: "#102222",
+                  color: "#0F172A",
                   boxShadow: "0 0 15px rgba(15,240,240,0.3)",
                 }}
               >
-                {saved ? "✓ Saved!" : "Save Changes"}
+                {isSaving ? "Saving..." : "Save Changes"}
               </button>
             </div>
           </header>
@@ -683,9 +693,9 @@ const Settings: React.FC = () => {
                         className="w-24 h-24 md:w-28 md:h-28 rounded-full p-1"
                         style={{ border: "2px solid #0ff0f0" }}
                       >
-                        {avatarUrl || sessionUser?.image ? (
+                        {avatarUrl || user?.photoURL ? (
                           <img
-                            src={avatarUrl ?? sessionUser?.image ?? ""}
+                            src={avatarUrl ?? user?.photoURL ?? ""}
                             alt="Profile"
                             loading="lazy"
                             className="w-full h-full rounded-full object-cover"
@@ -731,17 +741,19 @@ const Settings: React.FC = () => {
                       </span>
                       <input
                         className="cf-input"
+                        id="firstName"
                         type="text"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
                       />
                     </label>
-                    <label className="flex flex-col gap-2">
-                      <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                    <label className="flex flex-col gap-1.5 flex-1 min-w-[140px]">
+                      <span className="text-xs uppercase tracking-widest text-[#94A3B8] font-semibold">
                         Last Name
                       </span>
                       <input
                         className="cf-input"
+                        id="lastName"
                         type="text"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -753,9 +765,10 @@ const Settings: React.FC = () => {
                       </span>
                       <input
                         className="cf-input"
+                        id="email"
                         type="email"
-                        value={displayEmail}
-                        readOnly
+                        value={user?.email || ""}
+                        disabled
                         style={{ opacity: 0.7, cursor: "not-allowed" }}
                       />
                     </label>
@@ -1154,7 +1167,7 @@ const Settings: React.FC = () => {
               >
                 <button
                   onClick={handleSignOut}
-                  disabled={isSigningOut || !firebaseUser}
+                  disabled={isSigningOut || !user}
                   className="flex items-center gap-2 text-sm font-medium transition-colors text-red-400 hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <span className="material-symbols-outlined text-lg">
