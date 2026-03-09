@@ -405,6 +405,300 @@ export const chefs: Chef[] = [
     featuredRecipeId: 21,
     creations: [21, 22, 23, 24, 30],
   },
+  {
+    id: 7,
+    name: "Chef Eleni Stavros",
+    title: "CULINARY INSTRUCTOR",
+    city: "Athens, GR",
+    focus: "Modern Greek Home Cooking",
+    image:
+      "https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&w=600&q=80",
+    rating: 4.8,
+    students: 1980,
+    courses: 8,
+    tags: ["Greek", "One Pot"],
+    cuisine: "Modern Greek Home Cooking",
+    bio: '"I teach bright Mediterranean cooking with practical methods for everyday kitchens and family tables."',
+    banner:
+      "https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&q=80",
+    featuredRecipeId: 47,
+    creations: [31, 34, 39, 43, 47],
+  },
+  {
+    id: 8,
+    name: "Chef Noura Haddad",
+    title: "SOUS CHEF",
+    city: "Beirut, LB",
+    focus: "Levantine Street Classics",
+    image:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80",
+    rating: 4.7,
+    students: 2435,
+    courses: 9,
+    tags: ["Levantine", "Street Food"],
+    cuisine: "Levantine Street Classics",
+    bio: '"From shawarma to mezze, I focus on bold seasoning, balance, and techniques that scale from weeknight to feast."',
+    banner:
+      "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&q=80",
+    featuredRecipeId: 33,
+    creations: [8, 20, 29, 33, 45],
+  },
+  {
+    id: 9,
+    name: "Chef Min-Jae Park",
+    title: "EXECUTIVE CHEF",
+    city: "Seoul, KR",
+    focus: "Korean Comfort Bowls",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
+    rating: 4.9,
+    students: 3870,
+    courses: 13,
+    tags: ["Korean", "Bowls"],
+    cuisine: "Korean Comfort & Fermentation",
+    bio: '"Great Korean food is about contrast: spice, sweetness, umami, and texture in the same bite."',
+    banner:
+      "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80",
+    featuredRecipeId: 42,
+    creations: [11, 18, 32, 40, 42],
+  },
+  {
+    id: 10,
+    name: "Chef Priya Raman",
+    title: "HEAD CHEF",
+    city: "Bengaluru, IN",
+    focus: "Vegetarian Indian Regional",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80",
+    rating: 4.8,
+    students: 3320,
+    courses: 11,
+    tags: ["Indian", "Vegetarian"],
+    cuisine: "Vegetarian Indian Regional",
+    bio: '"I build layered flavor with spices and timing, proving vegetarian cooking can be deeply satisfying and technical."',
+    banner:
+      "https://images.unsplash.com/photo-1596797038530-2c107aa6b0c5?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80",
+    featuredRecipeId: 48,
+    creations: [7, 16, 27, 45, 48],
+  },
+  {
+    id: 11,
+    name: "Chef Mateo Alvarez",
+    title: "GRILL SPECIALIST",
+    city: "Barcelona, ES",
+    focus: "Seafood Fire Cooking",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+    rating: 4.7,
+    students: 2140,
+    courses: 7,
+    tags: ["Seafood", "Grill"],
+    cuisine: "Iberian Seafood Fire Cooking",
+    bio: '"Open flame, clean marinades, and precise timing are my foundations for unforgettable seafood."',
+    banner:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80",
+    featuredRecipeId: 38,
+    creations: [1, 17, 28, 38, 49],
+  },
+  {
+    id: 12,
+    name: "Chef Amelia Hart",
+    title: "PASTRY SPECIALIST",
+    city: "London, UK",
+    focus: "Modern Bakery Classics",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80",
+    rating: 4.9,
+    students: 4595,
+    courses: 15,
+    tags: ["Pastry", "Baking"],
+    cuisine: "Modern Bakery & Brunch Pastry",
+    bio: '"I translate bakery-level pastry into clear systems so home bakers can get reliable, repeatable results."',
+    banner:
+      "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80",
+    featuredRecipeId: 50,
+    creations: [6, 10, 31, 36, 50],
+  },
+  {
+    id: 13,
+    name: "Chef Theo Brennan",
+    title: "SOUS CHEF",
+    city: "Dublin, IE",
+    focus: "Comfort Food Reinvented",
+    image:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=600&q=80",
+    rating: 4.6,
+    students: 1760,
+    courses: 6,
+    tags: ["Comfort", "Meal Prep"],
+    cuisine: "Contemporary Comfort Food",
+    bio: '"I modernize comfort staples with cleaner prep, smarter batch cooking, and big flavor."',
+    banner:
+      "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80",
+    featuredRecipeId: 40,
+    creations: [14, 22, 30, 37, 40],
+  },
+  {
+    id: 14,
+    name: "Chef Claire Dubreuil",
+    title: "CHEF DE PARTIE",
+    city: "Lyon, FR",
+    focus: "French Bistro Classics",
+    image:
+      "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&w=600&q=80",
+    rating: 4.8,
+    students: 2680,
+    courses: 10,
+    tags: ["French", "Bistro"],
+    cuisine: "French Bistro & Seasonal Cooking",
+    bio: '"Technique first, but never at the expense of generosity. I teach classic foundations that hold up in real kitchens."',
+    banner:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?auto=format&fit=crop&q=80",
+    featuredRecipeId: 49,
+    creations: [9, 12, 26, 43, 49],
+  },
+  {
+    id: 15,
+    name: "Chef Diego Morales",
+    title: "HEAD CHEF",
+    city: "Austin, TX",
+    focus: "Tex-Mex Brunch & Bowls",
+    image:
+      "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&w=600&q=80",
+    rating: 4.7,
+    students: 2230,
+    courses: 8,
+    tags: ["Tex-Mex", "Brunch"],
+    cuisine: "Tex-Mex Brunch & Street Bowls",
+    bio: '"I blend smoke, citrus, and heat into approachable dishes that are fast, social, and full of character."',
+    banner:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?auto=format&fit=crop&q=80",
+    featuredRecipeId: 46,
+    creations: [3, 19, 29, 44, 46],
+  },
+  {
+    id: 16,
+    name: "Chef Hana Idrissi",
+    title: "CHEF DE PARTIE",
+    city: "Marrakesh, MA",
+    focus: "North African Weeknight Cooking",
+    image:
+      "https://i.pravatar.cc/600?img=47",
+    rating: 4.8,
+    students: 2410,
+    courses: 9,
+    tags: ["Moroccan", "Spice"],
+    cuisine: "North African Home Cooking",
+    bio: '"I teach fast, aromatic cooking with pantry spices, preserved citrus, and practical one-pan methods."',
+    banner:
+      "https://images.unsplash.com/photo-1543353071-10c8ba85a904?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://i.pravatar.cc/300?img=47",
+    featuredRecipeId: 66,
+    creations: [39, 45, 53, 66, 68],
+  },
+  {
+    id: 17,
+    name: "Chef Owen Caldwell",
+    title: "HEAD CHEF",
+    city: "Portland, OR",
+    focus: "Pacific Northwest Seasonal",
+    image:
+      "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=600&q=80",
+    rating: 4.7,
+    students: 1895,
+    courses: 7,
+    tags: ["Seasonal", "Farm-to-Table"],
+    cuisine: "Pacific Northwest Seasonal Cooking",
+    bio: '"Great food starts in the market. I focus on ingredient-led dishes with clean technique and low waste."',
+    banner:
+      "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&q=80",
+    featuredRecipeId: 58,
+    creations: [34, 43, 58, 63, 70],
+  },
+  {
+    id: 18,
+    name: "Chef Lucia Benitez",
+    title: "SOUS CHEF",
+    city: "Buenos Aires, AR",
+    focus: "Latin Grilling & Bowls",
+    image:
+      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=600&q=80",
+    rating: 4.8,
+    students: 2765,
+    courses: 10,
+    tags: ["Grill", "Latin"],
+    cuisine: "Latin Grilling & Bowl Meals",
+    bio: '"I blend bright acids, char, and fresh herbs to make bold dishes that still feel balanced and light."',
+    banner:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&q=80",
+    featuredRecipeId: 56,
+    creations: [33, 38, 56, 67, 69],
+  },
+  {
+    id: 19,
+    name: "Chef Robin Keller",
+    title: "EXECUTIVE CHEF",
+    city: "Berlin, DE",
+    focus: "Plant-Forward Modern Cooking",
+    image:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=600&q=80",
+    rating: 4.9,
+    students: 3180,
+    courses: 12,
+    tags: ["Vegan", "Modern"],
+    cuisine: "Plant-Forward Modern Cooking",
+    bio: '"My classes are about texture, umami, and high-protein plant meals that satisfy without compromise."',
+    banner:
+      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80",
+    featuredRecipeId: 69,
+    creations: [35, 39, 57, 61, 69],
+  },
+  {
+    id: 20,
+    name: "Chef Naomi Carter",
+    title: "PASTRY SPECIALIST",
+    city: "Toronto, CA",
+    focus: "Healthy Desserts & Brunch",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80",
+    rating: 4.8,
+    students: 2950,
+    courses: 11,
+    tags: ["Dessert", "Brunch"],
+    cuisine: "Healthy Desserts & Brunch Pastry",
+    bio: '"I create lower-sugar pastries and brunch recipes that keep indulgence while improving nutritional balance."',
+    banner:
+      "https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80",
+    avatar:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80",
+    featuredRecipeId: 70,
+    creations: [36, 50, 55, 60, 70],
+  },
 ];
 
 export const recipes: Recipe[] = [
@@ -1981,6 +2275,1751 @@ export const recipes: Recipe[] = [
       },
       {
         text: "Slice from the bone and drizzle with best olive oil. Serve with only lemon wedges and warm cannellini beans — no sauce.",
+      },
+    ],
+  },
+  {
+    id: 31,
+    name: "Shakshuka Verde",
+    category: "Breakfast",
+    time: "35 min",
+    kcal: 410,
+    rating: 4.8,
+    reviews: 142,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Eggs", "Vegetarian", "One Pan"],
+    image:
+      "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Poached eggs nestled in a bright green sauce of spinach, herbs, and peppers, finished with feta and warm flatbread.",
+    ingredients: [
+      "2 tbsp olive oil",
+      "1 small onion, diced",
+      "1 green bell pepper, sliced",
+      "2 cloves garlic, minced",
+      "120g baby spinach",
+      "1 cup chopped parsley and cilantro",
+      "4 eggs",
+      "60g feta, crumbled",
+      "Salt and black pepper",
+      "Flatbread to serve",
+    ],
+    steps: [
+      {
+        text: "Heat oil in a skillet. Saute onion and pepper until softened.",
+        duration: "8 min",
+      },
+      {
+        text: "Add garlic and spinach. Cook until spinach wilts, then blend with herbs and a splash of water until smooth.",
+      },
+      {
+        text: "Return sauce to skillet, season well, and simmer gently.",
+        duration: "5 min",
+      },
+      {
+        text: "Make four wells and crack eggs in. Cover and cook until whites set and yolks stay runny.",
+        duration: "6 min",
+      },
+      {
+        text: "Top with feta and black pepper. Serve immediately with warm flatbread.",
+      },
+    ],
+  },
+  {
+    id: 32,
+    name: "Miso Salmon Rice Bowl",
+    category: "Lunch",
+    time: "30 min",
+    kcal: 560,
+    rating: 4.9,
+    reviews: 201,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Salmon", "Japanese", "High Protein"],
+    image:
+      "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Oven-baked miso-glazed salmon over rice with cucumber, edamame, and sesame-lime dressing.",
+    ingredients: [
+      "2 salmon fillets",
+      "1 tbsp white miso paste",
+      "1 tbsp soy sauce",
+      "1 tsp honey",
+      "2 cups cooked jasmine rice",
+      "1 cup shelled edamame",
+      "1 cucumber, sliced",
+      "1 spring onion, sliced",
+      "1 tbsp sesame seeds",
+      "1 lime",
+    ],
+    steps: [
+      {
+        text: "Mix miso, soy, and honey. Brush over salmon and bake at 220C until flaky.",
+        duration: "12 min",
+      },
+      {
+        text: "Warm rice and edamame. Divide between two bowls.",
+      },
+      {
+        text: "Top with cucumber and baked salmon.",
+      },
+      {
+        text: "Finish with lime juice, sesame seeds, and spring onion.",
+      },
+    ],
+  },
+  {
+    id: 33,
+    name: "Chicken Shawarma Sheet Pan",
+    category: "Dinner",
+    time: "45 min",
+    kcal: 640,
+    rating: 4.8,
+    reviews: 176,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Chicken", "Middle Eastern", "Meal Prep"],
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Spiced chicken thighs roasted with onions and peppers, served with garlic yogurt and warm pita.",
+    ingredients: [
+      "700g boneless chicken thighs",
+      "2 tbsp olive oil",
+      "2 tsp ground cumin",
+      "2 tsp paprika",
+      "1 tsp coriander",
+      "1/2 tsp cinnamon",
+      "1 red onion, sliced",
+      "1 red bell pepper, sliced",
+      "200g Greek yogurt",
+      "2 garlic cloves, grated",
+      "Pita bread and lemon wedges",
+    ],
+    steps: [
+      {
+        text: "Toss chicken with oil and spices. Spread on a tray with onion and pepper.",
+      },
+      {
+        text: "Roast at 220C until chicken is charred at edges and cooked through.",
+        duration: "25 min",
+      },
+      {
+        text: "Mix yogurt with garlic, lemon juice, and salt for sauce.",
+      },
+      {
+        text: "Slice chicken and serve in pita with roasted vegetables and garlic yogurt.",
+      },
+    ],
+  },
+  {
+    id: 34,
+    name: "Mushroom Barley Soup",
+    category: "Lunch",
+    time: "55 min",
+    kcal: 390,
+    rating: 4.7,
+    reviews: 118,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Soup", "Vegetarian", "Comfort"],
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "A hearty soup with mixed mushrooms, pearl barley, herbs, and a rich vegetable broth.",
+    ingredients: [
+      "2 tbsp butter",
+      "1 onion, chopped",
+      "2 carrots, diced",
+      "300g mixed mushrooms, sliced",
+      "3 cloves garlic, minced",
+      "150g pearl barley",
+      "1.3L vegetable stock",
+      "1 bay leaf",
+      "2 tsp thyme leaves",
+      "Parsley, salt, black pepper",
+    ],
+    steps: [
+      {
+        text: "Saute onion and carrots in butter until softened.",
+        duration: "8 min",
+      },
+      {
+        text: "Add mushrooms and cook until they release moisture and brown.",
+        duration: "10 min",
+      },
+      {
+        text: "Stir in garlic and barley, then add stock, bay, and thyme.",
+      },
+      {
+        text: "Simmer gently until barley is tender. Adjust seasoning.",
+        duration: "30 min",
+      },
+      {
+        text: "Serve hot with parsley and crusty bread.",
+      },
+    ],
+  },
+  {
+    id: 35,
+    name: "Thai Basil Tofu Stir-Fry",
+    category: "Dinner",
+    time: "25 min",
+    kcal: 480,
+    rating: 4.8,
+    reviews: 164,
+    servings: 2,
+    difficulty: "Medium",
+    tags: ["Tofu", "Thai", "Quick"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Crispy tofu stir-fried in a savory chili-garlic sauce with green beans and lots of Thai basil.",
+    ingredients: [
+      "400g firm tofu, pressed",
+      "2 tbsp cornstarch",
+      "2 tbsp neutral oil",
+      "150g green beans",
+      "3 cloves garlic, minced",
+      "2 red chilies, sliced",
+      "1 tbsp soy sauce",
+      "1 tbsp oyster sauce or mushroom sauce",
+      "1 tsp sugar",
+      "1 big handful Thai basil",
+      "Steamed rice to serve",
+    ],
+    steps: [
+      {
+        text: "Cube tofu, coat in cornstarch, and pan-fry until crisp on all sides.",
+        duration: "10 min",
+      },
+      {
+        text: "Stir-fry green beans until bright and slightly blistered.",
+        duration: "4 min",
+      },
+      {
+        text: "Add garlic and chilies, then soy, oyster sauce, and sugar.",
+      },
+      {
+        text: "Return tofu to pan and toss to coat. Fold in basil off heat.",
+      },
+      {
+        text: "Serve immediately over steamed rice.",
+      },
+    ],
+  },
+  {
+    id: 36,
+    name: "Lemon Ricotta Pancakes",
+    category: "Breakfast",
+    time: "20 min",
+    kcal: 450,
+    rating: 4.9,
+    reviews: 222,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Brunch", "Sweet", "Italian"],
+    image:
+      "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Cloud-like pancakes with ricotta and lemon zest, served with berries and maple syrup.",
+    ingredients: [
+      "180g ricotta",
+      "2 eggs, separated",
+      "120ml milk",
+      "120g flour",
+      "1 tbsp sugar",
+      "1 tsp baking powder",
+      "Zest of 1 lemon",
+      "Pinch of salt",
+      "Butter for the pan",
+      "Berries and maple syrup to serve",
+    ],
+    steps: [
+      {
+        text: "Whisk yolks, ricotta, milk, and lemon zest in a bowl.",
+      },
+      {
+        text: "Fold in flour, sugar, baking powder, and salt.",
+      },
+      {
+        text: "Whisk egg whites to soft peaks and fold gently into batter.",
+      },
+      {
+        text: "Cook small pancakes in a buttered skillet until golden on both sides.",
+        duration: "8 min",
+      },
+      {
+        text: "Serve warm with berries and syrup.",
+      },
+    ],
+  },
+  {
+    id: 37,
+    name: "Pesto Gnocchi with Green Beans",
+    category: "Dinner",
+    time: "20 min",
+    kcal: 590,
+    rating: 4.7,
+    reviews: 133,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Pasta", "Italian", "Vegetarian"],
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Potato gnocchi tossed in basil pesto with green beans and toasted pine nuts.",
+    ingredients: [
+      "500g potato gnocchi",
+      "150g green beans, trimmed",
+      "4 tbsp basil pesto",
+      "2 tbsp pasta water",
+      "2 tbsp pine nuts, toasted",
+      "30g parmesan, grated",
+      "1 tbsp olive oil",
+      "Salt and black pepper",
+    ],
+    steps: [
+      {
+        text: "Boil gnocchi until they float. Add green beans for the last 2 minutes.",
+      },
+      {
+        text: "Reserve some cooking water and drain.",
+      },
+      {
+        text: "Toss gnocchi and beans with pesto, olive oil, and a splash of pasta water.",
+      },
+      {
+        text: "Top with parmesan, pine nuts, and black pepper.",
+      },
+    ],
+  },
+  {
+    id: 38,
+    name: "Cajun Shrimp Tacos",
+    category: "Dinner",
+    time: "25 min",
+    kcal: 520,
+    rating: 4.8,
+    reviews: 189,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Seafood", "Tacos", "Spicy"],
+    image:
+      "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Juicy Cajun shrimp in warm tortillas with crunchy slaw and lime crema.",
+    ingredients: [
+      "500g peeled shrimp",
+      "2 tsp Cajun seasoning",
+      "1 tbsp olive oil",
+      "6 corn tortillas",
+      "2 cups shredded cabbage",
+      "1 carrot, grated",
+      "120g sour cream",
+      "1 lime",
+      "Coriander leaves",
+      "Salt",
+    ],
+    steps: [
+      {
+        text: "Toss shrimp with Cajun seasoning, oil, and a pinch of salt.",
+      },
+      {
+        text: "Sear shrimp in a hot pan until pink and lightly charred.",
+        duration: "4 min",
+      },
+      {
+        text: "Mix cabbage and carrot with lime juice and salt for slaw.",
+      },
+      {
+        text: "Stir sour cream with lime zest and a little juice.",
+      },
+      {
+        text: "Warm tortillas and assemble with shrimp, slaw, crema, and coriander.",
+      },
+    ],
+  },
+  {
+    id: 39,
+    name: "Harissa Chickpea Stew",
+    category: "Dinner",
+    time: "35 min",
+    kcal: 470,
+    rating: 4.7,
+    reviews: 121,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Vegan", "North African", "One Pot"],
+    image:
+      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Slow-simmered chickpeas in a spicy tomato-harissa sauce with spinach and lemon.",
+    ingredients: [
+      "2 tbsp olive oil",
+      "1 onion, diced",
+      "3 cloves garlic, minced",
+      "2 tbsp harissa paste",
+      "2 x 400g cans chickpeas, drained",
+      "1 x 400g can crushed tomatoes",
+      "350ml vegetable stock",
+      "120g spinach",
+      "1 lemon",
+      "Parsley and yogurt to serve (optional)",
+    ],
+    steps: [
+      {
+        text: "Saute onion in oil until soft. Add garlic and harissa and cook briefly.",
+      },
+      {
+        text: "Add chickpeas, tomatoes, and stock. Simmer until thickened.",
+        duration: "20 min",
+      },
+      {
+        text: "Fold in spinach to wilt and finish with lemon juice.",
+      },
+      {
+        text: "Serve with parsley and a spoon of yogurt if desired.",
+      },
+    ],
+  },
+  {
+    id: 40,
+    name: "Teriyaki Chicken Meatballs",
+    category: "Lunch",
+    time: "40 min",
+    kcal: 610,
+    rating: 4.8,
+    reviews: 147,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Chicken", "Japanese", "Meal Prep"],
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Tender chicken meatballs glazed in sticky homemade teriyaki, served with rice and steamed broccoli.",
+    ingredients: [
+      "600g chicken mince",
+      "1 egg",
+      "50g panko breadcrumbs",
+      "2 spring onions, sliced",
+      "2 tbsp soy sauce",
+      "2 tbsp mirin",
+      "1 tbsp brown sugar",
+      "1 tsp grated ginger",
+      "1 tsp cornstarch",
+      "Steamed rice and broccoli to serve",
+    ],
+    steps: [
+      {
+        text: "Mix chicken, egg, panko, and half the spring onion. Shape into meatballs.",
+      },
+      {
+        text: "Bake at 210C until cooked through and lightly golden.",
+        duration: "16 min",
+      },
+      {
+        text: "Simmer soy, mirin, sugar, ginger, and 60ml water in a pan.",
+      },
+      {
+        text: "Thicken with cornstarch slurry, then coat meatballs in the glaze.",
+      },
+      {
+        text: "Serve with rice, broccoli, and remaining spring onion.",
+      },
+    ],
+  },
+  {
+    id: 41,
+    name: "Spinach Feta Borek",
+    category: "Breakfast",
+    time: "50 min",
+    kcal: 530,
+    rating: 4.7,
+    reviews: 98,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Baking", "Mediterranean", "Vegetarian"],
+    image:
+      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Crisp filo pastry spirals filled with spinach, feta, dill, and a touch of nutmeg.",
+    ingredients: [
+      "8 filo pastry sheets",
+      "300g spinach, chopped",
+      "200g feta, crumbled",
+      "1 small onion, finely chopped",
+      "1 egg",
+      "2 tbsp chopped dill",
+      "Pinch nutmeg",
+      "4 tbsp olive oil or melted butter",
+      "Sesame seeds",
+      "Salt and pepper",
+    ],
+    steps: [
+      {
+        text: "Saute onion and spinach until dry. Cool, then mix with feta, egg, dill, nutmeg, and pepper.",
+      },
+      {
+        text: "Brush filo sheets with oil. Add filling along one edge and roll into logs.",
+      },
+      {
+        text: "Coil logs into a spiral in a greased baking dish. Brush top with oil and add sesame seeds.",
+      },
+      {
+        text: "Bake at 190C until deep golden and crisp.",
+        duration: "30 min",
+      },
+      {
+        text: "Rest 10 minutes, then slice and serve warm.",
+      },
+    ],
+  },
+  {
+    id: 42,
+    name: "Korean Beef Bibimbap",
+    category: "Dinner",
+    time: "45 min",
+    kcal: 690,
+    rating: 4.9,
+    reviews: 214,
+    servings: 3,
+    difficulty: "Medium",
+    tags: ["Beef", "Korean", "Rice Bowl"],
+    image:
+      "https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Rice bowls layered with gochujang beef, sauteed vegetables, and fried eggs.",
+    ingredients: [
+      "450g beef mince",
+      "2 tbsp soy sauce",
+      "1 tbsp sesame oil",
+      "1 tbsp gochujang",
+      "1 tsp sugar",
+      "3 cups cooked short-grain rice",
+      "1 carrot, julienned",
+      "150g spinach",
+      "200g mushrooms, sliced",
+      "3 eggs",
+      "Sesame seeds and spring onion",
+    ],
+    steps: [
+      {
+        text: "Cook beef in a hot pan. Add soy, sesame oil, gochujang, and sugar; reduce until glossy.",
+      },
+      {
+        text: "Quick-saute carrot, spinach, and mushrooms separately with a pinch of salt.",
+      },
+      {
+        text: "Fry eggs sunny-side up.",
+      },
+      {
+        text: "Assemble bowls with rice, beef, vegetables, and egg. Top with sesame seeds and spring onion.",
+      },
+    ],
+  },
+  {
+    id: 43,
+    name: "Butternut Squash Risotto",
+    category: "Dinner",
+    time: "50 min",
+    kcal: 580,
+    rating: 4.8,
+    reviews: 171,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Italian", "Vegetarian", "Comfort"],
+    image:
+      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Creamy arborio risotto with roasted butternut squash, sage butter, and parmesan.",
+    ingredients: [
+      "1 small butternut squash, diced",
+      "2 tbsp olive oil",
+      "1.2L vegetable stock, warm",
+      "1 onion, finely chopped",
+      "2 garlic cloves, minced",
+      "300g arborio rice",
+      "120ml dry white wine",
+      "40g butter",
+      "60g parmesan, grated",
+      "6 sage leaves",
+      "Salt and pepper",
+    ],
+    steps: [
+      {
+        text: "Roast squash with olive oil and salt until caramelized.",
+        duration: "25 min",
+      },
+      {
+        text: "Cook onion and garlic in a saucepan until translucent.",
+      },
+      {
+        text: "Add rice and toast 2 minutes. Deglaze with wine.",
+      },
+      {
+        text: "Add warm stock one ladle at a time, stirring until absorbed, until rice is creamy and al dente.",
+        duration: "22 min",
+      },
+      {
+        text: "Fold in squash, butter, and parmesan. Fry sage in a little butter and spoon over to finish.",
+      },
+    ],
+  },
+  {
+    id: 44,
+    name: "Turkey Avocado Club Sandwich",
+    category: "Lunch",
+    time: "15 min",
+    kcal: 540,
+    rating: 4.6,
+    reviews: 86,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Sandwich", "Quick", "High Protein"],
+    image:
+      "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Toasted layered sandwich with turkey, bacon, avocado, tomato, and mustard mayo.",
+    ingredients: [
+      "6 slices wholegrain bread",
+      "180g roast turkey slices",
+      "4 bacon rashers, cooked",
+      "1 avocado, sliced",
+      "1 tomato, sliced",
+      "2 lettuce leaves",
+      "2 tbsp mayo",
+      "1 tsp Dijon mustard",
+      "Salt and black pepper",
+    ],
+    steps: [
+      {
+        text: "Toast bread slices until golden.",
+      },
+      {
+        text: "Mix mayo with Dijon and spread on all slices.",
+      },
+      {
+        text: "Layer turkey, tomato, lettuce, bacon, and avocado across two stacked layers.",
+      },
+      {
+        text: "Season lightly, cap with final toast slice, and cut into triangles.",
+      },
+    ],
+  },
+  {
+    id: 45,
+    name: "Coconut Lentil Dahl",
+    category: "Dinner",
+    time: "35 min",
+    kcal: 490,
+    rating: 4.9,
+    reviews: 205,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Indian", "Vegan", "One Pot"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Red lentils simmered with coconut milk, ginger, and warming spices for a silky, nourishing dahl.",
+    ingredients: [
+      "1 tbsp coconut oil",
+      "1 onion, diced",
+      "3 cloves garlic, minced",
+      "1 tbsp grated ginger",
+      "1 tsp turmeric",
+      "1 tsp cumin",
+      "250g red lentils, rinsed",
+      "400ml coconut milk",
+      "650ml vegetable stock",
+      "100g spinach",
+      "Lime wedges and coriander",
+    ],
+    steps: [
+      {
+        text: "Cook onion in coconut oil until soft. Add garlic, ginger, and spices.",
+      },
+      {
+        text: "Stir in lentils, coconut milk, and stock. Bring to a simmer.",
+      },
+      {
+        text: "Cook until lentils break down and become creamy, stirring often.",
+        duration: "25 min",
+      },
+      {
+        text: "Fold in spinach and adjust seasoning.",
+      },
+      {
+        text: "Serve with rice or naan, plus lime and coriander.",
+      },
+    ],
+  },
+  {
+    id: 46,
+    name: "Huevos Rancheros",
+    category: "Breakfast",
+    time: "25 min",
+    kcal: 470,
+    rating: 4.8,
+    reviews: 154,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Mexican", "Eggs", "Spicy"],
+    image:
+      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Crisp tortillas topped with black beans, fried eggs, warm salsa, and avocado.",
+    ingredients: [
+      "4 corn tortillas",
+      "1 tbsp olive oil",
+      "1 cup black beans, drained",
+      "4 eggs",
+      "1 cup salsa roja",
+      "1 avocado, sliced",
+      "40g feta or queso fresco",
+      "Coriander and lime wedges",
+      "Salt and pepper",
+    ],
+    steps: [
+      {
+        text: "Toast tortillas in a skillet until lightly crisp.",
+      },
+      {
+        text: "Warm beans and salsa separately.",
+      },
+      {
+        text: "Fry eggs to your preferred doneness.",
+      },
+      {
+        text: "Layer tortillas with beans, eggs, salsa, avocado, and cheese.",
+      },
+      {
+        text: "Finish with coriander and lime juice.",
+      },
+    ],
+  },
+  {
+    id: 47,
+    name: "Greek Lemon Chicken Orzo",
+    category: "Dinner",
+    time: "40 min",
+    kcal: 620,
+    rating: 4.8,
+    reviews: 132,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Chicken", "Greek", "One Pot"],
+    image:
+      "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Seared chicken thighs baked with orzo, lemon, spinach, and feta in one pan.",
+    ingredients: [
+      "6 boneless chicken thighs",
+      "2 tbsp olive oil",
+      "1 tsp dried oregano",
+      "1 onion, chopped",
+      "3 cloves garlic, minced",
+      "250g orzo",
+      "700ml chicken stock",
+      "Zest and juice of 1 lemon",
+      "100g spinach",
+      "80g feta, crumbled",
+      "Dill or parsley",
+    ],
+    steps: [
+      {
+        text: "Season chicken with oregano, salt, and pepper. Sear in a large ovenproof pan.",
+        duration: "6 min",
+      },
+      {
+        text: "Saute onion and garlic in the same pan, then stir in orzo.",
+      },
+      {
+        text: "Add stock, lemon zest, and juice. Return chicken to pan.",
+      },
+      {
+        text: "Bake at 200C until orzo is tender and chicken cooked through.",
+        duration: "20 min",
+      },
+      {
+        text: "Stir in spinach to wilt, top with feta and herbs, and serve.",
+      },
+    ],
+  },
+  {
+    id: 48,
+    name: "Paneer Tikka Skewers",
+    category: "Dinner",
+    time: "35 min",
+    kcal: 510,
+    rating: 4.7,
+    reviews: 109,
+    servings: 3,
+    difficulty: "Medium",
+    tags: ["Indian", "Vegetarian", "Grill"],
+    image:
+      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Charred paneer and vegetables marinated in spiced yogurt, served with mint chutney.",
+    ingredients: [
+      "400g paneer, cubed",
+      "1 red onion, chunks",
+      "1 bell pepper, chunks",
+      "150g Greek yogurt",
+      "1 tbsp ginger-garlic paste",
+      "1 tsp garam masala",
+      "1 tsp turmeric",
+      "1 tsp paprika",
+      "1 tbsp lemon juice",
+      "1 tbsp oil",
+      "Mint chutney to serve",
+    ],
+    steps: [
+      {
+        text: "Mix yogurt, ginger-garlic, spices, lemon, and oil. Coat paneer and vegetables.",
+      },
+      {
+        text: "Marinate at least 20 minutes.",
+        duration: "20 min",
+      },
+      {
+        text: "Thread onto skewers and grill or broil until charred at edges.",
+        duration: "10 min",
+      },
+      {
+        text: "Serve hot with mint chutney and flatbread.",
+      },
+    ],
+  },
+  {
+    id: 49,
+    name: "Salmon Nicoise Salad",
+    category: "Lunch",
+    time: "30 min",
+    kcal: 560,
+    rating: 4.8,
+    reviews: 127,
+    servings: 2,
+    difficulty: "Medium",
+    tags: ["Salad", "French", "Seafood"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "A modern Nicoise with seared salmon, baby potatoes, beans, olives, and mustard vinaigrette.",
+    ingredients: [
+      "2 salmon fillets",
+      "300g baby potatoes",
+      "150g green beans",
+      "2 eggs",
+      "80g cherry tomatoes",
+      "50g black olives",
+      "2 tbsp olive oil",
+      "1 tsp Dijon mustard",
+      "1 tbsp red wine vinegar",
+      "Mixed leaves, salt, pepper",
+    ],
+    steps: [
+      {
+        text: "Boil potatoes until tender. Blanch green beans. Boil eggs for 7 minutes and halve.",
+      },
+      {
+        text: "Sear salmon skin-side down until crisp, then flip briefly.",
+        duration: "6 min",
+      },
+      {
+        text: "Whisk olive oil, mustard, vinegar, salt, and pepper into a dressing.",
+      },
+      {
+        text: "Assemble leaves, potatoes, beans, tomatoes, olives, eggs, and salmon. Drizzle dressing on top.",
+      },
+    ],
+  },
+  {
+    id: 50,
+    name: "Chocolate Oat Banana Muffins",
+    category: "Breakfast",
+    time: "35 min",
+    kcal: 320,
+    rating: 4.9,
+    reviews: 238,
+    servings: 12,
+    difficulty: "Easy",
+    tags: ["Baking", "Snack", "Kid Friendly"],
+    image:
+      "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=80",
+    badge: "Popular",
+    badgeColor: "#F59E0B",
+    description:
+      "Moist banana-oat muffins with cocoa and dark chocolate chips, perfect for make-ahead breakfasts.",
+    ingredients: [
+      "3 ripe bananas, mashed",
+      "2 eggs",
+      "80ml maple syrup",
+      "60ml neutral oil",
+      "180g rolled oats",
+      "120g flour",
+      "35g cocoa powder",
+      "1 tsp baking powder",
+      "1/2 tsp baking soda",
+      "100g dark chocolate chips",
+      "Pinch salt",
+    ],
+    steps: [
+      {
+        text: "Whisk mashed bananas, eggs, maple syrup, and oil.",
+      },
+      {
+        text: "Stir in oats, flour, cocoa, baking powder, baking soda, and salt.",
+      },
+      {
+        text: "Fold in chocolate chips and divide batter into a lined muffin tin.",
+      },
+      {
+        text: "Bake at 180C until risen and set in the center.",
+        duration: "22 min",
+      },
+      {
+        text: "Cool on a rack and store in an airtight container.",
+      },
+    ],
+  },
+  {
+    id: 51,
+    name: "Smoky Tomato Lentil Pasta",
+    category: "Dinner",
+    time: "30 min",
+    kcal: 540,
+    rating: 4.8,
+    reviews: 146,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Pasta", "Vegetarian", "High Protein"],
+    image:
+      "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Whole-wheat pasta in a smoky tomato sauce with red lentils and basil for a protein-rich weeknight meal.",
+    ingredients: [
+      "250g whole-wheat pasta",
+      "1 tbsp olive oil",
+      "1 onion, diced",
+      "2 garlic cloves, minced",
+      "120g red lentils, rinsed",
+      "1 x 400g can crushed tomatoes",
+      "500ml vegetable stock",
+      "1 tsp smoked paprika",
+      "30g parmesan or vegan alternative",
+      "Fresh basil, salt, black pepper",
+    ],
+    steps: [
+      {
+        text: "Cook pasta until al dente. Reserve 100ml pasta water.",
+      },
+      {
+        text: "Saute onion and garlic in olive oil. Add lentils, paprika, tomatoes, and stock.",
+        duration: "15 min",
+      },
+      {
+        text: "Simmer until lentils are tender and sauce thickens.",
+      },
+      {
+        text: "Toss pasta with sauce and a splash of pasta water. Finish with basil and parmesan.",
+      },
+    ],
+  },
+  {
+    id: 52,
+    name: "Ginger Scallion Chicken Noodles",
+    category: "Lunch",
+    time: "25 min",
+    kcal: 570,
+    rating: 4.7,
+    reviews: 118,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Chicken", "Noodles", "Quick"],
+    image:
+      "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Silky noodles tossed with shredded chicken in a punchy ginger-scallion soy dressing.",
+    ingredients: [
+      "200g wheat noodles",
+      "250g cooked chicken, shredded",
+      "4 spring onions, finely sliced",
+      "1 tbsp grated ginger",
+      "2 tbsp soy sauce",
+      "1 tbsp rice vinegar",
+      "1 tsp sesame oil",
+      "1 tsp honey",
+      "1 tbsp neutral oil",
+      "Sesame seeds and chili flakes",
+    ],
+    steps: [
+      {
+        text: "Cook noodles, rinse briefly, and drain well.",
+      },
+      {
+        text: "Mix soy, rice vinegar, sesame oil, and honey in a large bowl.",
+      },
+      {
+        text: "Heat neutral oil and pour over ginger and spring onion to release aroma.",
+      },
+      {
+        text: "Combine noodles and chicken with dressing. Top with sesame and chili flakes.",
+      },
+    ],
+  },
+  {
+    id: 53,
+    name: "Baked Feta Veg Traybake",
+    category: "Dinner",
+    time: "40 min",
+    kcal: 500,
+    rating: 4.8,
+    reviews: 173,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Vegetarian", "Traybake", "Mediterranean"],
+    image:
+      "https://images.unsplash.com/photo-1546069901-ec46c77ba130?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Roasted peppers, zucchini, and tomatoes baked with feta and herbs, served with warm pita.",
+    ingredients: [
+      "200g feta block",
+      "1 zucchini, sliced",
+      "1 red bell pepper, chunks",
+      "1 yellow bell pepper, chunks",
+      "250g cherry tomatoes",
+      "1 red onion, wedges",
+      "3 tbsp olive oil",
+      "1 tsp dried oregano",
+      "1 lemon",
+      "Pita bread to serve",
+    ],
+    steps: [
+      {
+        text: "Arrange vegetables in a roasting dish and toss with olive oil, oregano, salt, and pepper.",
+      },
+      {
+        text: "Nestle feta in the center and roast at 210C.",
+        duration: "28 min",
+      },
+      {
+        text: "Squeeze lemon over the tray and gently toss to combine.",
+      },
+      {
+        text: "Serve hot with warm pita.",
+      },
+    ],
+  },
+  {
+    id: 54,
+    name: "Tuna Kimchi Fried Rice",
+    category: "Lunch",
+    time: "20 min",
+    kcal: 560,
+    rating: 4.7,
+    reviews: 97,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Korean", "Rice", "Quick"],
+    image:
+      "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Savory fried rice with canned tuna, kimchi, and gochujang, finished with a jammy egg.",
+    ingredients: [
+      "2 cups cold cooked rice",
+      "1 can tuna in olive oil, drained",
+      "3/4 cup kimchi, chopped",
+      "1 tbsp kimchi juice",
+      "1 tsp gochujang",
+      "2 spring onions, sliced",
+      "1 tbsp soy sauce",
+      "1 tsp sesame oil",
+      "2 eggs",
+      "Sesame seeds",
+    ],
+    steps: [
+      {
+        text: "Scramble eggs softly and set aside.",
+      },
+      {
+        text: "Stir-fry kimchi and white spring onion parts. Add tuna and gochujang.",
+      },
+      {
+        text: "Add rice, kimchi juice, and soy sauce. Fry until hot and slightly crisp.",
+      },
+      {
+        text: "Fold in eggs, finish with sesame oil and spring onion greens.",
+      },
+    ],
+  },
+  {
+    id: 55,
+    name: "Apple Cinnamon Overnight Oats",
+    category: "Breakfast",
+    time: "10 min",
+    kcal: 360,
+    rating: 4.8,
+    reviews: 164,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Meal Prep", "Healthy", "Vegetarian"],
+    image:
+      "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Creamy overnight oats with grated apple, cinnamon, chia, and toasted walnuts.",
+    ingredients: [
+      "100g rolled oats",
+      "250ml milk of choice",
+      "120g Greek yogurt",
+      "1 apple, grated",
+      "1 tbsp chia seeds",
+      "1 tsp cinnamon",
+      "1 tbsp maple syrup",
+      "Pinch salt",
+      "2 tbsp chopped walnuts",
+    ],
+    steps: [
+      {
+        text: "Mix oats, milk, yogurt, chia, cinnamon, maple syrup, and salt.",
+      },
+      {
+        text: "Fold in half the grated apple and refrigerate overnight.",
+        duration: "8 hr",
+      },
+      {
+        text: "Top with remaining apple and walnuts before serving.",
+      },
+    ],
+  },
+  {
+    id: 56,
+    name: "Peri Peri Chicken Skewers",
+    category: "Dinner",
+    time: "35 min",
+    kcal: 610,
+    rating: 4.8,
+    reviews: 139,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Chicken", "Grill", "Spicy"],
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Juicy chicken skewers marinated in lemony peri peri paste and charred until smoky.",
+    ingredients: [
+      "700g chicken thigh, chunks",
+      "2 tbsp peri peri paste",
+      "2 tbsp olive oil",
+      "2 garlic cloves, minced",
+      "1 lemon, juice and zest",
+      "1 tsp smoked paprika",
+      "1 tsp honey",
+      "Salt and black pepper",
+      "Skewers",
+    ],
+    steps: [
+      {
+        text: "Marinate chicken with peri peri paste, oil, garlic, lemon, paprika, honey, salt, and pepper.",
+        duration: "20 min",
+      },
+      {
+        text: "Thread onto skewers and grill or broil on high heat.",
+        duration: "12 min",
+      },
+      {
+        text: "Turn halfway until charred and cooked through.",
+      },
+      {
+        text: "Rest briefly and serve with salad or rice.",
+      },
+    ],
+  },
+  {
+    id: 57,
+    name: "Herby Quinoa Falafel Bowl",
+    category: "Lunch",
+    time: "35 min",
+    kcal: 520,
+    rating: 4.7,
+    reviews: 101,
+    servings: 3,
+    difficulty: "Medium",
+    tags: ["Vegetarian", "Bowl", "Meal Prep"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Crisp baked falafel over lemon quinoa with cucumber salad and tahini drizzle.",
+    ingredients: [
+      "1 can chickpeas, drained",
+      "1 small onion, chopped",
+      "2 garlic cloves",
+      "1 cup parsley and cilantro",
+      "1 tsp cumin",
+      "1 tbsp flour",
+      "1 cup cooked quinoa",
+      "1 cucumber, diced",
+      "2 tbsp tahini",
+      "1 lemon",
+    ],
+    steps: [
+      {
+        text: "Pulse chickpeas, onion, garlic, herbs, cumin, and flour to a coarse mixture.",
+      },
+      {
+        text: "Shape into small patties and bake at 210C until crisp.",
+        duration: "18 min",
+      },
+      {
+        text: "Toss quinoa with lemon juice, olive oil, and salt.",
+      },
+      {
+        text: "Serve bowls with quinoa, falafel, cucumber, and tahini-lemon sauce.",
+      },
+    ],
+  },
+  {
+    id: 58,
+    name: "Creamy Corn Chowder",
+    category: "Dinner",
+    time: "40 min",
+    kcal: 470,
+    rating: 4.8,
+    reviews: 122,
+    servings: 4,
+    difficulty: "Easy",
+    tags: ["Soup", "Comfort", "Vegetarian"],
+    image:
+      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Sweet corn chowder with potatoes, thyme, and a silky finish of cream and chives.",
+    ingredients: [
+      "2 tbsp butter",
+      "1 onion, diced",
+      "2 celery stalks, diced",
+      "2 potatoes, diced",
+      "500g corn kernels",
+      "800ml vegetable stock",
+      "150ml cream",
+      "1 tsp thyme",
+      "Chives, salt, black pepper",
+    ],
+    steps: [
+      {
+        text: "Saute onion and celery in butter until soft.",
+      },
+      {
+        text: "Add potatoes, corn, thyme, and stock. Simmer until potatoes are tender.",
+        duration: "20 min",
+      },
+      {
+        text: "Blend one-third of the soup and return to pot for a creamy texture.",
+      },
+      {
+        text: "Stir in cream, season, and serve with chives.",
+      },
+    ],
+  },
+  {
+    id: 59,
+    name: "Beef Bulgogi Lettuce Wraps",
+    category: "Dinner",
+    time: "30 min",
+    kcal: 590,
+    rating: 4.9,
+    reviews: 158,
+    servings: 3,
+    difficulty: "Medium",
+    tags: ["Beef", "Korean", "Low Carb"],
+    image:
+      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Sweet-savory bulgogi beef served in crisp lettuce cups with quick pickled cucumbers.",
+    ingredients: [
+      "500g beef sirloin, thin sliced",
+      "2 tbsp soy sauce",
+      "1 tbsp brown sugar",
+      "1 tbsp sesame oil",
+      "2 garlic cloves, minced",
+      "1 pear, grated",
+      "1 cucumber, sliced",
+      "1 tbsp rice vinegar",
+      "Lettuce leaves",
+      "Sesame seeds and spring onion",
+    ],
+    steps: [
+      {
+        text: "Marinate beef with soy, sugar, sesame oil, garlic, and grated pear.",
+        duration: "15 min",
+      },
+      {
+        text: "Quick-pickle cucumber with rice vinegar and salt.",
+      },
+      {
+        text: "Sear beef in a very hot pan until caramelized.",
+        duration: "5 min",
+      },
+      {
+        text: "Serve in lettuce cups with cucumber, sesame seeds, and spring onion.",
+      },
+    ],
+  },
+  {
+    id: 60,
+    name: "Coconut Mango Chia Parfait",
+    category: "Breakfast",
+    time: "15 min",
+    kcal: 340,
+    rating: 4.8,
+    reviews: 110,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["No Cook", "Tropical", "Healthy"],
+    image:
+      "https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Layered chia pudding with coconut yogurt, fresh mango, and toasted coconut flakes.",
+    ingredients: [
+      "3 tbsp chia seeds",
+      "250ml coconut milk",
+      "150g coconut yogurt",
+      "1 ripe mango, diced",
+      "1 tbsp maple syrup",
+      "1 tsp lime zest",
+      "2 tbsp toasted coconut flakes",
+    ],
+    steps: [
+      {
+        text: "Mix chia seeds, coconut milk, maple syrup, and lime zest.",
+      },
+      {
+        text: "Chill until thickened, stirring once after 10 minutes.",
+        duration: "2 hr",
+      },
+      {
+        text: "Layer chia pudding with coconut yogurt and mango.",
+      },
+      {
+        text: "Top with toasted coconut and serve cold.",
+      },
+    ],
+  },
+  {
+    id: 61,
+    name: "Roasted Cauliflower Tacos",
+    category: "Dinner",
+    time: "30 min",
+    kcal: 490,
+    rating: 4.7,
+    reviews: 116,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Vegetarian", "Tacos", "Spicy"],
+    image:
+      "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Spiced roasted cauliflower tacos with chipotle crema, cabbage slaw, and lime.",
+    ingredients: [
+      "1 cauliflower, florets",
+      "2 tbsp olive oil",
+      "1 tsp chili powder",
+      "1 tsp cumin",
+      "6 corn tortillas",
+      "2 cups shredded cabbage",
+      "100g sour cream",
+      "1 tsp chipotle paste",
+      "1 lime",
+      "Coriander leaves",
+    ],
+    steps: [
+      {
+        text: "Toss cauliflower with oil and spices. Roast until crisp edges form.",
+        duration: "20 min",
+      },
+      {
+        text: "Mix sour cream with chipotle paste and lime juice.",
+      },
+      {
+        text: "Warm tortillas and fill with cauliflower and cabbage.",
+      },
+      {
+        text: "Drizzle chipotle crema and finish with coriander.",
+      },
+    ],
+  },
+  {
+    id: 62,
+    name: "Spinach Artichoke Stuffed Chicken",
+    category: "Dinner",
+    time: "45 min",
+    kcal: 630,
+    rating: 4.8,
+    reviews: 132,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Chicken", "High Protein", "Baked"],
+    image:
+      "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Chicken breasts filled with creamy spinach-artichoke mixture and baked until golden.",
+    ingredients: [
+      "4 chicken breasts",
+      "120g cream cheese",
+      "100g spinach, chopped",
+      "120g artichoke hearts, chopped",
+      "2 garlic cloves, minced",
+      "40g parmesan, grated",
+      "1 tbsp olive oil",
+      "1 tsp paprika",
+      "Salt and black pepper",
+    ],
+    steps: [
+      {
+        text: "Cut a pocket into each chicken breast.",
+      },
+      {
+        text: "Mix cream cheese, spinach, artichoke, garlic, and parmesan. Stuff chicken pockets.",
+      },
+      {
+        text: "Season chicken with paprika, salt, and pepper, then sear briefly.",
+      },
+      {
+        text: "Bake at 200C until chicken is cooked through.",
+        duration: "22 min",
+      },
+    ],
+  },
+  {
+    id: 63,
+    name: "Soba Noodle Sesame Salad",
+    category: "Lunch",
+    time: "20 min",
+    kcal: 450,
+    rating: 4.6,
+    reviews: 84,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Japanese", "Salad", "Vegetarian"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Cold soba noodles tossed with crunchy vegetables in a toasted sesame dressing.",
+    ingredients: [
+      "180g soba noodles",
+      "1 carrot, julienned",
+      "1 cucumber, julienned",
+      "1 red pepper, thin sliced",
+      "2 spring onions, sliced",
+      "1 tbsp soy sauce",
+      "1 tbsp rice vinegar",
+      "1 tsp honey",
+      "1 tbsp tahini",
+      "1 tsp sesame oil",
+      "Sesame seeds",
+    ],
+    steps: [
+      {
+        text: "Cook soba, rinse under cold water, and drain.",
+      },
+      {
+        text: "Whisk soy, vinegar, honey, tahini, sesame oil, and a splash of water.",
+      },
+      {
+        text: "Toss noodles with vegetables and dressing.",
+      },
+      {
+        text: "Top with sesame seeds and serve chilled.",
+      },
+    ],
+  },
+  {
+    id: 64,
+    name: "Turkish Menemen",
+    category: "Breakfast",
+    time: "18 min",
+    kcal: 420,
+    rating: 4.8,
+    reviews: 141,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Eggs", "Turkish", "One Pan"],
+    image:
+      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Soft scrambled eggs in a buttery tomato and pepper base with Aleppo chili and parsley.",
+    ingredients: [
+      "1 tbsp butter",
+      "1 tbsp olive oil",
+      "1 green pepper, diced",
+      "2 ripe tomatoes, grated",
+      "4 eggs",
+      "1 tsp Aleppo chili",
+      "Salt and black pepper",
+      "Parsley and bread to serve",
+    ],
+    steps: [
+      {
+        text: "Saute pepper in butter and olive oil until soft.",
+      },
+      {
+        text: "Add tomatoes and chili, then reduce until thick.",
+        duration: "6 min",
+      },
+      {
+        text: "Lightly beat eggs and pour in. Stir gently for soft curds.",
+      },
+      {
+        text: "Season and serve immediately with parsley and bread.",
+      },
+    ],
+  },
+  {
+    id: 65,
+    name: "Garlic Butter Shrimp Orzo",
+    category: "Dinner",
+    time: "25 min",
+    kcal: 600,
+    rating: 4.9,
+    reviews: 167,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Seafood", "One Pot", "Quick"],
+    image:
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Creamy one-pot orzo with juicy shrimp, garlic butter, lemon, and parsley.",
+    ingredients: [
+      "400g shrimp, peeled",
+      "2 tbsp butter",
+      "3 garlic cloves, minced",
+      "250g orzo",
+      "700ml seafood or chicken stock",
+      "40g parmesan",
+      "1 lemon, zest and juice",
+      "2 tbsp parsley, chopped",
+      "Salt and black pepper",
+    ],
+    steps: [
+      {
+        text: "Sear shrimp in 1 tbsp butter until just pink, then remove.",
+      },
+      {
+        text: "Cook garlic and orzo in remaining butter for 1 minute.",
+      },
+      {
+        text: "Add stock and simmer, stirring occasionally, until orzo is tender.",
+        duration: "12 min",
+      },
+      {
+        text: "Return shrimp, add parmesan and lemon, then finish with parsley.",
+      },
+    ],
+  },
+  {
+    id: 66,
+    name: "Pumpkin Sage Pasta Bake",
+    category: "Dinner",
+    time: "45 min",
+    kcal: 610,
+    rating: 4.7,
+    reviews: 94,
+    servings: 4,
+    difficulty: "Medium",
+    tags: ["Pasta", "Vegetarian", "Baked"],
+    image:
+      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Baked pasta coated in creamy pumpkin sauce with mozzarella and crispy sage.",
+    ingredients: [
+      "300g short pasta",
+      "2 tbsp olive oil",
+      "1 onion, diced",
+      "2 garlic cloves, minced",
+      "350g pumpkin puree",
+      "250ml milk",
+      "80g parmesan",
+      "120g mozzarella, shredded",
+      "8 sage leaves",
+      "Nutmeg, salt, black pepper",
+    ],
+    steps: [
+      {
+        text: "Cook pasta 2 minutes less than package instructions.",
+      },
+      {
+        text: "Cook onion and garlic in olive oil. Add pumpkin puree, milk, nutmeg, and parmesan.",
+      },
+      {
+        text: "Combine pasta and sauce in a baking dish. Top with mozzarella.",
+      },
+      {
+        text: "Bake at 200C until bubbling and golden. Fry sage leaves in oil and scatter on top.",
+        duration: "18 min",
+      },
+    ],
+  },
+  {
+    id: 67,
+    name: "Vietnamese Lemongrass Pork Bowls",
+    category: "Lunch",
+    time: "30 min",
+    kcal: 620,
+    rating: 4.8,
+    reviews: 128,
+    servings: 3,
+    difficulty: "Medium",
+    tags: ["Vietnamese", "Pork", "Rice Bowl"],
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Fragrant lemongrass pork served over jasmine rice with pickled carrot and cucumber.",
+    ingredients: [
+      "500g pork shoulder, thin sliced",
+      "2 tbsp fish sauce",
+      "1 tbsp soy sauce",
+      "1 tbsp brown sugar",
+      "1 stalk lemongrass, minced",
+      "2 garlic cloves, minced",
+      "3 cups cooked jasmine rice",
+      "1 carrot, julienned",
+      "1 cucumber, sliced",
+      "Lime wedges and coriander",
+    ],
+    steps: [
+      {
+        text: "Marinate pork with fish sauce, soy, sugar, lemongrass, and garlic.",
+        duration: "15 min",
+      },
+      {
+        text: "Stir-fry pork in a hot pan until caramelized.",
+      },
+      {
+        text: "Quick-pickle carrot and cucumber with lime juice and salt.",
+      },
+      {
+        text: "Build bowls with rice, pork, pickles, and coriander.",
+      },
+    ],
+  },
+  {
+    id: 68,
+    name: "Mediterranean Chickpea Salad",
+    category: "Lunch",
+    time: "15 min",
+    kcal: 410,
+    rating: 4.7,
+    reviews: 105,
+    servings: 3,
+    difficulty: "Easy",
+    tags: ["Salad", "Vegan", "No Cook"],
+    image:
+      "https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Chickpeas tossed with cucumber, tomato, olives, herbs, and lemon-oregano dressing.",
+    ingredients: [
+      "2 cans chickpeas, drained",
+      "1 cucumber, diced",
+      "200g cherry tomatoes, halved",
+      "1/2 red onion, minced",
+      "50g olives, sliced",
+      "2 tbsp parsley, chopped",
+      "3 tbsp olive oil",
+      "1 lemon, juiced",
+      "1 tsp dried oregano",
+      "Salt and black pepper",
+    ],
+    steps: [
+      {
+        text: "Combine chickpeas, cucumber, tomatoes, onion, olives, and parsley.",
+      },
+      {
+        text: "Whisk olive oil, lemon juice, oregano, salt, and pepper.",
+      },
+      {
+        text: "Dress salad, toss well, and rest 5 minutes before serving.",
+      },
+    ],
+  },
+  {
+    id: 69,
+    name: "Sticky Tofu Rice Bowl",
+    category: "Dinner",
+    time: "28 min",
+    kcal: 530,
+    rating: 4.8,
+    reviews: 134,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Tofu", "Vegan", "High Protein"],
+    image:
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Crispy tofu glazed in sticky soy-ginger sauce with steamed rice and broccoli.",
+    ingredients: [
+      "400g firm tofu",
+      "2 tbsp cornstarch",
+      "1 tbsp neutral oil",
+      "2 tbsp soy sauce",
+      "1 tbsp maple syrup",
+      "1 tsp rice vinegar",
+      "1 tsp grated ginger",
+      "2 cups cooked rice",
+      "200g broccoli florets",
+      "Sesame seeds and spring onion",
+    ],
+    steps: [
+      {
+        text: "Cube tofu, coat with cornstarch, and pan-fry until golden.",
+      },
+      {
+        text: "Mix soy, maple syrup, vinegar, and ginger. Pour into pan and reduce to a glaze.",
+      },
+      {
+        text: "Steam broccoli until crisp-tender.",
+      },
+      {
+        text: "Serve tofu with rice and broccoli, topped with sesame and spring onion.",
+      },
+    ],
+  },
+  {
+    id: 70,
+    name: "Berry Yogurt Crumble Cups",
+    category: "Breakfast",
+    time: "12 min",
+    kcal: 330,
+    rating: 4.9,
+    reviews: 180,
+    servings: 2,
+    difficulty: "Easy",
+    tags: ["Brunch", "No Cook", "Sweet"],
+    image:
+      "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=80",
+    badge: "New",
+    badgeColor: "#22C55E",
+    description:
+      "Layered Greek yogurt cups with mixed berries, honey, and quick oat-almond crumble.",
+    ingredients: [
+      "300g Greek yogurt",
+      "200g mixed berries",
+      "2 tbsp honey",
+      "50g rolled oats",
+      "20g sliced almonds",
+      "1 tbsp coconut oil",
+      "1 tsp cinnamon",
+      "Pinch salt",
+    ],
+    steps: [
+      {
+        text: "Toast oats and almonds in coconut oil with cinnamon and salt until fragrant.",
+        duration: "4 min",
+      },
+      {
+        text: "Layer yogurt, berries, and crumble into glasses.",
+      },
+      {
+        text: "Drizzle honey on top and serve immediately.",
       },
     ],
   },

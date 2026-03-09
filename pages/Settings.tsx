@@ -9,6 +9,7 @@ import { useAccess } from "../contexts/AccessContext";
 const QUICK_TOPUP_AMOUNTS = [5, 10, 25, 50, 100] as const;
 const MIN_TOPUP_AMOUNT = 1;
 const MAX_TOPUP_AMOUNT = 200;
+const DEFAULT_TOPUP_AMOUNT = 10;
 
 const CREDIT_ACTIONS = [
   {
@@ -74,8 +75,10 @@ const Settings: React.FC = () => {
   const [showTopUpModal, setShowTopUpModal] = useState(false);
   const [showSpendModal, setShowSpendModal] = useState(false);
   const [topUpCurrency, setTopUpCurrency] = useState<"EUR" | "GBP">("EUR");
-  const [topUpAmount, setTopUpAmount] = useState(10);
-  const [topUpInput, setTopUpInput] = useState("10");
+  const [topUpAmount, setTopUpAmount] = useState(DEFAULT_TOPUP_AMOUNT);
+  const [topUpInput, setTopUpInput] = useState(
+    DEFAULT_TOPUP_AMOUNT.toFixed(2),
+  );
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
@@ -165,10 +168,20 @@ const Settings: React.FC = () => {
     }
   };
 
-  const setTopUpAmountSafe = (amount: number) => {
-    const clamped = Math.min(MAX_TOPUP_AMOUNT, Math.max(MIN_TOPUP_AMOUNT, Math.round(amount)));
-    setTopUpAmount(clamped);
-    setTopUpInput(String(clamped));
+  const normalizeTopUpAmount = (amount: number) => {
+    const clamped = Math.min(
+      MAX_TOPUP_AMOUNT,
+      Math.max(MIN_TOPUP_AMOUNT, amount),
+    );
+    return Math.round(clamped * 100) / 100;
+  };
+
+  const setTopUpAmountSafe = (amount: number, syncInput = true) => {
+    const normalized = normalizeTopUpAmount(amount);
+    setTopUpAmount(normalized);
+    if (syncInput) {
+      setTopUpInput(normalized.toFixed(2));
+    }
   };
 
   const exchangeRate = topUpCurrency === "EUR" ? 100 : 120;
@@ -315,6 +328,7 @@ const Settings: React.FC = () => {
                     type="range"
                     min={MIN_TOPUP_AMOUNT}
                     max={MAX_TOPUP_AMOUNT}
+                    step={0.01}
                     value={topUpAmount}
                     onChange={(e) => setTopUpAmountSafe(Number(e.target.value))}
                     className="flex-1 accent-[#0EA5C6]"
@@ -347,18 +361,24 @@ const Settings: React.FC = () => {
                   <input
                     value={topUpInput}
                     onChange={(e) => {
-                      const raw = e.target.value.replace(/[^\d]/g, "");
+                      const raw = e.target.value.replace(",", ".");
+                      if (!/^\d*\.?\d{0,2}$/.test(raw)) return;
                       setTopUpInput(raw);
-                      if (!raw) return;
-                      setTopUpAmountSafe(Number(raw));
-                    }}
-                    onBlur={() => {
-                      if (!topUpInput.trim()) {
-                        setTopUpAmountSafe(10);
+                      if (!raw || raw === ".") return;
+                      const parsed = Number(raw);
+                      if (Number.isFinite(parsed)) {
+                        setTopUpAmountSafe(parsed, false);
                       }
                     }}
+                    onBlur={() => {
+                      if (!topUpInput.trim() || topUpInput === ".") {
+                        setTopUpAmountSafe(DEFAULT_TOPUP_AMOUNT);
+                        return;
+                      }
+                      setTopUpAmountSafe(topUpAmount);
+                    }}
                     className="w-full bg-[#1A2745] border border-[#2A3A63] rounded-xl py-3 pl-9 pr-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#0EA5C6]"
-                    inputMode="numeric"
+                    inputMode="decimal"
                   />
                 </div>
               </div>

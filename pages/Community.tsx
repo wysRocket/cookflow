@@ -108,6 +108,286 @@ const INITIAL_POSTS: Post[] = [
     liked: false,
     bookmarked: false,
   },
+  {
+    id: 6,
+    author: "Chef Sofia Reyes",
+    avatar:
+      "https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?auto=format&fit=crop&w=100&q=80",
+    role: "Head Chef",
+    time: "2d ago",
+    content:
+      "Taco al pastor prep day. Marinating pork overnight with guajillo, achiote, pineapple, and orange juice. Acid balance is everything here.",
+    image:
+      "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=800&q=80",
+    tags: ["Mexican", "Street Food", "Prep"],
+    likes: 201,
+    comments: 41,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 7,
+    author: "Nadia L.",
+    avatar: "https://i.pravatar.cc/150?img=23",
+    role: "Student · Level 3",
+    time: "2d ago",
+    content:
+      "Question for the fermentation crowd: my kimchi tastes great but is too fizzy by day 4. Cooler room temp or less sugar in the mix?",
+    tags: ["Fermentation", "Question"],
+    likes: 57,
+    comments: 33,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 8,
+    author: "Chef Marco Pellegrini",
+    avatar:
+      "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=100&q=80",
+    role: "Sous Chef",
+    time: "3d ago",
+    content:
+      "Fresh tagliatelle test: 52% hydration and a 30-minute rest gave the smoothest sheet and cleaner cut in the machine. Worth trying.",
+    tags: ["Italian", "Pasta", "Technique"],
+    likes: 133,
+    comments: 24,
+    liked: false,
+    bookmarked: true,
+  },
+  {
+    id: 9,
+    author: "Leo K.",
+    avatar: "https://i.pravatar.cc/150?img=14",
+    role: "Student · Level 1",
+    time: "3d ago",
+    content:
+      "First attempt at knife drills with carrots and cucumbers. Not fast yet, but my cuts are finally same size. Progress!",
+    tags: ["Knife Skills", "Win"],
+    likes: 39,
+    comments: 9,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 10,
+    author: "Chef Amina Bensalem",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80",
+    role: "Pastry Specialist",
+    time: "4d ago",
+    content:
+      "If your mousse splits, your chocolate and cream temperatures are too far apart. Keep both warm-ish and fold in stages, not all at once.",
+    tags: ["Pastry", "Tips"],
+    likes: 187,
+    comments: 37,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 11,
+    author: "Chef Kenji N.",
+    avatar:
+      "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=100&q=80",
+    role: "Executive Chef",
+    time: "4d ago",
+    content:
+      "Ramen tare workshop this week. Quick reminder: taste tare diluted in broth ratio, never straight, before adjusting salt.",
+    tags: ["Japanese", "Ramen", "Technique"],
+    likes: 246,
+    comments: 58,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 12,
+    author: "Maya S.",
+    avatar: "https://i.pravatar.cc/150?img=45",
+    role: "Student · Level 5",
+    time: "5d ago",
+    content:
+      "Tried the meal planner for the full week and actually stuck to it. Shopping list autofill saved me at least an hour.",
+    tags: ["Meal Prep", "Productivity"],
+    likes: 74,
+    comments: 12,
+    liked: true,
+    bookmarked: false,
+  },
+  {
+    id: 13,
+    author: "Chef Julian Vane",
+    avatar:
+      "https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=100&q=80",
+    role: "Chef de Partie",
+    time: "5d ago",
+    content:
+      "Low-temp egg experiment today: 63C for 45 min gives a silky yolk and barely set white. Great for grain bowls and toasts.",
+    tags: ["Molecular", "Eggs", "Technique"],
+    likes: 165,
+    comments: 29,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 14,
+    author: "Tom R.",
+    avatar: "https://i.pravatar.cc/150?img=31",
+    role: "Student · Level 2",
+    time: "6d ago",
+    content:
+      "Anyone else balancing full-time work with the academy tracks? Looking for routines that keep momentum without burnout.",
+    tags: ["Question", "Community"],
+    likes: 52,
+    comments: 44,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 15,
+    author: "Chef Priya Raman",
+    avatar:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&q=80",
+    role: "Head Chef",
+    time: "1w ago",
+    content:
+      "Batch-cooked coconut dahl for 4 lunches. Added lemon at the end and it kept brightness all week.",
+    tags: ["Indian", "Meal Prep", "Tips"],
+    likes: 141,
+    comments: 19,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 16,
+    author: "Ethan W.",
+    avatar: "https://i.pravatar.cc/150?img=19",
+    role: "Student · Level 3",
+    time: "1w ago",
+    content:
+      "Question: how do you keep tofu crispy after adding sauce? Mine goes soft in 2 minutes.",
+    tags: ["Question", "Tofu", "Technique"],
+    likes: 61,
+    comments: 31,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 17,
+    author: "Chef Eleni Stavros",
+    avatar:
+      "https://images.unsplash.com/photo-1546961329-78bef0414d7c?auto=format&fit=crop&w=100&q=80",
+    role: "Culinary Instructor",
+    time: "1w ago",
+    content:
+      "Reminder for orzo dishes: finish with zest first, juice second. You get a cleaner citrus profile.",
+    tags: ["Greek", "Technique"],
+    likes: 117,
+    comments: 14,
+    liked: false,
+    bookmarked: true,
+  },
+  {
+    id: 18,
+    author: "Mina T.",
+    avatar: "https://i.pravatar.cc/150?img=40",
+    role: "Student · Level 2",
+    time: "1w ago",
+    content:
+      "Just unlocked planner with credits and built my first 7-day menu. UI flow was super smooth.",
+    tags: ["Planner", "Win", "Credits"],
+    likes: 73,
+    comments: 11,
+    liked: true,
+    bookmarked: false,
+  },
+  {
+    id: 19,
+    author: "Chef Marco Pellegrini",
+    avatar:
+      "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=100&q=80",
+    role: "Sous Chef",
+    time: "1w ago",
+    content:
+      "Pasta water check: if it doesn't taste like the sea, your sauce won't emulsify as well as it should.",
+    tags: ["Italian", "Pasta", "Tips"],
+    likes: 188,
+    comments: 22,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 20,
+    author: "Jules C.",
+    avatar: "https://i.pravatar.cc/150?img=53",
+    role: "Student · Level 4",
+    time: "1w ago",
+    content:
+      "Tried the chicken shawarma sheet pan recipe tonight. Family approved, zero leftovers.",
+    image:
+      "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80",
+    tags: ["Chicken", "Dinner", "Win"],
+    likes: 92,
+    comments: 16,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 21,
+    author: "Chef Kenji N.",
+    avatar:
+      "https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?auto=format&fit=crop&w=100&q=80",
+    role: "Executive Chef",
+    time: "1w ago",
+    content:
+      "Ramen eggs: marinate 6 to 8 hours only. Longer and the whites over-season while yolks get chalky.",
+    tags: ["Japanese", "Ramen", "Technique"],
+    likes: 223,
+    comments: 47,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 22,
+    author: "Liam P.",
+    avatar: "https://i.pravatar.cc/150?img=9",
+    role: "Student · Level 1",
+    time: "1w ago",
+    content:
+      "Need advice: best budget knife for practicing daily? Not ready for premium steel yet.",
+    tags: ["Question", "Knife Skills", "Beginner"],
+    likes: 48,
+    comments: 36,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 23,
+    author: "Chef Robin Keller",
+    avatar:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80",
+    role: "Executive Chef",
+    time: "1w ago",
+    content:
+      "Plant protein combo of the week: lentils + walnuts + smoked paprika for deep savory flavor in sauces.",
+    tags: ["Vegan", "Protein", "Molecular"],
+    likes: 129,
+    comments: 18,
+    liked: false,
+    bookmarked: false,
+  },
+  {
+    id: 24,
+    author: "Sofia K.",
+    avatar: "https://i.pravatar.cc/150?img=36",
+    role: "Student · Level 5",
+    time: "1w ago",
+    content:
+      "Anyone wants a monthly community cook-along challenge? Could do one recipe each week by cuisine.",
+    tags: ["Community", "Question", "Challenge"],
+    likes: 67,
+    comments: 40,
+    liked: false,
+    bookmarked: true,
+  },
 ];
 
 const TABS = ["All", "Following", "Trending", "Questions"] as const;
@@ -193,6 +473,12 @@ function normalizePosts(value: unknown): Post[] {
   return normalized.length > 0 ? normalized : INITIAL_POSTS;
 }
 
+function mergeWithInitialPosts(posts: Post[]): Post[] {
+  const existingIds = new Set(posts.map((post) => post.id));
+  const missingInitial = INITIAL_POSTS.filter((post) => !existingIds.has(post.id));
+  return missingInitial.length > 0 ? [...posts, ...missingInitial] : posts;
+}
+
 const Community: React.FC = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<Tab>("All");
@@ -221,7 +507,9 @@ const Community: React.FC = () => {
           "community",
         );
         if (cancelled) return;
-        if (saved?.posts) setPosts(normalizePosts(saved.posts));
+        if (saved?.posts) {
+          setPosts(mergeWithInitialPosts(normalizePosts(saved.posts)));
+        }
       } catch (error) {
         console.error("Failed to load community state", error);
       } finally {
