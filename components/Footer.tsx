@@ -45,10 +45,10 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/auth/sign-up"
+                  to="/app/settings"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
-                  Pricing
+                  Credits
                 </Link>
               </li>
             </ul>

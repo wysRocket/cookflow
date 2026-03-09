@@ -25,9 +25,9 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
           </p>
           <h3>3. Data Retention</h3>
           <p>
-            Account data is retained for the duration of your subscription plus
-            12 months. You may request deletion at any time via Settings →
-            Delete Account.
+            Account data is retained while your account is active and for up to
+            12 months after closure. You may request deletion at any time via
+            Settings → Delete Account.
           </p>
           <h3>4. Cookies</h3>
           <p>
@@ -59,11 +59,10 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             By creating a CookFlow account you agree to these Terms. If you do
             not agree, please do not use the service.
           </p>
-          <h3>2. Subscriptions & Billing</h3>
+          <h3>2. Credits & Billing</h3>
           <p>
-            Subscriptions renew automatically on a monthly or annual cycle. You
-            can cancel at any time from Settings; cancellation takes effect at
-            the end of the current billing period.
+            CookFlow uses a credit wallet model. You can top up credits from
+            Settings and spend them to unlock premium content and features.
           </p>
           <h3>3. CookFlow Credits</h3>
           <p>
@@ -113,9 +112,9 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             <br />
             Tax ID (Steuernummer): 27/432/12345
           </p>
-          <h3>VAT on Subscriptions</h3>
+          <h3>VAT on Credit Top-Ups</h3>
           <p>
-            All subscription prices displayed on CookFlow include VAT at the
+            Credit top-up prices displayed on CookFlow include VAT at the
             applicable rate for your country of residence (determined at
             checkout). EU customers will see their local VAT rate applied
             automatically.
@@ -128,9 +127,7 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
           </p>
           <h3>VAT Receipts</h3>
           <p>
-            Full VAT receipts are available in Settings → Billing History after
-            each transaction. For business customers requiring a formal VAT
-            invoice, contact{" "}
+            For business customers requiring a formal VAT invoice, contact{" "}
             <span className="text-[#14b8a6]">billing@cookflow.app</span>.
           </p>
           <h3>B2B Customers</h3>

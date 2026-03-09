@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   ChevronLeft,
@@ -10,6 +10,8 @@ import {
   ShoppingBag,
   Edit2,
 } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { loadUserAppData, saveUserAppData } from "../lib/user-app-data";
 
 interface PlanEntry {
   readonly name: string;
@@ -21,6 +23,67 @@ type PlanData = Record<string, Record<string, PlanEntry | null>>;
 
 const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const MEALS = ["Breakfast", "Lunch", "Dinner"] as const;
+
+function createEmptyPlan(): PlanData {
+  return Object.fromEntries(
+    DAYS.map((day) => [day, Object.fromEntries(MEALS.map((meal) => [meal, null]))]),
+  ) as PlanData;
+}
+
+function normalizePlanEntry(value: unknown): PlanEntry | null {
+  if (!value || typeof value !== "object") return null;
+  const entry = value as Partial<PlanEntry>;
+  const kcal = Number(entry.kcal);
+  if (
+    typeof entry.name !== "string" ||
+    typeof entry.image !== "string" ||
+    !Number.isFinite(kcal)
+  ) {
+    return null;
+  }
+  return {
+    name: entry.name,
+    image: entry.image,
+    kcal: Math.max(0, Math.round(kcal)),
+  };
+}
+
+function normalizePlanData(value: unknown): PlanData {
+  const base = createEmptyPlan();
+  if (!value || typeof value !== "object") return base;
+  const input = value as Record<string, unknown>;
+  for (const day of DAYS) {
+    const rawDay = input[day];
+    if (!rawDay || typeof rawDay !== "object") continue;
+    const dayObj = rawDay as Record<string, unknown>;
+    for (const meal of MEALS) {
+      base[day][meal] = normalizePlanEntry(dayObj[meal]);
+    }
+  }
+  return base;
+}
+
+function normalizeWeekPlans(value: unknown): Record<number, PlanData> {
+  if (!value || typeof value !== "object") {
+    return { 0: INITIAL_PLAN };
+  }
+  const input = value as Record<string, unknown>;
+  const normalized: Record<number, PlanData> = {};
+  for (const [key, rawPlan] of Object.entries(input)) {
+    const numKey = Number(key);
+    if (!Number.isFinite(numKey)) continue;
+    normalized[numKey] = normalizePlanData(rawPlan);
+  }
+  return Object.keys(normalized).length > 0 ? normalized : { 0: INITIAL_PLAN };
+}
+
+function normalizeRecipeBank(value: unknown): PlanEntry[] {
+  if (!Array.isArray(value)) return RECIPE_BANK;
+  const normalized = value
+    .map((entry) => normalizePlanEntry(entry))
+    .filter((entry): entry is PlanEntry => entry !== null);
+  return normalized.length > 0 ? normalized : RECIPE_BANK;
+}
 
 const RECIPE_BANK: PlanEntry[] = [
   {
@@ -98,6 +161,7 @@ const INITIAL_PLAN: PlanData = {
 const MealPlanner: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const [recipeBank, setRecipeBank] = useState<PlanEntry[]>(() => {
     const locState = location.state as { addedRecipe?: PlanEntry };
     if (locState?.addedRecipe) {
@@ -115,15 +179,63 @@ const MealPlanner: React.FC = () => {
     0: INITIAL_PLAN,
   });
   const plan: PlanData =
-    weekPlans[weekOffset] ??
-    Object.fromEntries(
-      DAYS.map((d) => [d, Object.fromEntries(MEALS.map((m) => [m, null]))]),
-    );
+    weekPlans[weekOffset] ?? createEmptyPlan();
   const [dragging, setDragging] = useState<PlanEntry | null>(null);
   const [hoverCell, setHoverCell] = useState<string | null>(null);
   const [pickerCell, setPickerCell] = useState<string | null>(null);
+  const hydratedRef = useRef(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
+    let cancelled = false;
+    hydratedRef.current = false;
+
+    const loadPlannerState = async () => {
+      if (!user) {
+        hydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{
+          recipeBank?: unknown;
+          weekPlans?: unknown;
+          weekOffset?: unknown;
+        }>(user.uid, "mealPlanner");
+        if (cancelled || !saved) {
+          if (!cancelled) hydratedRef.current = true;
+          return;
+        }
+        setRecipeBank(normalizeRecipeBank(saved.recipeBank));
+        setWeekPlans(normalizeWeekPlans(saved.weekPlans));
+        const offset = Number(saved.weekOffset);
+        setWeekOffset(Number.isFinite(offset) ? Math.round(offset) : 0);
+      } catch (error) {
+        console.error("Failed to load meal planner state", error);
+      } finally {
+        if (!cancelled) hydratedRef.current = true;
+      }
+    };
+
+    void loadPlannerState();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !hydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      void saveUserAppData(user.uid, "mealPlanner", {
+        recipeBank,
+        weekPlans,
+        weekOffset,
+      }).catch((error) => {
+        console.error("Failed to save meal planner state", error);
+      });
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [recipeBank, user, weekOffset, weekPlans]);
+
+  useEffect(() => {
     const locState = location.state as { addedRecipe?: PlanEntry };
     if (locState?.addedRecipe) {
       setRecipeBank((prev) => {

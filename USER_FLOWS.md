@@ -37,7 +37,7 @@ Generate missing Stitch screens, convert to components, implement pages.
 
 - [x] Recipe List implemented (dark mode, Unsplash photos, search, filter, bookmark)
 - [x] Recipe Detail implemented (dark mode, hero image, ingredients checklist, timed steps, Start Cooking nav)
-- [x] Home Dashboard implemented (courses grid, CookFlows timeline, pricing)
+- [x] Home Dashboard implemented (courses grid, CookFlows timeline, credit wallet packs)
 
 ### Phase 3 — Planning & Workflow `[COMPLETE]`
 
@@ -56,10 +56,10 @@ Existing Stitch screens: Chef Progress Dashboard, Culinary Skills Gallery, Cours
 
 ### Phase 5 — Monetisation & Polish `[IN PROGRESS]`
 
-Existing Stitch screens: Subscription Tiers v1/v2, Premium Settings Page.
+Existing Stitch screens: Credit Wallet Packs v1/v2, Premium Settings Page.
 
 - [ ] Settings page implemented
-- [ ] Subscription/Membership flow
+- [ ] Credit wallet flow
 - [ ] Mobile responsiveness pass
 
 ---
@@ -250,17 +250,17 @@ Community → Feed of activity from followed chefs
 **Exit:** n/a
 
 ```
-Tabs: Profile | Preferences | Subscription | Account
+Tabs: Profile | Preferences | Credits | Account
   → Profile: edit name, avatar, bio
   → Preferences: units (metric/imperial), dietary tags
-  → Subscription: current plan, upgrade CTA (→ Membership)
+  → Credits: top-up packs, unlock spending actions, entitlement status
   → Account: change password, sign out, delete account
 ```
 
 **Acceptance Criteria:**
 
 - [ ] Profile edits save via Better Auth `updateUser`
-- [ ] Subscription tab shows current plan from session
+- [ ] Credits section shows current balance and unlock status
 - [ ] Settings page matches Stitch screen `26df72df12e3470cb91aa0e5e9263b68`
 
 ---
@@ -280,7 +280,7 @@ Tabs: Profile | Preferences | Subscription | Account
 | 9   | Chef List + Chef Profile pages                      | 4     | Layout        |
 | 10  | Community page                                      | 4     | Layout        |
 | 11  | Settings page                                       | 5     | Auth          |
-| 12  | Subscription/Membership flow                        | 5     | Settings      |
+| 12  | Credit wallet flow                                 | 5     | Settings      |
 
 ---
 
@@ -293,8 +293,8 @@ Tabs: Profile | Preferences | Subscription | Account
 | Culinary Skills Gallery       | `2c11bdacdcc34c46a161824c55eefa9d` | `/app/courses`           | Stub        |
 | Course Lesson Interface       | `9e92136d6c0342a8a20d0a3ac6926fcd` | `/app/courses/:id`       | Stub        |
 | Public Chef Profile           | `b3ca8b80b0204ba3b16b301622a38d98` | `/app/chef/:id`          | Stub        |
-| Subscription Tiers v1         | `be63158a3b2043de8839a3ed21c499d0` | `/app/settings`          | Stub        |
-| Subscription Tiers v2         | `e647d17644ae4dd083a94ca14968e6dd` | `/` (Membership section) | Partial     |
+| Credit Wallet Pack v1         | `be63158a3b2043de8839a3ed21c499d0` | `/app/settings`          | Partial     |
+| Credit Wallet Pack v2         | `e647d17644ae4dd083a94ca14968e6dd` | `/` (Membership section) | Partial     |
 | Premium Settings Page         | `26df72df12e3470cb91aa0e5e9263b68` | `/app/settings`          | Stub        |
 | Home Dashboard                | _(not yet generated)_              | `/app`                   | Missing     |
 | Recipe List                   | _(not yet generated)_              | `/app/recipes`           | Missing     |

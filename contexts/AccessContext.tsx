@@ -1,128 +1,127 @@
 import React, {
   createContext,
-  useContext,
-  useState,
   useCallback,
-  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
 } from "react";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../lib/firebase";
+import { useAuth } from "./AuthContext";
 
-// ── Types ─────────────────────────────────────────────────────────────────────
-
-export type Plan = "patissier" | "chef_de_partie" | "executive_chef" | null;
-
-export const PLAN_LABELS: Record<NonNullable<Plan>, string> = {
-  patissier: "Patissier",
-  chef_de_partie: "Chef de Partie",
-  executive_chef: "Executive Chef",
-};
-
-export const PLAN_COLORS: Record<NonNullable<Plan>, string> = {
-  patissier: "#38bdf8",
-  chef_de_partie: "#d4af37",
-  executive_chef: "#0ff0f0",
-};
-
-// Which features each plan unlocks
-const PLAN_FEATURES: Record<
-  NonNullable<Plan>,
-  {
-    recipes: boolean;
-    chefs: boolean;
-    planner: boolean;
-    aiRecipe: boolean;
-    bookChef: boolean;
-  }
-> = {
-  patissier: {
-    recipes: true,
-    chefs: true,
-    planner: false,
-    aiRecipe: false,
-    bookChef: false,
-  },
-  chef_de_partie: {
-    recipes: true,
-    chefs: true,
-    planner: true,
-    aiRecipe: true,
-    bookChef: false,
-  },
-  executive_chef: {
-    recipes: true,
-    chefs: true,
-    planner: true,
-    aiRecipe: true,
-    bookChef: true,
-  },
-};
-
-// ── localStorage keys ────────────────────────────────────────────────────────
-
-const LS_PLAN = "cookflow_plan";
+const LS_ACCESS_V2 = "cookflow_access_v2";
 const LS_CREDITS = "cookflow_credits";
 const LS_UNLOCKED_RECIPES = "cookflow_unlocked_recipes";
 const LS_UNLOCKED_CHEFS = "cookflow_unlocked_chefs";
 const LS_PLANNER_UNTIL = "cookflow_planner_until";
+const LS_PLAN = "cookflow_plan";
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+const RECIPE_UNLOCK_COST = 15;
+const CHEF_UNLOCK_COST = 25;
+const PLANNER_MONTH_COST = 100;
 
-function readPlan(): Plan {
-  try {
-    return (localStorage.getItem(LS_PLAN) as Plan) ?? null;
-  } catch {
-    return null;
-  }
-}
-function readCredits(): number {
-  try {
-    const v = localStorage.getItem(LS_CREDITS);
-    return v ? parseInt(v, 10) : 250;
-  } catch {
-    return 250;
-  }
-}
-function readList(key: string): number[] {
-  try {
-    return JSON.parse(localStorage.getItem(key) ?? "[]");
-  } catch {
-    return [];
-  }
-}
-function readPlannerUntil(): number | null {
-  try {
-    const v = localStorage.getItem(LS_PLANNER_UNTIL);
-    return v ? parseInt(v, 10) : null;
-  } catch {
-    return null;
-  }
-}
-
-function saveStr(key: string, val: string) {
-  try {
-    localStorage.setItem(key, val);
-  } catch {
-    /* quota */
-  }
-}
-function saveList(key: string, val: number[]) {
-  try {
-    localStorage.setItem(key, JSON.stringify(val));
-  } catch {
-    /* quota */
-  }
-}
-
-// ── Context interface ─────────────────────────────────────────────────────────
-
-interface AccessContextValue {
-  // State
-  plan: Plan;
+type AccessState = {
   credits: number;
   unlockedRecipes: number[];
   unlockedChefs: number[];
   plannerUntil: number | null;
+};
 
-  // Derived access checks
+const DEFAULT_STATE: AccessState = {
+  credits: 250,
+  unlockedRecipes: [],
+  unlockedChefs: [],
+  plannerUntil: null,
+};
+
+function uniqueNumericList(value: unknown): number[] {
+  if (!Array.isArray(value)) return [];
+  const cleaned = value
+    .map((item) => Number(item))
+    .filter((item) => Number.isFinite(item) && item > 0);
+  return Array.from(new Set(cleaned));
+}
+
+function normalizeAccessState(value: unknown): AccessState {
+  if (!value || typeof value !== "object") return DEFAULT_STATE;
+  const raw = value as Partial<AccessState>;
+  const creditsNum = Number(raw.credits);
+  const plannerUntilNum =
+    raw.plannerUntil == null ? null : Number(raw.plannerUntil);
+  return {
+    credits:
+      Number.isFinite(creditsNum) && creditsNum >= 0
+        ? Math.floor(creditsNum)
+        : DEFAULT_STATE.credits,
+    unlockedRecipes: uniqueNumericList(raw.unlockedRecipes),
+    unlockedChefs: uniqueNumericList(raw.unlockedChefs),
+    plannerUntil:
+      plannerUntilNum !== null &&
+      Number.isFinite(plannerUntilNum) &&
+      plannerUntilNum > 0
+        ? Math.floor(plannerUntilNum)
+        : null,
+  };
+}
+
+function readV2LocalState(): AccessState {
+  try {
+    const raw = localStorage.getItem(LS_ACCESS_V2);
+    return raw ? normalizeAccessState(JSON.parse(raw)) : DEFAULT_STATE;
+  } catch {
+    return DEFAULT_STATE;
+  }
+}
+
+function readLegacyLocalState(): AccessState | null {
+  try {
+    const hasAnyLegacyKey =
+      localStorage.getItem(LS_CREDITS) !== null ||
+      localStorage.getItem(LS_UNLOCKED_RECIPES) !== null ||
+      localStorage.getItem(LS_UNLOCKED_CHEFS) !== null ||
+      localStorage.getItem(LS_PLANNER_UNTIL) !== null ||
+      localStorage.getItem(LS_PLAN) !== null;
+    if (!hasAnyLegacyKey) return null;
+    return normalizeAccessState({
+      credits: localStorage.getItem(LS_CREDITS),
+      unlockedRecipes: JSON.parse(localStorage.getItem(LS_UNLOCKED_RECIPES) ?? "[]"),
+      unlockedChefs: JSON.parse(localStorage.getItem(LS_UNLOCKED_CHEFS) ?? "[]"),
+      plannerUntil: localStorage.getItem(LS_PLANNER_UNTIL),
+    });
+  } catch {
+    return null;
+  }
+}
+
+function clearLegacyLocalState() {
+  try {
+    localStorage.removeItem(LS_PLAN);
+    localStorage.removeItem(LS_CREDITS);
+    localStorage.removeItem(LS_UNLOCKED_RECIPES);
+    localStorage.removeItem(LS_UNLOCKED_CHEFS);
+    localStorage.removeItem(LS_PLANNER_UNTIL);
+  } catch {
+    // ignore
+  }
+}
+
+function saveV2LocalState(state: AccessState) {
+  try {
+    localStorage.setItem(LS_ACCESS_V2, JSON.stringify(state));
+  } catch {
+    // ignore quota errors
+  }
+}
+
+interface AccessContextValue {
+  loading: boolean;
+  credits: number;
+  unlockedRecipes: number[];
+  unlockedChefs: number[];
+  plannerUntil: number | null;
   canAccessRecipes: boolean;
   canAccessChefs: boolean;
   canAccessPlanner: boolean;
@@ -130,149 +129,211 @@ interface AccessContextValue {
   canBookChef: boolean;
   canAccessRecipe: (id: number) => boolean;
   canAccessChef: (id: number) => boolean;
-
-  // Actions
-  activatePlan: (p: Plan) => void;
-  addCredits: (amount: number) => void;
+  addCredits: (amount: number) => boolean;
+  spendCredits: (amount: number) => boolean;
   unlockRecipe: (id: number) => boolean;
   unlockChef: (id: number) => boolean;
   unlockPlannerMonth: () => boolean;
 }
 
-// ── Context ───────────────────────────────────────────────────────────────────
-
 const AccessContext = createContext<AccessContextValue | null>(null);
-
-// ── Provider ──────────────────────────────────────────────────────────────────
 
 export const AccessProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [plan, setPlan] = useState<Plan>(readPlan);
-  const [credits, setCredits] = useState<number>(readCredits);
-  const [unlockedRecipes, setUnlockedRecipes] = useState<number[]>(() =>
-    readList(LS_UNLOCKED_RECIPES),
-  );
-  const [unlockedChefs, setUnlockedChefs] = useState<number[]>(() =>
-    readList(LS_UNLOCKED_CHEFS),
-  );
-  const [plannerUntil, setPlannerUntil] = useState<number | null>(
-    readPlannerUntil,
-  );
+  const { user } = useAuth();
+  const [state, setState] = useState<AccessState>(DEFAULT_STATE);
+  const [loading, setLoading] = useState(true);
+  const hydratedRef = useRef(false);
 
-  // ── Derived ----------------------------------------------------------------
+  useEffect(() => {
+    let cancelled = false;
 
-  const features = plan ? PLAN_FEATURES[plan] : null;
-  const plannerActive = plannerUntil !== null && plannerUntil > Date.now();
+    const bootstrap = async () => {
+      setLoading(true);
+      hydratedRef.current = false;
 
-  const canAccessRecipes = !!features?.recipes || unlockedRecipes.length > 0;
-  const canAccessChefs = !!features?.chefs || unlockedChefs.length > 0;
-  const canAccessPlanner = !!features?.planner || plannerActive;
-  const canUseAiRecipe = !!features?.aiRecipe;
-  const canBookChef = !!features?.bookChef;
+      const localGuestState = readV2LocalState();
+      const localLegacy = readLegacyLocalState();
 
-  const canAccessRecipe = useCallback(
-    (id: number) => !!features?.recipes || unlockedRecipes.includes(id),
-    [features, unlockedRecipes],
-  );
-  const canAccessChef = useCallback(
-    (id: number) => !!features?.chefs || unlockedChefs.includes(id),
-    [features, unlockedChefs],
-  );
-
-  // ── Actions ----------------------------------------------------------------
-
-  const activatePlan = useCallback((p: Plan) => {
-    if (p === null) {
-      try {
-        localStorage.removeItem(LS_PLAN);
-      } catch {
-        /* ignore */
+      if (!user) {
+        if (!cancelled) {
+          setState(localLegacy ?? localGuestState);
+          hydratedRef.current = true;
+          setLoading(false);
+        }
+        return;
       }
-    } else {
-      saveStr(LS_PLAN, p);
+
+      try {
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+        const remote = normalizeAccessState(snap.data()?.access);
+
+        const merged = localLegacy
+          ? normalizeAccessState({
+              credits: Math.max(remote.credits, localLegacy.credits),
+              unlockedRecipes: [...remote.unlockedRecipes, ...localLegacy.unlockedRecipes],
+              unlockedChefs: [...remote.unlockedChefs, ...localLegacy.unlockedChefs],
+              plannerUntil:
+                Math.max(remote.plannerUntil ?? 0, localLegacy.plannerUntil ?? 0) ||
+                null,
+            })
+          : remote;
+
+        if (!cancelled) {
+          setState(merged);
+          hydratedRef.current = true;
+          setLoading(false);
+        }
+
+        await setDoc(ref, { access: merged }, { merge: true });
+        clearLegacyLocalState();
+      } catch (error) {
+        console.error("Failed to load access state, falling back to local", error);
+        if (!cancelled) {
+          setState(localLegacy ?? localGuestState);
+          hydratedRef.current = true;
+          setLoading(false);
+        }
+      }
+    };
+
+    void bootstrap();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!hydratedRef.current) return;
+    if (!user) {
+      saveV2LocalState(state);
+      return;
     }
-    setPlan(p);
+    const ref = doc(db, "users", user.uid);
+    void setDoc(ref, { access: state }, { merge: true }).catch((error) => {
+      console.error("Failed to persist access state", error);
+    });
+  }, [state, user]);
+
+  const applySpend = useCallback((amount: number): boolean => {
+    if (!Number.isFinite(amount) || amount <= 0) return false;
+    let success = false;
+    setState((prev) => {
+      if (prev.credits < amount) return prev;
+      success = true;
+      return { ...prev, credits: prev.credits - amount };
+    });
+    return success;
   }, []);
 
-  const addCredits = useCallback((amount: number) => {
-    setCredits((c) => {
-      const next = c + amount;
-      saveStr(LS_CREDITS, String(next));
-      return next;
-    });
-  }, []);
-
-  const unlockRecipe = useCallback((id: number): boolean => {
-    setCredits((c) => {
-      const n = c - 15;
-      saveStr(LS_CREDITS, String(n));
-      return n;
-    });
-    setUnlockedRecipes((prev) => {
-      if (prev.includes(id)) return prev;
-      const next = [...prev, id];
-      saveList(LS_UNLOCKED_RECIPES, next);
-      return next;
-    });
+  const addCredits = useCallback((amount: number): boolean => {
+    if (!Number.isFinite(amount) || amount === 0) return false;
+    if (amount < 0) return applySpend(Math.abs(amount));
+    setState((prev) => ({ ...prev, credits: prev.credits + Math.floor(amount) }));
     return true;
-  }, []);
+  }, [applySpend]);
 
-  const unlockChef = useCallback((id: number): boolean => {
-    setCredits((c) => {
-      const next = c - 25;
-      saveStr(LS_CREDITS, String(next));
-      return next;
-    });
-    setUnlockedChefs((prev) => {
-      if (prev.includes(id)) return prev;
-      const next = [...prev, id];
-      saveList(LS_UNLOCKED_CHEFS, next);
-      return next;
-    });
-    return true;
-  }, []);
+  const spendCredits = useCallback(
+    (amount: number): boolean => applySpend(amount),
+    [applySpend],
+  );
+
+  const unlockRecipe = useCallback(
+    (id: number): boolean => {
+      if (!Number.isFinite(id) || id <= 0) return false;
+      let unlocked = false;
+      setState((prev) => {
+        if (prev.unlockedRecipes.includes(id)) return prev;
+        if (prev.credits < RECIPE_UNLOCK_COST) return prev;
+        unlocked = true;
+        return {
+          ...prev,
+          credits: prev.credits - RECIPE_UNLOCK_COST,
+          unlockedRecipes: [...prev.unlockedRecipes, id],
+        };
+      });
+      return unlocked;
+    },
+    [],
+  );
+
+  const unlockChef = useCallback(
+    (id: number): boolean => {
+      if (!Number.isFinite(id) || id <= 0) return false;
+      let unlocked = false;
+      setState((prev) => {
+        if (prev.unlockedChefs.includes(id)) return prev;
+        if (prev.credits < CHEF_UNLOCK_COST) return prev;
+        unlocked = true;
+        return {
+          ...prev,
+          credits: prev.credits - CHEF_UNLOCK_COST,
+          unlockedChefs: [...prev.unlockedChefs, id],
+        };
+      });
+      return unlocked;
+    },
+    [],
+  );
 
   const unlockPlannerMonth = useCallback((): boolean => {
-    setCredits((c) => {
-      const next = c - 100;
-      saveStr(LS_CREDITS, String(next));
-      return next;
+    let unlocked = false;
+    setState((prev) => {
+      if (prev.credits < PLANNER_MONTH_COST) return prev;
+      const currentPlannerUntil = prev.plannerUntil ?? Date.now();
+      const base = Math.max(currentPlannerUntil, Date.now());
+      unlocked = true;
+      return {
+        ...prev,
+        credits: prev.credits - PLANNER_MONTH_COST,
+        plannerUntil: base + 30 * 24 * 60 * 60 * 1000,
+      };
     });
-    const until = Date.now() + 30 * 24 * 60 * 60 * 1000;
-    saveStr(LS_PLANNER_UNTIL, String(until));
-    setPlannerUntil(until);
-    return true;
+    return unlocked;
   }, []);
 
-  return (
-    <AccessContext.Provider
-      value={{
-        plan,
-        credits,
-        unlockedRecipes,
-        unlockedChefs,
-        plannerUntil,
-        canAccessRecipes,
-        canAccessChefs,
-        canAccessPlanner,
-        canUseAiRecipe,
-        canBookChef,
-        canAccessRecipe,
-        canAccessChef,
-        activatePlan,
-        addCredits,
-        unlockRecipe,
-        unlockChef,
-        unlockPlannerMonth,
-      }}
-    >
-      {children}
-    </AccessContext.Provider>
-  );
-};
+  const plannerActive = state.plannerUntil !== null && state.plannerUntil > Date.now();
 
-// ── Hook ──────────────────────────────────────────────────────────────────────
+  const value = useMemo<AccessContextValue>(
+    () => ({
+      loading,
+      credits: state.credits,
+      unlockedRecipes: state.unlockedRecipes,
+      unlockedChefs: state.unlockedChefs,
+      plannerUntil: state.plannerUntil,
+      canAccessRecipes: true,
+      canAccessChefs: true,
+      canAccessPlanner: plannerActive,
+      canUseAiRecipe: state.credits > 0,
+      canBookChef: state.credits >= 150,
+      canAccessRecipe: (id: number) => state.unlockedRecipes.includes(id),
+      canAccessChef: (id: number) => state.unlockedChefs.includes(id),
+      addCredits,
+      spendCredits,
+      unlockRecipe,
+      unlockChef,
+      unlockPlannerMonth,
+    }),
+    [
+      addCredits,
+      loading,
+      plannerActive,
+      spendCredits,
+      state.credits,
+      state.plannerUntil,
+      state.unlockedChefs,
+      state.unlockedRecipes,
+      unlockChef,
+      unlockPlannerMonth,
+      unlockRecipe,
+    ],
+  );
+
+  return <AccessContext.Provider value={value}>{children}</AccessContext.Provider>;
+};
 
 export function useAccess(): AccessContextValue {
   const ctx = useContext(AccessContext);

@@ -26,12 +26,6 @@ export interface Testimonial {
   location: string;
 }
 
-export enum MembershipTier {
-  COMMIS = 'Commis',
-  CHEF_DE_PARTIE = 'Chef de Partie',
-  EXECUTIVE = 'Executive'
-}
-
 export interface Recipe {
   readonly id: number;
   readonly name: string;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import {
   MapPin,
@@ -20,6 +20,8 @@ import {
   Users,
 } from "lucide-react";
 import { chefs, recipes } from "../data";
+import { useAuth } from "../contexts/AuthContext";
+import { loadUserAppData, saveUserAppData } from "../lib/user-app-data";
 
 const showcaseSkills = [
   { icon: <Droplets className="w-4 h-4" />, name: "Saucier Level 3" },
@@ -52,7 +54,57 @@ const connections = [
 const ChefProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const profile = id ? chefs.find(c => c.id === Number(id)) : undefined;
-  const [followed, setFollowed] = useState(false);
+  const { user } = useAuth();
+  const [followedChefIds, setFollowedChefIds] = useState<Set<number>>(new Set());
+  const followsHydratedRef = useRef(false);
+  const isFollowed = profile ? followedChefIds.has(profile.id) : false;
+
+  useEffect(() => {
+    let cancelled = false;
+    followsHydratedRef.current = false;
+
+    const loadFollows = async () => {
+      if (!user) {
+        followsHydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{ followedChefIds?: unknown }>(
+          user.uid,
+          "chefProfile",
+        );
+        if (cancelled) return;
+        const ids = Array.isArray(saved?.followedChefIds)
+          ? saved.followedChefIds
+              .map((item) => Number(item))
+              .filter((item) => Number.isFinite(item) && item > 0)
+          : [];
+        setFollowedChefIds(new Set(ids));
+      } catch (error) {
+        console.error("Failed to load followed chefs", error);
+      } finally {
+        if (!cancelled) followsHydratedRef.current = true;
+      }
+    };
+
+    void loadFollows();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !followsHydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      const ids = Array.from(followedChefIds).sort((a, b) => a - b);
+      void saveUserAppData(user.uid, "chefProfile", {
+        followedChefIds: ids,
+      }).catch((error) => {
+        console.error("Failed to save followed chefs", error);
+      });
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [followedChefIds, user]);
 
   if (!profile) {
     return <Navigate to="/app/chefs" replace />;
@@ -111,18 +163,25 @@ const ChefProfile: React.FC = () => {
 
             <div className="flex items-center gap-3">
               <button
-                onClick={() => setFollowed((f) => !f)}
-                className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${followed
+                onClick={() =>
+                  setFollowedChefIds((prev) => {
+                    const next = new Set(prev);
+                    if (next.has(profile.id)) next.delete(profile.id);
+                    else next.add(profile.id);
+                    return next;
+                  })
+                }
+                className={`flex items-center gap-2 px-6 py-2.5 font-bold rounded-full transition-colors shadow-lg ${isFollowed
                   ? "bg-[#1E293B] border border-[#14b8a6] text-[#14b8a6]"
                   : "bg-[#14b8a6] hover:bg-[#0d9488] text-white shadow-teal-900/30"
                   }`}
               >
-                {followed ? (
+                {isFollowed ? (
                   <UserCheck className="w-4 h-4 hidden sm:block" />
                 ) : (
                   <UserPlus className="w-4 h-4 hidden sm:block" />
                 )}
-                {followed ? "Following" : "Follow"}
+                {isFollowed ? "Following" : "Follow"}
               </button>
               <Link
                 to="/app/community"

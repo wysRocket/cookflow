@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { Cloud, Beaker, Scissors, Check } from "lucide-react";
+import { Cloud, Beaker, Scissors } from "lucide-react";
 
 const academyCourses = [
   {
@@ -318,123 +318,79 @@ const Dashboard: React.FC = () => {
         </div>
       </section>
 
-      {/* Join The Brigade Pricing */}
+      {/* Credit Wallet Packs */}
       <section className="text-center pt-8">
         <h2 className="text-3xl md:text-4xl font-serif text-[#F1F5F9] mb-12 tracking-tight">
-          Join The Brigade
+          Credit Wallet Packs
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto px-4">
-          {/* Tier 1 */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-3xl p-8 flex flex-col text-left">
             <h3 className="text-xl font-serif text-[#F1F5F9] text-center mb-2">
-              Patissier
+              Starter Pack
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#D4AF37] text-4xl font-bold tracking-tight">
-                €79
+                €4.99
               </span>
-              <span className="text-[#64748B]">/mo</span>
+              <span className="text-[#64748B]"> one-time</span>
             </div>
-            <ul className="space-y-4 mb-10 flex-1">
-              {[
-                "Business Features",
-                "Editable Consumer Features",
-                "Molecular Textures",
-                "Fermentation Features",
-                "Chef certificate",
-              ].map((feature, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-3 text-sm text-[#94A3B8]"
-                >
-                  <Check className="w-4 h-4 text-[#38bdf8] flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <p className="text-sm text-[#94A3B8] mb-8">
+              50 credits for unlocking recipes, chef profiles, and premium tools
+              at your own pace.
+            </p>
             <Link
-              to="/auth/sign-up"
+              to="/app/settings"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
-              Get started
+              Add Credits
             </Link>
           </div>
 
-          {/* Tier 2 (Most Popular) */}
           <div className="bg-[#1E293B]/80 border border-[#F59E0B]/30 rounded-3xl p-8 flex flex-col text-left relative transform scale-105 shadow-[0_0_30px_rgba(245,158,11,0.1)] z-10">
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#F59E0B] text-[#fff] text-[10px] font-bold uppercase tracking-widest py-1.5 px-4 rounded-full">
               Most Popular
             </div>
             <h3 className="text-xl font-serif text-[#E2E8F0] text-center mb-2 mt-2">
-              Chef de Partie
+              Pro Pack
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#F1F5F9] text-5xl font-bold tracking-tight">
-                €199
+                €14.99
               </span>
-              <span className="text-[#94A3B8]">/mo</span>
+              <span className="text-[#94A3B8]"> one-time</span>
             </div>
-            <ul className="space-y-4 mb-10 flex-1">
-              {[
-                "Business Features",
-                "Editable Consumer Features",
-                "Molecular Features",
-                "Fermentation Features",
-                "Water-shield Features",
-                "Chef de Partie",
-              ].map((feature, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-3 text-sm text-[#F1F5F9]"
-                >
-                  <Check className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <p className="text-sm text-[#F1F5F9] mb-8">
+              200 credits. Ideal for active learners who unlock multiple
+              recipes and planner access.
+            </p>
             <Link
-              to="/auth/sign-up"
+              to="/app/settings"
               className="w-full py-3 rounded-full bg-gradient-to-r from-[#F59E0B] to-[#14b8a6] hover:from-[#d97706] hover:to-[#ea580c] text-white font-bold transition-colors text-center block"
             >
-              Get started
+              Add Credits
             </Link>
           </div>
 
-          {/* Tier 3 */}
           <div className="bg-[#1E293B] border border-[#334155] rounded-3xl p-8 flex flex-col text-left">
             <h3 className="text-xl font-serif text-[#F1F5F9] text-center mb-2">
-              Chef de Cuisine
+              Studio Pack
             </h3>
             <div className="text-center mb-8">
               <span className="text-[#38bdf8] text-4xl font-bold tracking-tight">
-                €299
+                €29.99
               </span>
-              <span className="text-[#64748B]">/mo</span>
+              <span className="text-[#64748B]"> one-time</span>
             </div>
-            <ul className="space-y-4 mb-10 flex-1">
-              {[
-                "Business Features",
-                "Editable Consumer Features",
-                "Molecular Features",
-                "Fermentation Features",
-                "Noblesstitched Features",
-                "Advanced sourdough browning",
-              ].map((feature, i) => (
-                <li
-                  key={i}
-                  className="flex items-center gap-3 text-sm text-[#94A3B8]"
-                >
-                  <Check className="w-4 h-4 text-[#38bdf8] flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
+            <p className="text-sm text-[#94A3B8] mb-8">
+              500 credits for heavy usage, experimentation, and long-term
+              unlock flexibility.
+            </p>
             <Link
-              to="/auth/sign-up"
+              to="/app/settings"
               className="w-full py-3 rounded-full border border-[#475569] hover:bg-[#334155] text-[#F1F5F9] font-medium transition-colors text-center block"
             >
-              Get started
+              Add Credits
             </Link>
           </div>
         </div>

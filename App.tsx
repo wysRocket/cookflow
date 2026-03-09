@@ -57,7 +57,14 @@ const NotFoundPage: React.FC = () => (
 // ── Gated route wrappers ──────────────────────────────────────────────────────
 
 const RecipeListGated: React.FC = () => {
-  const { canAccessRecipes } = useAccess();
+  const { loading, canAccessRecipes } = useAccess();
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-[#94A3B8] text-sm">
+        Loading access...
+      </div>
+    );
+  }
   return (
     <PremiumGate allowed={canAccessRecipes} section="recipes">
       <RecipeList />
@@ -67,17 +74,35 @@ const RecipeListGated: React.FC = () => {
 
 const RecipeDetailGated: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { canAccessRecipe } = useAccess();
+  const { loading, canAccessRecipe } = useAccess();
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-[#94A3B8] text-sm">
+        Loading access...
+      </div>
+    );
+  }
   const numId = Number(id);
   return (
-    <PremiumGate allowed={canAccessRecipe(numId)} section="recipe" itemId={numId}>
+    <PremiumGate
+      allowed={canAccessRecipe(numId)}
+      section="recipe"
+      itemId={numId}
+    >
       <RecipeDetail />
     </PremiumGate>
   );
 };
 
 const ChefListGated: React.FC = () => {
-  const { canAccessChefs } = useAccess();
+  const { loading, canAccessChefs } = useAccess();
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-[#94A3B8] text-sm">
+        Loading access...
+      </div>
+    );
+  }
   return (
     <PremiumGate allowed={canAccessChefs} section="chefs">
       <ChefList />
@@ -87,17 +112,35 @@ const ChefListGated: React.FC = () => {
 
 const ChefProfileGated: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { canAccessChef } = useAccess();
+  const { loading, canAccessChef } = useAccess();
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-[#94A3B8] text-sm">
+        Loading access...
+      </div>
+    );
+  }
   const numId = Number(id);
   return (
-    <PremiumGate allowed={canAccessChef(numId)} section="chef" itemId={numId}>
+    <PremiumGate
+      allowed={canAccessChef(numId)}
+      section="chef"
+      itemId={numId}
+    >
       <ChefProfile />
     </PremiumGate>
   );
 };
 
 const MealPlannerGated: React.FC = () => {
-  const { canAccessPlanner } = useAccess();
+  const { loading, canAccessPlanner } = useAccess();
+  if (loading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center text-[#94A3B8] text-sm">
+        Loading access...
+      </div>
+    );
+  }
   return (
     <PremiumGate allowed={canAccessPlanner} section="planner">
       <MealPlanner />
@@ -117,8 +160,8 @@ const ScrollToTop: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AccessProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <AccessProvider>
         <BrowserRouter>
           <ScrollToTop />
           <Suspense
@@ -166,8 +209,8 @@ const App: React.FC = () => {
             </Routes>
           </Suspense>
         </BrowserRouter>
-      </AuthProvider>
-    </AccessProvider>
+      </AccessProvider>
+    </AuthProvider>
   );
 };
 

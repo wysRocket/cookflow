@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Heart,
@@ -12,6 +12,8 @@ import {
   X,
   Image,
 } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { loadUserAppData, saveUserAppData } from "../lib/user-app-data";
 
 interface Post {
   id: number;
@@ -146,7 +148,53 @@ const FEATURED_CHEFS = [
   },
 ];
 
+function normalizePost(value: unknown): Post | null {
+  if (!value || typeof value !== "object") return null;
+  const post = value as Partial<Post>;
+  const id = Number(post.id);
+  const likes = Number(post.likes);
+  const comments = Number(post.comments);
+  if (
+    !Number.isFinite(id) ||
+    typeof post.author !== "string" ||
+    typeof post.avatar !== "string" ||
+    typeof post.role !== "string" ||
+    typeof post.time !== "string" ||
+    typeof post.content !== "string"
+  ) {
+    return null;
+  }
+  const tags = Array.isArray(post.tags)
+    ? post.tags
+        .map((tag) => String(tag).trim())
+        .filter((tag) => tag.length > 0)
+    : [];
+  return {
+    id: Math.round(id),
+    author: post.author,
+    avatar: post.avatar,
+    role: post.role,
+    time: post.time,
+    content: post.content,
+    image: typeof post.image === "string" ? post.image : undefined,
+    tags,
+    likes: Number.isFinite(likes) ? Math.max(0, Math.round(likes)) : 0,
+    comments: Number.isFinite(comments) ? Math.max(0, Math.round(comments)) : 0,
+    liked: Boolean(post.liked),
+    bookmarked: Boolean(post.bookmarked),
+  };
+}
+
+function normalizePosts(value: unknown): Post[] {
+  if (!Array.isArray(value)) return INITIAL_POSTS;
+  const normalized = value
+    .map((item) => normalizePost(item))
+    .filter((item): item is Post => item !== null);
+  return normalized.length > 0 ? normalized : INITIAL_POSTS;
+}
+
 const Community: React.FC = () => {
+  const { user } = useAuth();
   const [activeTab, setActiveTab] = useState<Tab>("All");
   const [posts, setPosts] = useState<Post[]>(INITIAL_POSTS);
   const [tagFilter, setTagFilter] = useState<string | null>(null);
@@ -156,6 +204,46 @@ const Community: React.FC = () => {
   const [replyingTo, setReplyingTo] = useState<number | null>(null);
   const [replyContent, setReplyContent] = useState("");
   const [shareToast, setShareToast] = useState<number | null>(null);
+  const hydratedRef = useRef(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    hydratedRef.current = false;
+
+    const loadCommunityState = async () => {
+      if (!user) {
+        hydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{ posts?: unknown }>(
+          user.uid,
+          "community",
+        );
+        if (cancelled) return;
+        if (saved?.posts) setPosts(normalizePosts(saved.posts));
+      } catch (error) {
+        console.error("Failed to load community state", error);
+      } finally {
+        if (!cancelled) hydratedRef.current = true;
+      }
+    };
+
+    void loadCommunityState();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !hydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      void saveUserAppData(user.uid, "community", { posts }).catch((error) => {
+        console.error("Failed to save community state", error);
+      });
+    }, 400);
+    return () => window.clearTimeout(timer);
+  }, [posts, user]);
 
   const handleNewPostSubmit = (e: React.FormEvent) => {
     e.preventDefault();

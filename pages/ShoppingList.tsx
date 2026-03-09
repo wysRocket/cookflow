@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ShoppingBag,
@@ -8,6 +8,8 @@ import {
   Circle,
   ArrowLeft,
 } from "lucide-react";
+import { useAuth } from "../contexts/AuthContext";
+import { loadUserAppData, saveUserAppData } from "../lib/user-app-data";
 
 interface ShoppingItem {
   id: number;
@@ -66,14 +68,114 @@ const INITIAL_CATEGORIES: Category[] = [
   },
 ];
 
-let nextId = 100;
+function getNextItemId(categories: Category[]): number {
+  const maxId = categories.reduce((acc, category) => {
+    const categoryMax = category.items.reduce(
+      (itemAcc, item) => Math.max(itemAcc, item.id),
+      0,
+    );
+    return Math.max(acc, categoryMax);
+  }, 0);
+  return Math.max(100, maxId + 1);
+}
+
+function normalizeCategories(value: unknown): Category[] {
+  if (!Array.isArray(value)) return INITIAL_CATEGORIES;
+  const normalized = value
+    .map((rawCategory) => {
+      if (!rawCategory || typeof rawCategory !== "object") return null;
+      const category = rawCategory as Partial<Category>;
+      if (typeof category.label !== "string" || typeof category.emoji !== "string") {
+        return null;
+      }
+      const items = Array.isArray(category.items)
+        ? category.items
+            .map((rawItem) => {
+              if (!rawItem || typeof rawItem !== "object") return null;
+              const item = rawItem as Partial<ShoppingItem>;
+              const id = Number(item.id);
+              if (!Number.isFinite(id) || id <= 0 || typeof item.name !== "string") {
+                return null;
+              }
+              return {
+                id,
+                name: item.name,
+                qty: typeof item.qty === "string" ? item.qty : "1",
+                checked: Boolean(item.checked),
+              } satisfies ShoppingItem;
+            })
+            .filter((item): item is ShoppingItem => item !== null)
+        : [];
+      return {
+        label: category.label,
+        emoji: category.emoji,
+        items,
+      } satisfies Category;
+    })
+    .filter((category): category is Category => category !== null);
+  return normalized.length > 0 ? normalized : INITIAL_CATEGORIES;
+}
 
 const ShoppingList: React.FC = () => {
+  const { user } = useAuth();
   const [categories, setCategories] = useState<Category[]>(INITIAL_CATEGORIES);
+  const [nextItemId, setNextItemId] = useState<number>(() =>
+    getNextItemId(INITIAL_CATEGORIES),
+  );
   const [newItem, setNewItem] = useState("");
   const [newQty, setNewQty] = useState("");
   const [addingTo, setAddingTo] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const hydratedRef = useRef(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    hydratedRef.current = false;
+
+    const loadShoppingList = async () => {
+      if (!user) {
+        hydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{
+          categories?: unknown;
+          nextItemId?: unknown;
+        }>(user.uid, "shoppingList");
+        if (cancelled) return;
+        const normalized = normalizeCategories(saved?.categories);
+        const remoteNextId = Number(saved?.nextItemId);
+        setCategories(normalized);
+        setNextItemId(
+          Number.isFinite(remoteNextId) && remoteNextId > 0
+            ? Math.floor(remoteNextId)
+            : getNextItemId(normalized),
+        );
+      } catch (error) {
+        console.error("Failed to load shopping list state", error);
+      } finally {
+        if (!cancelled) hydratedRef.current = true;
+      }
+    };
+
+    void loadShoppingList();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !hydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      void saveUserAppData(user.uid, "shoppingList", {
+        categories,
+        nextItemId,
+      }).catch((error) => {
+        console.error("Failed to save shopping list state", error);
+      });
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [categories, nextItemId, user]);
 
   const totalItems = categories.reduce((s, c) => s + c.items.length, 0);
   const checkedItems = categories.reduce(
@@ -109,6 +211,7 @@ const ShoppingList: React.FC = () => {
 
   const addItem = (catLabel: string) => {
     if (!newItem.trim()) return;
+    const createdItemId = nextItemId;
     setCategories((prev) =>
       prev.map((cat) =>
         cat.label !== catLabel
@@ -118,7 +221,7 @@ const ShoppingList: React.FC = () => {
             items: [
               ...cat.items,
               {
-                id: nextId++,
+                id: createdItemId,
                 name: newItem.trim(),
                 qty: newQty.trim() || "1",
                 checked: false,
@@ -127,6 +230,7 @@ const ShoppingList: React.FC = () => {
           },
       ),
     );
+    setNextItemId((id) => id + 1);
     setNewItem("");
     setNewQty("");
     setAddingTo(null);

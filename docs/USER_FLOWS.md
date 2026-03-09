@@ -14,7 +14,7 @@ Full product vision user flow diagram, grounded in current routing/navigation an
 ```mermaid
 flowchart TB
   %% Shared acquisition/funnel
-  LP["Landing Page / [LIVE]<br/>Hero + Academy + Rituals + Membership + Consultant Form"] --> HASACC{"Has account/session? / [VISION]"}
+  LP["Landing Page / [LIVE]<br/>Hero + Academy + Rituals + Credit Wallet + Consultant Form"] --> HASACC{"Has account/session? / [VISION]"}
   HASACC -->|No| SIGNUP["Sign up / onboarding / [VISION]"]
   HASACC -->|Yes| APPHOME["/app -> /app/courses redirect / [LIVE]"]
   SIGNUP -.-> APPHOME
@@ -28,8 +28,8 @@ flowchart TB
     LOCKED["Locked lesson state shown / [LIVE]"]
     PROGRESS["Continue next lesson / [LIVE UI,<br/>VISION progression persistence]"]
     DISCUSS["Join Discussion in lesson panel / [PARTIAL]"]
-    MEMBERSHIP_DEC{"Has premium tier? / [VISION]"}
-    UPGRADE["Upgrade via pricing tiers / [VISION]<br/>from Membership sections"]
+    CREDITS_DEC{"Has enough credits? / [LIVE]"}
+    TOPUP["Top up credits in Settings / [LIVE]"]
     RETAIN["Return loop: streak/progress re-entry / [VISION]"]
   end
 
@@ -39,10 +39,10 @@ flowchart TB
   UNLOCKED -->|No| LOCKED
   UNLOCKED -->|Yes| PROGRESS
   PROGRESS --> DISCUSS
-  DISCUSS -.-> MEMBERSHIP_DEC
-  MEMBERSHIP_DEC -->|No| UPGRADE
-  MEMBERSHIP_DEC -->|Yes| RETAIN
-  UPGRADE -.-> RETAIN
+  DISCUSS -.-> CREDITS_DEC
+  CREDITS_DEC -->|No| TOPUP
+  CREDITS_DEC -->|Yes| RETAIN
+  TOPUP -.-> RETAIN
   RETAIN -.-> CATALOG
 
   %% Chef/creator persona
@@ -116,7 +116,7 @@ flowchart TB
 | Learner | `/app/courses` | Click course card | `/app/courses/:id` | Enter lesson/cooking mode | LIVE | `/Users/wysmyfree/Projects/cookflow/pages/Dashboard.tsx`, `/Users/wysmyfree/Projects/cookflow/pages/CookingMode.tsx` |
 | Learner | Lesson page | Read syllabus status | Completed/In progress/Locked states | Progress gating shown in UI | LIVE | `/Users/wysmyfree/Projects/cookflow/pages/CookingMode.tsx` |
 | Learner | Lesson page | Click discussion/community cues | Community participation intent | Engagement loop begins | PARTIAL | `/Users/wysmyfree/Projects/cookflow/pages/CookingMode.tsx`, `/Users/wysmyfree/Projects/cookflow/pages/Community.tsx` |
-| Learner | Landing membership sections | Click tier CTA | Checkout/subscription journey | Monetization/upgrade | VISION | `/Users/wysmyfree/Projects/cookflow/components/Membership.tsx`, `/Users/wysmyfree/Projects/cookflow/pages/Dashboard.tsx` |
+| Learner | Landing credit wallet section | Click credits CTA | Go to Settings credit wallet | Monetization via credit top-up | LIVE | `/Users/wysmyfree/Projects/cookflow/components/Membership.tsx`, `/Users/wysmyfree/Projects/cookflow/pages/Settings.tsx` |
 | Chef/Creator | `/app/chefs` | Discover chefs | Open profile detail | Chef-specific engagement | PARTIAL | `/Users/wysmyfree/Projects/cookflow/pages/ChefList.tsx`, `/Users/wysmyfree/Projects/cookflow/pages/ChefProfile.tsx` |
 | Chef/Creator | `/app/chef/:id` | Follow/Message/Recipe CTA | Relationship actions | Network and creator engagement | PARTIAL | `/Users/wysmyfree/Projects/cookflow/pages/ChefProfile.tsx` |
 | Community | `/app/community` | Open community tab | Enter community space | Placeholder hub currently | PARTIAL | `/Users/wysmyfree/Projects/cookflow/pages/Community.tsx` |

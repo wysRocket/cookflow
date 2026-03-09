@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Clock, Flame, Star, Bookmark, ChevronRight, Sparkles } from "lucide-react";
 import { recipes } from "../data";
 import { useAccess } from "../contexts/AccessContext";
+import { useAuth } from "../contexts/AuthContext";
+import { loadUserAppData, saveUserAppData } from "../lib/user-app-data";
 
 interface Recipe {
   readonly id: number;
@@ -32,12 +34,61 @@ const RecipeList: React.FC = () => {
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
 
-  const { credits, addCredits } = useAccess();
+  const { credits, spendCredits } = useAccess();
+  const { user } = useAuth();
+  const bookmarksHydratedRef = useRef(false);
 
   useEffect(() => {
     const q = searchParams.get("q");
     setSearch(q ?? "");
   }, [searchParams]);
+
+  useEffect(() => {
+    let cancelled = false;
+    bookmarksHydratedRef.current = false;
+
+    const loadBookmarks = async () => {
+      if (!user) {
+        bookmarksHydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{ bookmarkedIds?: unknown }>(
+          user.uid,
+          "recipeList",
+        );
+        if (cancelled) return;
+        const ids = Array.isArray(saved?.bookmarkedIds)
+          ? saved.bookmarkedIds
+              .map((item) => Number(item))
+              .filter((item) => Number.isFinite(item) && item > 0)
+          : [];
+        setBookmarked(new Set(ids));
+      } catch (error) {
+        console.error("Failed to load recipe bookmarks", error);
+      } finally {
+        if (!cancelled) bookmarksHydratedRef.current = true;
+      }
+    };
+
+    void loadBookmarks();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !bookmarksHydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      const bookmarkedIds = Array.from(bookmarked).sort((a, b) => a - b);
+      void saveUserAppData(user.uid, "recipeList", { bookmarkedIds }).catch(
+        (error) => {
+          console.error("Failed to save recipe bookmarks", error);
+        },
+      );
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [bookmarked, user]);
 
   const filtered = recipes.filter((r) => {
     const matchesFilter = activeFilter === "All" || r.category === activeFilter;
@@ -60,11 +111,10 @@ const RecipeList: React.FC = () => {
   };
 
   const handleGenerateAiRecipe = () => {
-    if (credits >= 1) {
-      addCredits(-1);
+    if (spendCredits(1)) {
       window.alert("Generating AI Recipe...\nAI Recipe generated! Check your saved items.");
     } else {
-      window.alert("Not enough credits. Upgrade or purchase more.");
+      window.alert("Not enough credits. Add more credits in Settings.");
     }
   };
 
