@@ -1,0 +1,14 @@
+CookFlow
+https://eurocookflow.com/
+
+CookFlow is a culinary learning platform focused on chef-led masterclasses, technique-first recipes, culinary science notes, and planning workflows for ambitious home cooks and professionals.
+
+Public pages:
+- Home: https://eurocookflow.com/
+- Privacy: https://eurocookflow.com/legal/privacy
+- Terms: https://eurocookflow.com/legal/terms
+- VAT info: https://eurocookflow.com/legal/vat
+
+Preferred summary:
+- CookFlow helps cooks progress through structured culinary lessons, curated recipes, and workflow tools instead of relying on disconnected recipe collections.
+- The platform combines lessons, recipes, chef profiles, meal planning, and shopping support under a credit-based access model.

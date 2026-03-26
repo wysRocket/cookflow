@@ -30,18 +30,23 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <span className="inline-block py-1 px-3 rounded-full bg-white/5 border border-white/10 text-saffron text-xs font-sans font-bold tracking-[0.2em] uppercase mb-6 backdrop-blur-md">
-            Europe's Premier Culinary Platform
+            Culinary Learning Platform
           </span>
           <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-white mb-6 leading-tight">
-            Master the Art. <br />
+            Learn advanced cooking <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sage to-emerald-400">
-              Control the Flow.
+              with structure and flow.
             </span>
           </h1>
           <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-300 font-sans font-light leading-relaxed">
-            Transition from inspiration to mastery with the most advanced
-            recipe-to-lesson ecosystem. Precision metrics. Molecular insights.
-            Elite mentorship.
+            CookFlow helps ambitious home cooks and professionals improve
+            through chef-led masterclasses, technique-first recipes, culinary
+            science notes, and planning workflows in one connected platform.
+          </p>
+          <p className="mt-4 max-w-3xl mx-auto text-sm md:text-base text-gray-400 font-sans leading-relaxed">
+            Explore public culinary themes, compare learning tracks, and unlock
+            recipes, chef profiles, and planning tools with a flexible credit
+            wallet instead of a recurring subscription.
           </p>
 
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">

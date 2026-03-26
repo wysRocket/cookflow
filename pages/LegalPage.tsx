@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChefHat, ArrowLeft } from "lucide-react";
+import Seo from "../components/Seo";
 
 type LegalSection = "privacy" | "terms" | "vat";
 
@@ -146,9 +147,22 @@ const LegalPage: React.FC = () => {
   const section =
     (page as LegalSection) in content ? (page as LegalSection) : "privacy";
   const { title, body } = content[section];
+  const descriptions: Record<LegalSection, string> = {
+    privacy:
+      "Read CookFlow's privacy policy, including how account, analytics, and usage data are handled.",
+    terms:
+      "Review CookFlow's terms of service, billing rules, credit wallet terms, and acceptable use policy.",
+    vat: "View CookFlow Europe Ltd VAT, tax, and invoicing information for EU customers.",
+  };
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-gray-200">
+      <Seo
+        title={`${title} | CookFlow`}
+        description={descriptions[section]}
+        pathname={`/legal/${section}`}
+        type="article"
+      />
       {/* Nav */}
       <header className="border-b border-white/5 px-6 py-4 flex items-center justify-between max-w-4xl mx-auto">
         <Link to="/" className="flex items-center gap-2">

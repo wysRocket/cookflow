@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { ChefHat } from "lucide-react";
-import { motion } from "framer-motion";
+import React from "react";
 import Navbar from "../components/Navbar";
+import Seo from "../components/Seo";
 import Hero from "../components/Hero";
+import AnswerSection from "../components/AnswerSection";
 import AcademyGrid from "../components/AcademyGrid";
 import RitualList from "../components/RitualList";
 import Membership from "../components/Membership";
@@ -11,42 +11,57 @@ import ConsultantForm from "../components/ConsultantForm";
 import Footer from "../components/Footer";
 
 const LandingPage: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="fixed inset-0 bg-black flex items-center justify-center z-50">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 1.2, opacity: 0 }}
-          transition={{
-            duration: 0.8,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="flex flex-col items-center gap-4"
-        >
-          <ChefHat className="w-16 h-16 text-[#14b8a6]" />
-          <p className="text-white font-serif tracking-[0.3em] text-sm animate-pulse">
-            INITIALIZING KITCHEN
-          </p>
-        </motion.div>
-      </div>
-    );
-  }
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is CookFlow?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CookFlow is a culinary learning platform that combines chef-led masterclasses, technique-first recipe libraries, and planning tools so cooks can learn, practice, and repeat advanced cooking workflows in one place.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is CookFlow for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CookFlow is designed for ambitious home cooks, culinary students, and professionals who want structured cooking lessons, deeper food-science context, and guided practice instead of a loose collection of recipes.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How does CookFlow work?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Members browse public culinary themes, create a profile, then unlock lessons, recipes, chefs, and planning features through a credit wallet. Each learning path connects techniques, science notes, and practical cooking sessions.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What makes CookFlow different from a recipe app?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CookFlow focuses on culinary progression rather than storage alone. It pairs recipes with chef context, lesson structure, technique explanations, and workflow tools such as meal planning and shopping support.",
+        },
+      },
+    ],
+  };
 
   return (
     <div className="min-h-screen bg-obsidian text-gray-200 selection:bg-[#14b8a6] selection:text-obsidian">
+      <Seo
+        title="CookFlow | Culinary Learning Platform for Recipes, Masterclasses, and Meal Planning"
+        description="CookFlow is a culinary learning platform with chef-led masterclasses, advanced recipes, technique explanations, and meal-planning workflows for ambitious home cooks and professionals."
+        pathname="/"
+        jsonLd={faqSchema}
+      />
       <Navbar />
       <main>
         <Hero />
+        <AnswerSection />
         <AcademyGrid />
         <RitualList />
         <Testimonials />
