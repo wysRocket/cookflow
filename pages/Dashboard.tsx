@@ -7,37 +7,37 @@ const academyCourses = [
     id: 1,
     title: "Modern Pastry",
     instructor: "PARIS",
-    timeAgo: "11 years ago",
+    timeAgo: "2 years ago",
     details: "27 details",
     image:
-      "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 2,
     title: "Artisan Pasta",
     instructor: "ROME",
-    timeAgo: "11 years ago",
+    timeAgo: "2 years ago",
     details: "15 details",
     image:
-      "https://images.unsplash.com/photo-1565299507177-b0ac66763828?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 3,
     title: "Molecular Tapas",
     instructor: "SAN SEBASTIAN",
-    timeAgo: "11 years ago",
+    timeAgo: "2 years ago",
     details: "15 details",
     image:
-      "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1502301103665-0b95cc738daf?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 4,
     title: "New Nordic Fermentation",
     instructor: "COPENHAGEN",
-    timeAgo: "11 years ago",
+    timeAgo: "2 years ago",
     details: "27 details",
     image:
-      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
   },
   {
     id: 5,
