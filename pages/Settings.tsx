@@ -248,15 +248,15 @@ const Settings: React.FC = () => {
 
       {showTopUpModal && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] overflow-y-auto bg-black/70 px-3 py-4 backdrop-blur-sm sm:flex sm:items-center sm:justify-center sm:p-4"
           onClick={() => setShowTopUpModal(false)}
         >
           <div
-            className="w-full max-w-[460px] bg-[#09132D] border border-[#1B2A4F] rounded-2xl p-6 shadow-2xl"
+            className="mx-auto max-h-[calc(100dvh-2rem)] w-full max-w-[460px] overflow-y-auto rounded-2xl border border-[#1B2A4F] bg-[#09132D] p-4 shadow-2xl sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-3xl font-serif font-bold text-white">
+              <h2 className="text-2xl font-serif font-bold text-white sm:text-3xl">
                 Top Up Credits
               </h2>
               <button
@@ -296,7 +296,7 @@ const Settings: React.FC = () => {
 
               <div>
                 <p className="text-sm text-[#8AA0C5] mb-3">Quick Select</p>
-                <div className="grid grid-cols-5 gap-2">
+                <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
                   {QUICK_TOPUP_AMOUNTS.map((amount) => (
                     <button
                       key={amount}
@@ -315,16 +315,7 @@ const Settings: React.FC = () => {
 
               <div>
                 <p className="text-sm text-[#8AA0C5] mb-3">Custom Amount</p>
-                <div className="flex items-center gap-2">
-                  {[-10, -1].map((delta) => (
-                    <button
-                      key={delta}
-                      onClick={() => setTopUpAmountSafe(topUpAmount + delta)}
-                      className="px-3 py-2 rounded-lg bg-[#1A2745] text-white text-sm font-semibold"
-                    >
-                      {delta}
-                    </button>
-                  ))}
+                <div className="grid grid-cols-2 gap-2 sm:grid-cols-[auto_auto_minmax(0,1fr)_auto_auto] sm:items-center">
                   <input
                     type="range"
                     min={MIN_TOPUP_AMOUNT}
@@ -332,13 +323,22 @@ const Settings: React.FC = () => {
                     step={0.01}
                     value={topUpAmount}
                     onChange={(e) => setTopUpAmountSafe(Number(e.target.value))}
-                    className="flex-1 accent-[#0EA5C6]"
+                    className="order-first col-span-2 w-full accent-[#0EA5C6] sm:order-none sm:col-span-1"
                   />
+                  {[-10, -1].map((delta) => (
+                    <button
+                      key={delta}
+                      onClick={() => setTopUpAmountSafe(topUpAmount + delta)}
+                      className="min-h-11 rounded-lg bg-[#1A2745] px-3 py-2 text-sm font-semibold text-white"
+                    >
+                      {delta}
+                    </button>
+                  ))}
                   {[1, 10].map((delta) => (
                     <button
                       key={delta}
                       onClick={() => setTopUpAmountSafe(topUpAmount + delta)}
-                      className="px-3 py-2 rounded-lg bg-[#1A2745] text-white text-sm font-semibold"
+                      className="min-h-11 rounded-lg bg-[#1A2745] px-3 py-2 text-sm font-semibold text-white"
                     >
                       +{delta}
                     </button>
@@ -378,22 +378,22 @@ const Settings: React.FC = () => {
                       }
                       setTopUpAmountSafe(topUpAmount);
                     }}
-                    className="w-full bg-[#1A2745] border border-[#2A3A63] rounded-xl py-3 pl-9 pr-4 text-white text-2xl font-semibold focus:outline-none focus:border-[#0EA5C6]"
+                    className="w-full rounded-xl border border-[#2A3A63] bg-[#1A2745] py-3 pl-9 pr-4 text-xl font-semibold text-white focus:border-[#0EA5C6] focus:outline-none sm:text-2xl"
                     inputMode="decimal"
                   />
                 </div>
               </div>
 
               <div className="bg-[#1A2745] border border-[#26375D] rounded-xl p-5">
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3 flex items-start justify-between gap-3">
                   <span className="text-[#8AA0C5]">Amount</span>
-                  <span className="text-2xl font-bold text-white">
+                  <span className="text-right text-xl font-bold text-white sm:text-2xl">
                     {currencySymbol}{formattedAmount}
                   </span>
                 </div>
-                <div className="flex items-center justify-between mb-3">
+                <div className="mb-3 flex items-start justify-between gap-3">
                   <span className="text-[#8AA0C5]">Credits</span>
-                  <span className="text-2xl font-bold text-[#35D2F1]">
+                  <span className="text-right text-xl font-bold text-[#35D2F1] sm:text-2xl">
                     {creditsToAdd}
                   </span>
                 </div>
