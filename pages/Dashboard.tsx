@@ -195,6 +195,7 @@ const Dashboard: React.FC = () => {
               <Link
                 key={course.id}
                 to={`/app/courses/${course.id}`}
+                state={{ courseName: course.title, city: course.instructor }}
                 className="bg-[#1E293B] rounded-2xl overflow-hidden border border-[#334155] hover:border-[#D4AF37]/50 transition-colors group shadow-lg"
               >
                 <div className="relative h-48 overflow-hidden p-3 pb-0">

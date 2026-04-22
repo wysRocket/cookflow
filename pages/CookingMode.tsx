@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Clock } from "lucide-react";
 import { recipes } from "../data";
 
@@ -163,26 +163,69 @@ const DEFAULT_STEPS: RecipeSteps = {
   ],
 };
 
+const parseDuration = (duration?: string): number | undefined => {
+  if (!duration) return undefined;
+  const match = duration.match(/(\d+)/);
+  return match ? parseInt(match[1]) * 60 : undefined;
+};
+
+const recipeToSteps = (recipe: (typeof recipes)[0]): CookingStep[] =>
+  recipe.steps.map((s, i) => ({
+    title: `Step ${i + 1}`,
+    description: s.text,
+    timerSeconds: parseDuration(s.duration),
+    ingredients: i === 0 ? recipe.ingredients.slice(0, 3) : [],
+  }));
+
+const generateCourseSteps = (courseName: string, city: string): CookingStep[] => [
+  {
+    title: "Mise en Place",
+    description: `Prepare your workspace and gather all equipment for ${courseName}. This ${city} masterclass begins with discipline and organisation.`,
+  },
+  {
+    title: "Core Technique",
+    description: `Study the foundational technique at the heart of ${courseName}. Understand the method fully before applying heat or working with your main ingredients.`,
+  },
+  {
+    title: "Primary Preparation",
+    description: `Work through the main preparation steps for ${courseName}. Precision and timing are the hallmarks of professional cooking.`,
+    timerSeconds: 600,
+  },
+  {
+    title: "Cooking & Development",
+    description: `Apply the techniques to build the flavours central to ${courseName}. Trust your senses and adjust seasoning as you go.`,
+    timerSeconds: 300,
+  },
+  {
+    title: "Finishing & Plating",
+    description: `Apply the final touches that elevate ${courseName} from good to exceptional. Presentation is the last act of craftsmanship.`,
+  },
+];
+
 const CookingMode: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const recipeData = id ? recipes.find((r) => r.id === Number(id)) : null;
-  const { name, steps } =
-    id && RECIPE_STEPS[id]
-      ? RECIPE_STEPS[id]
-      : {
-          name: recipeData?.name || DEFAULT_STEPS.name,
-          steps: [
-            {
-              title: "Preparation",
-              description: `Prepare the ingredients for ${recipeData?.name || "the dish"}. Make sure your workspace is clean and organized.`,
-              ingredients: recipeData
-                ? recipeData.ingredients.slice(0, 3)
-                : DEFAULT_STEPS.steps[0].ingredients,
-            },
-            ...DEFAULT_STEPS.steps.slice(1),
-          ],
-        };
   const navigate = useNavigate();
+  const location = useLocation();
+  const locationState = location.state as { courseName?: string; city?: string } | null;
+
+  const recipeData = id ? recipes.find((r) => r.id === Number(id)) : null;
+
+  let name: string;
+  let steps: CookingStep[];
+
+  if (id && RECIPE_STEPS[id]) {
+    name = RECIPE_STEPS[id].name;
+    steps = RECIPE_STEPS[id].steps;
+  } else if (locationState?.courseName) {
+    name = locationState.courseName;
+    steps = generateCourseSteps(locationState.courseName, locationState.city ?? "");
+  } else if (recipeData) {
+    name = recipeData.name;
+    steps = recipeToSteps(recipeData);
+  } else {
+    name = DEFAULT_STEPS.name;
+    steps = DEFAULT_STEPS.steps;
+  }
 
   const [currentStep, setCurrentStep] = useState(0);
   const [timerLeft, setTimerLeft] = useState(steps[0].timerSeconds ?? 0);
