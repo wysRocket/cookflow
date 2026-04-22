@@ -228,7 +228,7 @@ const CookingMode: React.FC = () => {
   }
 
   const [currentStep, setCurrentStep] = useState(0);
-  const [timerLeft, setTimerLeft] = useState(steps[0].timerSeconds ?? 0);
+  const [timerLeft, setTimerLeft] = useState(steps.length > 0 ? (steps[0].timerSeconds ?? 0) : 0);
   const [timerRunning, setTimerRunning] = useState(false);
 
   useEffect(() => {
