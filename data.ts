@@ -2425,7 +2425,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Soup", "Vegetarian", "Comfort"],
     image:
-      "https://images.unsplash.com/photo-1726880789083-1291c6b38e9e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=1200&q=80",
     description:
       "A hearty soup with mixed mushrooms, pearl barley, herbs, and a rich vegetable broth.",
     ingredients: [
@@ -2567,7 +2567,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Pasta", "Italian", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1712762311448-8077937f0ee2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=1200&q=80",
     description:
       "Potato gnocchi tossed in basil pesto with green beans and toasted pine nuts.",
     ingredients: [
@@ -2696,7 +2696,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Chicken", "Japanese", "Meal Prep"],
     image:
-      "https://images.unsplash.com/photo-1757845081931-e19a586c2311?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=1200&q=80",
     description:
       "Tender chicken meatballs glazed in sticky homemade teriyaki, served with rice and steamed broccoli.",
     ingredients: [
@@ -3577,7 +3577,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["No Cook", "Tropical", "Healthy"],
     image:
-      "https://images.unsplash.com/photo-1511690743081-d916d700da58?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=1200&q=80",
     description:
       "Layered chia pudding with coconut yogurt, fresh mango, and toasted coconut flakes.",
     ingredients: [
@@ -3702,7 +3702,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Japanese", "Salad", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1569720020116-b5ab6e71d98a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=1200&q=80",
     description:
       "Cold soba noodles tossed with crunchy vegetables in a toasted sesame dressing.",
     ingredients: [
@@ -3871,7 +3871,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Vietnamese", "Pork", "Rice Bowl"],
     image:
-      "https://images.unsplash.com/photo-1484723045748-07d5c2e37e09?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1200&q=80",
     description:
       "Fragrant lemongrass pork served over jasmine rice with pickled carrot and cucumber.",
     ingredients: [
@@ -3953,7 +3953,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Tofu", "Vegan", "High Protein"],
     image:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=1200&q=80",
     description:
       "Crispy tofu glazed in sticky soy-ginger sauce with steamed rice and broccoli.",
     ingredients: [
