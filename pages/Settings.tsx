@@ -5,6 +5,7 @@ import { updateProfile, signOut } from "firebase/auth";
 import { auth, db } from "../lib/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { useAccess } from "../contexts/AccessContext";
+import { companyDisplayAddress, companyInfo } from "../lib/companyInfo";
 
 const QUICK_TOPUP_AMOUNTS = [5, 10, 25, 50, 100] as const;
 const MIN_TOPUP_AMOUNT = 1;
@@ -399,6 +400,19 @@ const Settings: React.FC = () => {
                 <p className="text-xs text-[#62789E]">
                   Exchange rate: 1 {topUpCurrency} = {exchangeRate} credits
                 </p>
+              </div>
+
+              <div className="rounded-xl border border-[#26375D] bg-[#111d38] p-4">
+                <p className="text-[11px] uppercase tracking-[0.2em] text-[#35D2F1]">
+                  Payment Requisites
+                </p>
+                <div className="mt-2 text-sm leading-6 text-[#C3D1EC]">
+                  <p className="font-semibold text-white">{companyInfo.legalName}</p>
+                  <p>
+                    {companyInfo.registrationLabel} {companyInfo.registrationNumber}
+                  </p>
+                  <p>{companyDisplayAddress}</p>
+                </div>
               </div>
 
               <button
@@ -822,6 +836,14 @@ const Settings: React.FC = () => {
                   Need Help?
                 </h3>
                 <ul className="space-y-3 text-sm text-slate-400">
+                  <li>
+                    <button
+                      onClick={() => navigate("/legal/about")}
+                      className="hover:text-[#0ff0f0] transition-colors"
+                    >
+                      About & Billing Details
+                    </button>
+                  </li>
                   <li>
                     <button
                       onClick={() => navigate("/legal/privacy")}

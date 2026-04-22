@@ -1,6 +1,7 @@
 import React from "react";
 import { ChefHat } from "lucide-react";
 import { Link } from "react-router-dom";
+import { companyDisplayAddress, companyInfo } from "../lib/companyInfo";
 
 const Footer: React.FC = () => {
   return (
@@ -91,7 +92,7 @@ const Footer: React.FC = () => {
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
                 <Link
-                  to="/legal/terms"
+                  to="/legal/about"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   About
@@ -196,13 +197,33 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        <div className="mb-8 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+            <div>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#14b8a6]">
+                Payment Requisites
+              </p>
+              <h5 className="mt-2 text-sm font-semibold text-white">
+                Billing entity for eurocookflow.com
+              </h5>
+            </div>
+            <div className="text-sm text-gray-300 leading-6">
+              <p className="font-semibold text-white">{companyInfo.legalName}</p>
+              <p>
+                {companyInfo.registrationLabel} {companyInfo.registrationNumber}
+              </p>
+              <p>{companyDisplayAddress}</p>
+            </div>
+          </div>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
           <p>
-            © {new Date().getFullYear()} CookFlow Europe Ltd. All rights
+            © {new Date().getFullYear()} {companyInfo.legalName}. All rights
             reserved.
           </p>
           <div className="flex gap-4 mt-2 md:mt-0">
-            <span>Made in Berlin</span>
+            <span>Built for European kitchens</span>
             <span>Metric System Standard</span>
           </div>
         </div>

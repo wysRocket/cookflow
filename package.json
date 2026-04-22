@@ -9,6 +9,7 @@
     "auth:start": "node server/index.mjs",
     "dev:all": "node server/auth-server.mjs & vite; kill 0",
     "build": "vite build",
+    "audit:kitchen": "node scripts/audit-kitchen-content.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

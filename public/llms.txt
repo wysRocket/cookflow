@@ -5,6 +5,7 @@ CookFlow is a culinary learning platform focused on chef-led masterclasses, tech
 
 Public pages:
 - Home: https://eurocookflow.com/
+- About: https://eurocookflow.com/legal/about
 - Privacy: https://eurocookflow.com/legal/privacy
 - Terms: https://eurocookflow.com/legal/terms
 - VAT info: https://eurocookflow.com/legal/vat

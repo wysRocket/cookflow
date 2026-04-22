@@ -772,7 +772,9 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Vegan", "Quick", "Raw"],
     image:
-      "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/28935593/pexels-photo-28935593.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    detailImage:
+      "https://images.pexels.com/photos/28935593/pexels-photo-28935593.jpeg?auto=compress&cs=tinysrgb&w=1600",
     badge: "Quick",
     badgeColor: "bg-[#D4AF37]",
     description:
@@ -1343,7 +1345,9 @@ export const recipes: Recipe[] = [
     difficulty: "Hard",
     tags: ["Duck", "Modernist", "Precision"],
     image:
-      "https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/30469694/pexels-photo-30469694.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    detailImage:
+      "https://images.pexels.com/photos/30469694/pexels-photo-30469694.jpeg?auto=compress&cs=tinysrgb&w=1600",
     description:
       "Duck breast cooked with millimetre-perfect precision in a temperature-controlled water bath, then finished in a blazing hot pan for a shatteringly crisp lacquered skin.",
     ingredients: [
@@ -2007,7 +2011,7 @@ export const recipes: Recipe[] = [
   {
     id: 26,
     name: "Beef Carpaccio with Truffle & Parmesan",
-    category: "Starter",
+    category: "Lunch",
     time: "20 min",
     kcal: 310,
     rating: 4.7,
@@ -2425,7 +2429,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Soup", "Vegetarian", "Comfort"],
     image:
-      "https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1759689975439-58c8327761e0?auto=format&fit=crop&w=1200&q=80",
     description:
       "A hearty soup with mixed mushrooms, pearl barley, herbs, and a rich vegetable broth.",
     ingredients: [
@@ -2567,7 +2571,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Pasta", "Italian", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1565091628742-f5cd011290a6?auto=format&fit=crop&w=1200&q=80",
     description:
       "Potato gnocchi tossed in basil pesto with green beans and toasted pine nuts.",
     ingredients: [
@@ -2967,7 +2971,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Mexican", "Eggs", "Spicy"],
     image:
-      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/31823015/pexels-photo-31823015.jpeg?auto=compress&cs=tinysrgb&w=1200",
     description:
       "Crisp tortillas topped with black beans, fried eggs, warm salsa, and avocado.",
     ingredients: [
@@ -3011,7 +3015,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Chicken", "Greek", "One Pot"],
     image:
-      "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/32947063/pexels-photo-32947063.jpeg?auto=compress&cs=tinysrgb&w=1200",
     description:
       "Seared chicken thighs baked with orzo, lemon, spinach, and feta in one pan.",
     ingredients: [
@@ -3104,7 +3108,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Salad", "French", "Seafood"],
     image:
-      "https://images.unsplash.com/photo-1621150270679-476ea643bf8b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1758157836016-3f3fbc5bf796?auto=format&fit=crop&w=1200&q=80",
     description:
       "A modern Nicoise with seared salmon, baby potatoes, beans, olives, and mustard vinaigrette.",
     ingredients: [
@@ -3196,7 +3200,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Pasta", "Vegetarian", "High Protein"],
     image:
-      "https://images.unsplash.com/photo-1741026079032-7cb660e44bad?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1763627719097-a923a1e703a0?auto=format&fit=crop&w=1200&q=80",
     description:
       "Whole-wheat pasta in a smoky tomato sauce with red lentils and basil for a protein-rich weeknight meal.",
     ingredients: [
@@ -3239,7 +3243,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Chicken", "Noodles", "Quick"],
     image:
-      "https://images.unsplash.com/photo-1635685296916-95acaf58471f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1758979690131-11e2aa0b142b?auto=format&fit=crop&w=1200&q=80",
     description:
       "Silky noodles tossed with shredded chicken in a punchy ginger-scallion soy dressing.",
     ingredients: [
@@ -3281,7 +3285,9 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Vegetarian", "Traybake", "Mediterranean"],
     image:
-      "https://images.unsplash.com/photo-1546069901-ec46c77ba130?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/5112638/pexels-photo-5112638.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    detailImage:
+      "https://images.pexels.com/photos/5112638/pexels-photo-5112638.jpeg?auto=compress&cs=tinysrgb&w=1600",
     description:
       "Roasted peppers, zucchini, and tomatoes baked with feta and herbs, served with warm pita.",
     ingredients: [
@@ -3324,7 +3330,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Korean", "Rice", "Quick"],
     image:
-      "https://images.unsplash.com/photo-1600688654899-379ec76aca42?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1768634003113-42903d7ffe1b?auto=format&fit=crop&w=1200&q=80",
     description:
       "Savory fried rice with canned tuna, kimchi, and gochujang, finished with a jammy egg.",
     ingredients: [
@@ -3491,7 +3497,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Soup", "Comfort", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1660899227222-b9fd7fe2e060?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1768716574889-e9af8e7f7ae8?auto=format&fit=crop&w=1200&q=80",
     description:
       "Sweet corn chowder with potatoes, thyme, and a silky finish of cream and chives.",
     ingredients: [
@@ -3577,7 +3583,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["No Cook", "Tropical", "Healthy"],
     image:
-      "https://images.unsplash.com/photo-1505252585461-04db1eb84625?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1601045108758-eaa0444f68fc?auto=format&fit=crop&w=1200&q=80",
     description:
       "Layered chia pudding with coconut yogurt, fresh mango, and toasted coconut flakes.",
     ingredients: [
@@ -3617,7 +3623,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Vegetarian", "Tacos", "Spicy"],
     image:
-      "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1511690078903-71dc5a49f5e3?auto=format&fit=crop&w=1200&q=80",
     description:
       "Spiced roasted cauliflower tacos with chipotle crema, cabbage slaw, and lime.",
     ingredients: [
@@ -3660,7 +3666,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Chicken", "High Protein", "Baked"],
     image:
-      "https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/14201685/pexels-photo-14201685.jpeg?auto=compress&cs=tinysrgb&w=1200",
     description:
       "Chicken breasts filled with creamy spinach-artichoke mixture and baked until golden.",
     ingredients: [
@@ -3745,7 +3751,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Eggs", "Turkish", "One Pan"],
     image:
-      "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.pexels.com/photos/36472448/pexels-photo-36472448.jpeg?auto=compress&cs=tinysrgb&w=1200",
     description:
       "Soft scrambled eggs in a buttery tomato and pepper base with Aleppo chili and parsley.",
     ingredients: [
@@ -3828,7 +3834,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Pasta", "Vegetarian", "Baked"],
     image:
-      "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1569810912653-c0e8d1184623?auto=format&fit=crop&w=1200&q=80",
     description:
       "Baked pasta coated in creamy pumpkin sauce with mozzarella and crispy sage.",
     ingredients: [
@@ -3995,7 +4001,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Brunch", "No Cook", "Sweet"],
     image:
-      "https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1692071106919-01bc0b9b0919?auto=format&fit=crop&w=1200&q=80",
     badge: "New",
     badgeColor: "#22C55E",
     description:

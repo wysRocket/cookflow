@@ -2,16 +2,46 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { ChefHat, ArrowLeft } from "lucide-react";
 import Seo from "../components/Seo";
+import { companyDisplayAddress, companyInfo } from "../lib/companyInfo";
 
-type LegalSection = "privacy" | "terms" | "vat";
+type LegalSection = "about" | "privacy" | "terms" | "vat";
 
 const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
   {
+    about: {
+      title: "About CookFlow",
+      body: (
+        <>
+          <p>Last updated: April 22, 2026</p>
+          <h3>What CookFlow is</h3>
+          <p>
+            CookFlow is a culinary learning platform built around chef-led
+            lessons, technique-first recipes, meal planning, and kitchen
+            workflow tools for ambitious home cooks and professionals.
+          </p>
+          <h3>Billing entity</h3>
+          <p>
+            {companyInfo.legalName}
+            <br />
+            {companyInfo.registrationLabel} {companyInfo.registrationNumber}
+            <br />
+            {companyDisplayAddress}
+          </p>
+          <h3>Payment requisites</h3>
+          <p>
+            Credit top-ups and other charges displayed on eurocookflow.com are
+            issued under the legal entity above. This section is intended to
+            give customers a public reference for company requisites when
+            reviewing billing details or preparing internal approvals.
+          </p>
+        </>
+      ),
+    },
     privacy: {
       title: "Privacy Policy",
       body: (
         <>
-          <p>Last updated: March 2026</p>
+          <p>Last updated: April 22, 2026</p>
           <h3>1. Data We Collect</h3>
           <p>
             We collect information you provide directly (name, email, profile
@@ -38,14 +68,14 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
           <h3>5. GDPR Rights</h3>
           <p>
             If you are located in the EU/EEA, you have the right to access,
-            rectify, port, or erase your personal data. Contact{" "}
-            <span className="text-[#14b8a6]">privacy@cookflow.app</span> to
-            exercise these rights.
+            rectify, port, or erase your personal data. Requests may be
+            submitted through the CookFlow support channel referenced in your
+            account area.
           </p>
           <h3>6. Contact</h3>
           <p>
-            CookFlow Europe Ltd · Torstraße 1 · 10119 Berlin, Germany ·{" "}
-            <span className="text-[#14b8a6]">privacy@cookflow.app</span>
+            {companyInfo.legalName} · {companyInfo.registrationLabel}{" "}
+            {companyInfo.registrationNumber} · {companyDisplayAddress}
           </p>
         </>
       ),
@@ -54,7 +84,7 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
       title: "Terms of Service",
       body: (
         <>
-          <p>Last updated: March 2026</p>
+          <p>Last updated: April 22, 2026</p>
           <h3>1. Acceptance</h3>
           <p>
             By creating a CookFlow account you agree to these Terms. If you do
@@ -71,29 +101,37 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             after purchase. Credits have no cash value and cannot be exchanged
             for money.
           </p>
-          <h3>4. Intellectual Property</h3>
+          <h3>4. Billing Entity</h3>
+          <p>
+            CookFlow services for eurocookflow.com are provided by{" "}
+            {companyInfo.legalName}, {companyInfo.registrationLabel}{" "}
+            {companyInfo.registrationNumber}, with its registered office at{" "}
+            {companyDisplayAddress}.
+          </p>
+          <h3>5. Intellectual Property</h3>
           <p>
             All curriculum content, recipes, video lessons, and chef profiles
-            are the exclusive property of CookFlow Europe Ltd or its licensed
-            contributors. Reproduction or redistribution without written consent
-            is prohibited.
+            are the exclusive property of CookFlow or its licensed contributors.
+            Reproduction or redistribution without written consent is
+            prohibited.
           </p>
-          <h3>5. Acceptable Use</h3>
+          <h3>6. Acceptable Use</h3>
           <p>
             You agree not to scrape, resell, or reverse-engineer any part of the
             platform. Violations may result in immediate account termination
             without refund.
           </p>
-          <h3>6. Limitation of Liability</h3>
+          <h3>7. Limitation of Liability</h3>
           <p>
             CookFlow is provided "as is". We are not liable for injuries,
             property damage, or other consequences arising from following
             recipes or techniques on the platform.
           </p>
-          <h3>7. Governing Law</h3>
+          <h3>8. Governing Law</h3>
           <p>
-            These Terms are governed by the laws of Germany. Disputes shall be
-            resolved in the courts of Berlin.
+            These Terms are governed by the laws applicable to the contracting
+            entity identified above, unless mandatory consumer law states
+            otherwise.
           </p>
         </>
       ),
@@ -102,16 +140,14 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
       title: "VAT & Tax Information",
       body: (
         <>
-          <p>Last updated: March 2026</p>
+          <p>Last updated: April 22, 2026</p>
           <h3>Company Details</h3>
           <p>
-            CookFlow Europe Ltd
+            {companyInfo.legalName}
             <br />
-            Torstraße 1 · 10119 Berlin, Germany
+            {companyInfo.registrationLabel} {companyInfo.registrationNumber}
             <br />
-            EU VAT Number: <span className="text-[#14b8a6]">DE345678901</span>
-            <br />
-            Tax ID (Steuernummer): 27/432/12345
+            {companyDisplayAddress}
           </p>
           <h3>VAT on Credit Top-Ups</h3>
           <p>
@@ -120,16 +156,19 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             checkout). EU customers will see their local VAT rate applied
             automatically.
           </p>
-          <h3>VAT on Credits</h3>
+          <h3>Tax Handling on Credits</h3>
           <p>
             CookFlow Credits are treated as prepaid digital vouchers. VAT is
             applied at the point of purchase in accordance with EU Directive
             2006/112/EC.
           </p>
-          <h3>VAT Receipts</h3>
+          <h3>Billing Requisites</h3>
           <p>
-            For business customers requiring a formal VAT invoice, contact{" "}
-            <span className="text-[#14b8a6]">billing@cookflow.app</span>.
+            The public billing requisites currently published for
+            eurocookflow.com are the legal entity name, registration number,
+            and registered office shown above. If additional invoicing details
+            are required, they should be supplied during the checkout or
+            support workflow before publication.
           </p>
           <h3>B2B Customers</h3>
           <p>
@@ -148,11 +187,13 @@ const LegalPage: React.FC = () => {
     (page as LegalSection) in content ? (page as LegalSection) : "privacy";
   const { title, body } = content[section];
   const descriptions: Record<LegalSection, string> = {
+    about:
+      "Learn what CookFlow is and view the published company and billing requisites for eurocookflow.com.",
     privacy:
       "Read CookFlow's privacy policy, including how account, analytics, and usage data are handled.",
     terms:
       "Review CookFlow's terms of service, billing rules, credit wallet terms, and acceptable use policy.",
-    vat: "View CookFlow Europe Ltd VAT, tax, and invoicing information for EU customers.",
+    vat: "View ARDWILL LTD billing, VAT, and tax information for eurocookflow.com customers.",
   };
 
   return (
@@ -182,7 +223,7 @@ const LegalPage: React.FC = () => {
       {/* Tab nav */}
       <nav className="border-b border-white/5 px-6 max-w-4xl mx-auto">
         <div className="flex gap-6">
-          {(["privacy", "terms", "vat"] as LegalSection[]).map((s) => (
+          {(["about", "privacy", "terms", "vat"] as LegalSection[]).map((s) => (
             <Link
               key={s}
               to={`/legal/${s}`}
@@ -192,7 +233,9 @@ const LegalPage: React.FC = () => {
                   : "border-transparent text-[#64748B] hover:text-[#94A3B8]"
               }`}
             >
-              {s === "vat"
+              {s === "about"
+                ? "About"
+                : s === "vat"
                 ? "VAT Info"
                 : s.charAt(0).toUpperCase() + s.slice(1)}
             </Link>

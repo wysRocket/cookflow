@@ -36,6 +36,7 @@ export interface Recipe {
   readonly difficulty: "Easy" | "Medium" | "Hard";
   readonly tags: string[];
   readonly image: string;
+  readonly detailImage?: string;
   readonly badge?: string;
   readonly badgeColor?: string;
   readonly servings: number;

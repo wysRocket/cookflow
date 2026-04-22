@@ -55,7 +55,7 @@ const RecipeDetail: React.FC = () => {
         {/* Image */}
         <div className="lg:col-span-3 relative h-64 lg:h-auto rounded-2xl overflow-hidden">
           <img
-            src={recipe.image}
+            src={recipe.detailImage ?? recipe.image}
             alt={recipe.name}
             className="w-full h-full object-cover"
           />
