@@ -166,7 +166,7 @@ const DEFAULT_STEPS: RecipeSteps = {
 const parseDuration = (duration?: string): number | undefined => {
   if (!duration) return undefined;
   const match = duration.match(/(\d+)/);
-  return match ? parseInt(match[1]) * 60 : undefined;
+  return match ? parseInt(match[1], 10) * 60 : undefined;
 };
 
 const recipeToSteps = (recipe: (typeof recipes)[0]): CookingStep[] =>
