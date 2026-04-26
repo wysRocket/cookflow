@@ -37,7 +37,7 @@ const academyCourses = [
     timeAgo: "2 years ago",
     details: "27 details",
     image:
-      "https://images.unsplash.com/photo-1595475038665-c8e9a6a9218a?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: 5,

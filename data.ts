@@ -45,7 +45,7 @@ export const academyModules: AcademyModule[] = [
     city: "Copenhagen",
     focus: "New Nordic Fermentation",
     image:
-      "https://images.unsplash.com/photo-1595475038665-c8e9a6a9218a?q=80&w=1200",
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200",
     level: "Advanced",
     lessons: 8,
     price: 45,
