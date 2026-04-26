@@ -81,6 +81,7 @@ const Settings: React.FC = () => {
     DEFAULT_TOPUP_AMOUNT.toFixed(2),
   );
   const [toast, setToast] = useState<string | null>(null);
+  const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
   useEffect(() => {
     if (!user) return;
@@ -190,12 +191,40 @@ const Settings: React.FC = () => {
   const creditsToAdd = Math.round(topUpAmount * exchangeRate);
   const formattedAmount = topUpAmount.toFixed(2);
 
-  const handleTopUpProceed = () => {
-    addCredits(creditsToAdd);
-    setShowTopUpModal(false);
-    showToast(
-      `Added ${creditsToAdd} credits (${currencySymbol}${formattedAmount}).`,
-    );
+  const handleTopUpProceed = async () => {
+    if (!user || isPaymentLoading) return;
+    setIsPaymentLoading(true);
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_PAYMENTS_WORKER_URL}/payment/create`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amount: topUpAmount,
+            currency: topUpCurrency,
+            credits: creditsToAdd,
+            userId: user.uid,
+            userEmail: user.email ?? "",
+            userName: user.displayName ?? "",
+          }),
+        },
+      );
+      if (!res.ok) {
+        const err: { error?: string } = await res.json();
+        showToast(err.error ?? "Payment request failed. Please try again.");
+        return;
+      }
+      const { invoiceId, paymentUrl }: { invoiceId: string; paymentUrl: string } =
+        await res.json();
+      sessionStorage.setItem("cookflow_pending_invoice", invoiceId);
+      setShowTopUpModal(false);
+      window.location.href = paymentUrl;
+    } catch {
+      showToast("Could not reach payment gateway. Please try again.");
+    } finally {
+      setIsPaymentLoading(false);
+    }
   };
 
   const handleSpendAction = (actionKey: string, cost: number) => {
@@ -417,9 +446,17 @@ const Settings: React.FC = () => {
 
               <button
                 onClick={handleTopUpProceed}
-                className="w-full py-3 rounded-xl bg-[#0EA5C6] hover:bg-[#0b93b1] text-white text-lg font-bold transition-colors"
+                disabled={isPaymentLoading}
+                className="w-full py-3 rounded-xl bg-[#0EA5C6] hover:bg-[#0b93b1] disabled:opacity-60 disabled:cursor-not-allowed text-white text-lg font-bold transition-colors flex items-center justify-center gap-2"
               >
-                Proceed to Checkout
+                {isPaymentLoading ? (
+                  <>
+                    <span className="w-5 h-5 rounded-full border-2 border-white border-t-transparent animate-spin" />
+                    Redirecting…
+                  </>
+                ) : (
+                  "Proceed to Checkout"
+                )}
               </button>
             </div>
           </div>

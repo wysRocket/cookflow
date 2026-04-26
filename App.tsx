@@ -24,6 +24,8 @@ const RecipeDetail = lazy(() => import("./pages/RecipeDetail"));
 const MealPlanner = lazy(() => import("./pages/MealPlanner"));
 const ShoppingList = lazy(() => import("./pages/ShoppingList"));
 const Settings = lazy(() => import("./pages/Settings"));
+const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
+const PaymentCancel = lazy(() => import("./pages/PaymentCancel"));
 const LegalPage = lazy(() => import("./pages/LegalPage"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
@@ -197,6 +199,8 @@ const App: React.FC = () => {
                   <Route path="meal-planner" element={<MealPlannerGated />} />
                   <Route path="shopping-list" element={<ShoppingList />} />
                   <Route path="settings" element={<Settings />} />
+                  <Route path="payment/success" element={<PaymentSuccess />} />
+                  <Route path="payment/cancel" element={<PaymentCancel />} />
                   <Route
                     path="masterclass"
                     element={<Navigate to="/app/courses" replace />}
