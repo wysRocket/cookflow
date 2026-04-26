@@ -16,6 +16,20 @@ dist-ssr
 !.env.example
 server/.env
 
+# Credential and secret files — never commit these
+*.pem
+*.p12
+*.pfx
+*.key
+*service-account*.json
+*serviceaccount*.json
+*credentials*.json
+*firebase-adminsdk*.json
+google-services.json
+GoogleService-Info.plist
+.gcloud/
+gcloud-key.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

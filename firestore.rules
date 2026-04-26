@@ -1,8 +1,53 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+
+    // ── helpers ──────────────────────────────────────────────────────────────
+
+    function isValidAccessState(a) {
+      return a is map
+        && a.keys().hasOnly(['credits', 'unlockedRecipes', 'unlockedChefs', 'plannerUntil'])
+        && a.credits is int
+        && a.credits >= 0
+        && a.credits <= 10000
+        && a.unlockedRecipes is list
+        && a.unlockedRecipes.size() <= 100
+        && a.unlockedChefs is list
+        && a.unlockedChefs.size() <= 50
+        && (a.plannerUntil == null || a.plannerUntil is int);
+    }
+
+    function isValidUserDoc(data) {
+      // Only allow known top-level keys
+      return data.keys().hasOnly(['access', 'appData', 'displayName', 'email', 'photoURL', 'plan'])
+        && (!('access' in data) || isValidAccessState(data.access))
+        && (!('displayName' in data) || (data.displayName is string && data.displayName.size() <= 200))
+        && (!('email' in data) || data.email is string)
+        && (!('photoURL' in data) || data.photoURL is string);
+    }
+
+    // ── users collection ─────────────────────────────────────────────────────
+
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      // Authenticated users may only access their own document
+      allow read: if request.auth != null && request.auth.uid == userId;
+
+      allow create: if request.auth != null
+        && request.auth.uid == userId
+        && isValidUserDoc(request.resource.data);
+
+      allow update: if request.auth != null
+        && request.auth.uid == userId
+        && isValidUserDoc(request.resource.data);
+
+      // Prevent client-side deletion of user records
+      allow delete: if false;
+    }
+
+    // ── deny everything else ─────────────────────────────────────────────────
+
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
