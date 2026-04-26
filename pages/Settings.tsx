@@ -7,10 +7,10 @@ import { useAuth } from "../contexts/AuthContext";
 import { useAccess } from "../contexts/AccessContext";
 import { companyDisplayAddress, companyInfo } from "../lib/companyInfo";
 
-const QUICK_TOPUP_AMOUNTS = [5, 10, 25, 50, 100] as const;
-const MIN_TOPUP_AMOUNT = 1;
-const MAX_TOPUP_AMOUNT = 200;
-const DEFAULT_TOPUP_AMOUNT = 10;
+const QUICK_TOPUP_CREDITS = [100, 500, 1000, 2500, 5000] as const;
+const MIN_TOPUP_CREDITS = 1;
+const MAX_TOPUP_CREDITS = 20000;
+const DEFAULT_TOPUP_CREDITS = 1000;
 
 const CREDIT_ACTIONS = [
   {
@@ -76,10 +76,8 @@ const Settings: React.FC = () => {
   const [showTopUpModal, setShowTopUpModal] = useState(false);
   const [showSpendModal, setShowSpendModal] = useState(false);
   const [topUpCurrency, setTopUpCurrency] = useState<"EUR" | "GBP">("EUR");
-  const [topUpAmount, setTopUpAmount] = useState(DEFAULT_TOPUP_AMOUNT);
-  const [topUpInput, setTopUpInput] = useState(
-    DEFAULT_TOPUP_AMOUNT.toFixed(2),
-  );
+  const [topUpCredits, setTopUpCredits] = useState(DEFAULT_TOPUP_CREDITS);
+  const [topUpInput, setTopUpInput] = useState(String(DEFAULT_TOPUP_CREDITS));
   const [toast, setToast] = useState<string | null>(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
 
@@ -170,26 +168,19 @@ const Settings: React.FC = () => {
     }
   };
 
-  const normalizeTopUpAmount = (amount: number) => {
-    const clamped = Math.min(
-      MAX_TOPUP_AMOUNT,
-      Math.max(MIN_TOPUP_AMOUNT, amount),
-    );
-    return Math.round(clamped * 100) / 100;
-  };
+  const normalizeTopUpCredits = (credits: number) =>
+    Math.min(MAX_TOPUP_CREDITS, Math.max(MIN_TOPUP_CREDITS, Math.round(credits)));
 
-  const setTopUpAmountSafe = (amount: number, syncInput = true) => {
-    const normalized = normalizeTopUpAmount(amount);
-    setTopUpAmount(normalized);
-    if (syncInput) {
-      setTopUpInput(normalized.toFixed(2));
-    }
+  const setTopUpCreditsSafe = (credits: number, syncInput = true) => {
+    const normalized = normalizeTopUpCredits(credits);
+    setTopUpCredits(normalized);
+    if (syncInput) setTopUpInput(String(normalized));
   };
 
   const exchangeRate = topUpCurrency === "EUR" ? 100 : 120;
   const currencySymbol = topUpCurrency === "EUR" ? "€" : "£";
-  const creditsToAdd = Math.round(topUpAmount * exchangeRate);
-  const formattedAmount = topUpAmount.toFixed(2);
+  const amountInCurrency = topUpCredits / exchangeRate;
+  const formattedAmount = amountInCurrency.toFixed(2);
 
   const handleTopUpProceed = async () => {
     if (!user || isPaymentLoading) return;
@@ -201,9 +192,9 @@ const Settings: React.FC = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            amount: topUpAmount,
+            amount: amountInCurrency,
             currency: topUpCurrency,
-            credits: creditsToAdd,
+            credits: topUpCredits,
             userId: user.uid,
             userEmail: user.email ?? "",
             userName: user.displayName ?? "",
@@ -326,17 +317,17 @@ const Settings: React.FC = () => {
               <div>
                 <p className="text-sm text-[#8AA0C5] mb-3">Quick Select</p>
                 <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
-                  {QUICK_TOPUP_AMOUNTS.map((amount) => (
+                  {QUICK_TOPUP_CREDITS.map((cr) => (
                     <button
-                      key={amount}
-                      onClick={() => setTopUpAmountSafe(amount)}
+                      key={cr}
+                      onClick={() => setTopUpCreditsSafe(cr)}
                       className={`py-2 rounded-lg text-sm font-semibold transition-colors ${
-                        topUpAmount === amount
+                        topUpCredits === cr
                           ? "bg-[#0EA5C6] text-white"
                           : "bg-[#1A2745] text-[#8AA0C5] hover:text-white"
                       }`}
                     >
-                      {amount}
+                      {cr.toLocaleString()}
                     </button>
                   ))}
                 </div>
@@ -347,26 +338,26 @@ const Settings: React.FC = () => {
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-[auto_auto_minmax(0,1fr)_auto_auto] sm:items-center">
                   <input
                     type="range"
-                    min={MIN_TOPUP_AMOUNT}
-                    max={MAX_TOPUP_AMOUNT}
-                    step={0.01}
-                    value={topUpAmount}
-                    onChange={(e) => setTopUpAmountSafe(Number(e.target.value))}
+                    min={MIN_TOPUP_CREDITS}
+                    max={MAX_TOPUP_CREDITS}
+                    step={10}
+                    value={topUpCredits}
+                    onChange={(e) => setTopUpCreditsSafe(Number(e.target.value))}
                     className="order-first col-span-2 w-full accent-[#0EA5C6] sm:order-none sm:col-span-1"
                   />
-                  {[-10, -1].map((delta) => (
+                  {[-100, -10].map((delta) => (
                     <button
                       key={delta}
-                      onClick={() => setTopUpAmountSafe(topUpAmount + delta)}
+                      onClick={() => setTopUpCreditsSafe(topUpCredits + delta)}
                       className="min-h-11 rounded-lg bg-[#1A2745] px-3 py-2 text-sm font-semibold text-white"
                     >
                       {delta}
                     </button>
                   ))}
-                  {[1, 10].map((delta) => (
+                  {[10, 100].map((delta) => (
                     <button
                       key={delta}
-                      onClick={() => setTopUpAmountSafe(topUpAmount + delta)}
+                      onClick={() => setTopUpCreditsSafe(topUpCredits + delta)}
                       className="min-h-11 rounded-lg bg-[#1A2745] px-3 py-2 text-sm font-semibold text-white"
                     >
                       +{delta}
@@ -374,60 +365,60 @@ const Settings: React.FC = () => {
                   ))}
                 </div>
                 <div className="flex items-center justify-between text-xs text-[#7C92B8] mt-2">
-                  <span>{currencySymbol}{MIN_TOPUP_AMOUNT.toFixed(2)}</span>
-                  <span>{currencySymbol}{MAX_TOPUP_AMOUNT.toFixed(2)}</span>
+                  <span>{MIN_TOPUP_CREDITS} cr</span>
+                  <span>{MAX_TOPUP_CREDITS.toLocaleString()} cr</span>
                 </div>
                 <p className="text-xs text-[#62789E] mt-2 text-center">
-                  Buttons adjust by amount (1 {topUpCurrency} = {exchangeRate} credits)
+                  Buttons adjust by ±10 or ±100 credits
                 </p>
               </div>
 
               <div>
-                <p className="text-sm text-[#8AA0C5] mb-3">Or Enter Exact Amount</p>
+                <p className="text-sm text-[#8AA0C5] mb-3">Or Enter Credits</p>
                 <div className="relative">
-                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#8AA0C5]">
-                    {currencySymbol}
-                  </span>
                   <input
                     value={topUpInput}
                     onChange={(e) => {
-                      const raw = e.target.value.replace(",", ".");
-                      if (!/^\d*\.?\d{0,2}$/.test(raw)) return;
+                      const raw = e.target.value.replace(/\D/g, "");
                       setTopUpInput(raw);
-                      if (!raw || raw === ".") return;
-                      const parsed = Number(raw);
+                      if (!raw) return;
+                      const parsed = parseInt(raw, 10);
                       if (Number.isFinite(parsed)) {
-                        setTopUpAmountSafe(parsed, false);
+                        setTopUpCreditsSafe(parsed, false);
                       }
                     }}
                     onBlur={() => {
-                      if (!topUpInput.trim() || topUpInput === ".") {
-                        setTopUpAmountSafe(DEFAULT_TOPUP_AMOUNT);
+                      if (!topUpInput.trim()) {
+                        setTopUpCreditsSafe(DEFAULT_TOPUP_CREDITS);
                         return;
                       }
-                      setTopUpAmountSafe(topUpAmount);
+                      setTopUpCreditsSafe(topUpCredits);
                     }}
-                    className="w-full rounded-xl border border-[#2A3A63] bg-[#1A2745] py-3 pl-9 pr-4 text-xl font-semibold text-white focus:border-[#0EA5C6] focus:outline-none sm:text-2xl"
-                    inputMode="decimal"
+                    className="w-full rounded-xl border border-[#2A3A63] bg-[#1A2745] py-3 pl-4 pr-12 text-xl font-semibold text-white focus:border-[#0EA5C6] focus:outline-none sm:text-2xl"
+                    inputMode="numeric"
+                    placeholder="Enter credits"
                   />
+                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8AA0C5] text-sm">
+                    cr
+                  </span>
                 </div>
               </div>
 
               <div className="bg-[#1A2745] border border-[#26375D] rounded-xl p-5">
+                <div className="mb-3 flex items-start justify-between gap-3">
+                  <span className="text-[#8AA0C5]">Credits</span>
+                  <span className="text-right text-xl font-bold text-[#35D2F1] sm:text-2xl">
+                    {topUpCredits.toLocaleString()}
+                  </span>
+                </div>
                 <div className="mb-3 flex items-start justify-between gap-3">
                   <span className="text-[#8AA0C5]">Amount</span>
                   <span className="text-right text-xl font-bold text-white sm:text-2xl">
                     {currencySymbol}{formattedAmount}
                   </span>
                 </div>
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <span className="text-[#8AA0C5]">Credits</span>
-                  <span className="text-right text-xl font-bold text-[#35D2F1] sm:text-2xl">
-                    {creditsToAdd}
-                  </span>
-                </div>
                 <p className="text-xs text-[#62789E]">
-                  Exchange rate: 1 {topUpCurrency} = {exchangeRate} credits
+                  {exchangeRate} credits = 1 {topUpCurrency}
                 </p>
               </div>
 
