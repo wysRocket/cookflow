@@ -28,7 +28,7 @@ const academyCourses = [
     timeAgo: "2 years ago",
     details: "15 details",
     image:
-      "https://images.unsplash.com/photo-1502301103665-0b95cc738daf?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1773333155314-cbfb5f6d4dba?q=80&w=1470&auto=format&fit=crop",
   },
   {
     id: 4,
@@ -37,7 +37,7 @@ const academyCourses = [
     timeAgo: "2 years ago",
     details: "27 details",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1595475038665-c8e9a6a9218a?q=80&w=1200&auto=format&fit=crop",
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ const academyCourses = [
     timeAgo: "1 year ago",
     details: "11 lessons",
     image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1671437361711-1d78e0546583?q=80&w=1470&auto=format&fit=crop",
   },
   {
     id: 8,
@@ -73,7 +73,7 @@ const academyCourses = [
     timeAgo: "6 months ago",
     details: "18 lessons",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1551437424-8d2ccf214a19?q=80&w=1470&auto=format&fit=crop",
   },
   {
     id: 9,
@@ -91,7 +91,7 @@ const academyCourses = [
     timeAgo: "8 months ago",
     details: "16 lessons",
     image:
-      "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1591831616711-bcc70b017abb?q=80&w=774&auto=format&fit=crop",
   },
   {
     id: 11,
@@ -100,7 +100,7 @@ const academyCourses = [
     timeAgo: "5 months ago",
     details: "10 lessons",
     image:
-      "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1664463761167-ad704d263da6?q=80&w=774&auto=format&fit=crop",
   },
   {
     id: 12,
@@ -118,7 +118,7 @@ const academyCourses = [
     timeAgo: "2 months ago",
     details: "14 lessons",
     image:
-      "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1625167473766-a0cda0257d9c?q=80&w=774&auto=format&fit=crop",
   },
   {
     id: 14,
@@ -136,7 +136,7 @@ const academyCourses = [
     timeAgo: "6 months ago",
     details: "11 lessons",
     image:
-      "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1619221881833-5e5aeff458fd?q=80&w=774&auto=format&fit=crop",
   },
   {
     id: 16,

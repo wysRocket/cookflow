@@ -32,7 +32,7 @@ export const academyModules: AcademyModule[] = [
     city: "San Sebastián",
     focus: "Molecular Tapas",
     image:
-      "https://images.unsplash.com/photo-1502301103665-0b95cc738daf?q=80&w=1200",
+      "https://images.unsplash.com/photo-1773333155314-cbfb5f6d4dba?q=80&w=1200",
     level: "Elite",
     lessons: 15,
     price: 79,
@@ -45,7 +45,7 @@ export const academyModules: AcademyModule[] = [
     city: "Copenhagen",
     focus: "New Nordic Fermentation",
     image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200",
+      "https://images.unsplash.com/photo-1595475038665-c8e9a6a9218a?q=80&w=1200",
     level: "Advanced",
     lessons: 8,
     price: 45,
@@ -84,7 +84,7 @@ export const academyModules: AcademyModule[] = [
     city: "Berlin",
     focus: "Plant-Based Molecular",
     image:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200",
+      "https://images.unsplash.com/photo-1671437361711-1d78e0546583?q=80&w=1200",
     level: "Advanced",
     lessons: 11,
     price: 44,
@@ -97,7 +97,7 @@ export const academyModules: AcademyModule[] = [
     city: "Lyon",
     focus: "The New Mother Sauces",
     image:
-      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200",
+      "https://images.unsplash.com/photo-1551437424-8d2ccf214a19?q=80&w=1200",
     level: "Elite",
     lessons: 18,
     price: 89,
@@ -123,7 +123,7 @@ export const academyModules: AcademyModule[] = [
     city: "Tokyo",
     focus: "Japanese Knife Mastery",
     image:
-      "https://images.unsplash.com/photo-1547592166-23ac45744acd?q=80&w=1200",
+      "https://images.unsplash.com/photo-1591831616711-bcc70b017abb?q=80&w=1200",
     level: "Elite",
     lessons: 16,
     price: 95,
@@ -136,7 +136,7 @@ export const academyModules: AcademyModule[] = [
     city: "Istanbul",
     focus: "Meze & Live-Fire Cooking",
     image:
-      "https://images.unsplash.com/photo-1561043433-aaf687c4cf04?q=80&w=1200",
+      "https://images.unsplash.com/photo-1664463761167-ad704d263da6?q=80&w=1200",
     level: "Advanced",
     lessons: 10,
     price: 48,
@@ -162,7 +162,7 @@ export const academyModules: AcademyModule[] = [
     city: "Mexico City",
     focus: "Mole & Masa",
     image:
-      "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?q=80&w=1200",
+      "https://images.unsplash.com/photo-1625167473766-a0cda0257d9c?q=80&w=1200",
     level: "Elite",
     lessons: 14,
     price: 72,
@@ -188,7 +188,7 @@ export const academyModules: AcademyModule[] = [
     city: "Lima",
     focus: "Ceviche & Citrus Chemistry",
     image:
-      "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?q=80&w=1200",
+      "https://images.unsplash.com/photo-1619221881833-5e5aeff458fd?q=80&w=1200",
     level: "Elite",
     lessons: 11,
     price: 67,

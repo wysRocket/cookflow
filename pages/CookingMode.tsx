@@ -213,12 +213,12 @@ const CookingMode: React.FC = () => {
   let name: string;
   let steps: CookingStep[];
 
-  if (id && RECIPE_STEPS[id]) {
-    name = RECIPE_STEPS[id].name;
-    steps = RECIPE_STEPS[id].steps;
-  } else if (locationState?.courseName) {
+  if (locationState?.courseName) {
     name = locationState.courseName;
     steps = generateCourseSteps(locationState.courseName, locationState.city ?? "");
+  } else if (id && RECIPE_STEPS[id]) {
+    name = RECIPE_STEPS[id].name;
+    steps = RECIPE_STEPS[id].steps;
   } else if (recipeData) {
     name = recipeData.name;
     steps = recipeToSteps(recipeData);
