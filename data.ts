@@ -920,7 +920,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Mediterranean", "Healthy"],
     image:
-      "https://images.unsplash.com/photo-1599021419847-d8a7a6aba5b4?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1693748543676-8d2f7a32c046?q=80&w=774&auto=format&fit=crop",
     badge: "Quick",
     badgeColor: "bg-[#D4AF37]",
     description:
@@ -1233,7 +1233,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Thai", "Spicy", "Soup"],
     image:
-      "https://images.unsplash.com/photo-1628430043175-0e8820df47c3?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1775480617686-405e19721d88?q=80&w=774&auto=format&fit=crop",
     description:
       "Thailand's famous hot and sour soup. A complex, aromatic broth layered with lemongrass, galangal, lime leaves, and explosive chili heat, swimming with plump shrimp.",
     ingredients: [
@@ -1603,7 +1603,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Japanese", "Dessert", "No-Bake"],
     image:
-      "https://images.unsplash.com/photo-1491226907933-45f03868ca1a?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1646229001150-e70066c4e78e?q=80&w=1470&auto=format&fit=crop",
     description:
       "A Japanese-Italian fusion: trembling, barely-set cream infused with ceremonial-grade matcha and sweetened with honey, served with red bean paste.",
     ingredients: [
@@ -1909,7 +1909,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Seafood", "Fire Cooking", "Italian"],
     image:
-      "https://images.unsplash.com/photo-1581597096506-acefe678d02b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1739484151190-e2a73842ca13?q=80&w=1470&auto=format&fit=crop",
     description:
       "A whole sea bass stuffed with lemon, fennel, and herbs, cooked directly over wood coals until the skin blisters and peels away in crisp, smoky sheets.",
     ingredients: [
@@ -1961,7 +1961,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Duck", "French", "Slow Cooking"],
     image:
-      "https://images.unsplash.com/photo-1767117997091-5617a7a2968e?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1704984678359-b8a4d2a70061?q=80&w=1287&auto=format&fit=crop",
     description:
       "Duck legs slow-cooked in their own fat until fall-apart tender, served over earthy Puy lentils with a sharp red wine vinegar dressing.",
     ingredients: [
@@ -2128,7 +2128,7 @@ export const recipes: Recipe[] = [
     difficulty: "Hard",
     tags: ["Pork", "Japanese", "Noodles"],
     image:
-      "https://images.unsplash.com/photo-1635379511574-bc167ca085c8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1711255357866-f983ab685ffc?q=80&w=870&auto=format&fit=crop",
     description:
       "A milky, cloud-white pork bone broth simmered at a rolling boil for hours, served with fresh ramen noodles, chashu pork, and a perfectly soft-boiled marinated egg.",
     ingredients: [
@@ -2342,7 +2342,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Salmon", "Japanese", "High Protein"],
     image:
-      "https://images.unsplash.com/photo-1638502182261-7be714a565ce?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1669264379590-13f5c5cf2d1a?q=80&w=1527&auto=format&fit=crop",
     description:
       "Oven-baked miso-glazed salmon over rice with cucumber, edamame, and sesame-lime dressing.",
     ingredients: [
@@ -2477,7 +2477,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Tofu", "Thai", "Quick"],
     image:
-      "https://images.unsplash.com/photo-1590301157890-4810ed352733?auto=format&fit=crop&w=1200&q=80",
+      "https://plus.unsplash.com/premium_photo-1695151832949-c294b444b699?q=80&w=774&auto=format&fit=crop",
     description:
       "Crispy tofu stir-fried in a savory chili-garlic sauce with green beans and lots of Thai basil.",
     ingredients: [
@@ -2525,7 +2525,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Brunch", "Sweet", "Italian"],
     image:
-      "https://images.unsplash.com/photo-1671527281209-7b3a8dff51ce?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1669277038743-066083326c32?q=80&w=1470&auto=format&fit=crop",
     description:
       "Cloud-like pancakes with ricotta and lemon zest, served with berries and maple syrup.",
     ingredients: [
@@ -2571,7 +2571,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Pasta", "Italian", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1565091628742-f5cd011290a6?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1616170687910-2edb17b633d5?q=80&w=1470&auto=format&fit=crop",
     description:
       "Potato gnocchi tossed in basil pesto with green beans and toasted pine nuts.",
     ingredients: [
@@ -2611,7 +2611,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Seafood", "Tacos", "Spicy"],
     image:
-      "https://images.unsplash.com/photo-1624300629298-e9de39c13be5?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1689774329109-9b70beeefc0a?q=80&w=1374&auto=format&fit=crop",
     description:
       "Juicy Cajun shrimp in warm tortillas with crunchy slaw and lime crema.",
     ingredients: [
@@ -2700,7 +2700,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Chicken", "Japanese", "Meal Prep"],
     image:
-      "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1736283236938-46741e97a016?q=80&w=1480&auto=format&fit=crop",
     description:
       "Tender chicken meatballs glazed in sticky homemade teriyaki, served with rice and steamed broccoli.",
     ingredients: [
@@ -2746,7 +2746,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Baking", "Mediterranean", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1767124664944-2df3dcb7a83d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1589330413699-9f36ddfa9bce?q=80&w=1470&auto=format&fit=crop",
     description:
       "Crisp filo pastry spirals filled with spinach, feta, dill, and a touch of nutmeg.",
     ingredients: [
@@ -2835,7 +2835,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Italian", "Vegetarian", "Comfort"],
     image:
-      "https://images.unsplash.com/photo-1637361874022-dd13782578ab?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1712407881629-a8ca82a3c64f?q=80&w=786&auto=format&fit=crop",
     description:
       "Creamy arborio risotto with roasted butternut squash, sage butter, and parmesan.",
     ingredients: [
@@ -2971,7 +2971,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Mexican", "Eggs", "Spicy"],
     image:
-      "https://images.pexels.com/photos/31823015/pexels-photo-31823015.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://plus.unsplash.com/premium_photo-1679816935935-261f93c10ef3?q=80&w=774&auto=format&fit=crop",
     description:
       "Crisp tortillas topped with black beans, fried eggs, warm salsa, and avocado.",
     ingredients: [
@@ -3063,7 +3063,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Indian", "Vegetarian", "Grill"],
     image:
-      "https://images.unsplash.com/photo-1567188040759-fb8a883dc6d8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1559561723-d54e370947c7?q=80&w=1471&auto=format&fit=crop",
     description:
       "Charred paneer and vegetables marinated in spiced yogurt, served with mint chutney.",
     ingredients: [
@@ -3200,7 +3200,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Pasta", "Vegetarian", "High Protein"],
     image:
-      "https://images.unsplash.com/photo-1763627719097-a923a1e703a0?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1626028937210-754d2118d5f7?q=80&w=1076&auto=format&fit=crop",
     description:
       "Whole-wheat pasta in a smoky tomato sauce with red lentils and basil for a protein-rich weeknight meal.",
     ingredients: [
@@ -3454,7 +3454,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Vegetarian", "Bowl", "Meal Prep"],
     image:
-      "https://images.unsplash.com/photo-1616005944283-486e2bc22990?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1593001867410-22f463e592ed?q=80&w=774&auto=format&fit=crop",
     description:
       "Crisp baked falafel over lemon quinoa with cucumber salad and tahini drizzle.",
     ingredients: [
@@ -3497,7 +3497,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Soup", "Comfort", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1768716574889-e9af8e7f7ae8?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1701351355828-d5b08514c9dd?q=80&w=774&auto=format&fit=crop",
     description:
       "Sweet corn chowder with potatoes, thyme, and a silky finish of cream and chives.",
     ingredients: [
@@ -3539,7 +3539,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Beef", "Korean", "Low Carb"],
     image:
-      "https://images.unsplash.com/photo-1580442151529-343f2f6e0e27?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1735279852005-6a81f0482a49?q=80&w=774&auto=format&fit=crop",
     description:
       "Sweet-savory bulgogi beef served in crisp lettuce cups with quick pickled cucumbers.",
     ingredients: [
@@ -3583,7 +3583,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["No Cook", "Tropical", "Healthy"],
     image:
-      "https://images.unsplash.com/photo-1601045108758-eaa0444f68fc?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1671527281209-7b3a8dff51ce?q=80&w=774&auto=format&fit=crop",
     description:
       "Layered chia pudding with coconut yogurt, fresh mango, and toasted coconut flakes.",
     ingredients: [
@@ -3623,7 +3623,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Vegetarian", "Tacos", "Spicy"],
     image:
-      "https://images.unsplash.com/photo-1550951957-3ab761159b8f?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1558985250-b1dbde2a467a?q=80&w=1470&auto=format&fit=crop",
     description:
       "Spiced roasted cauliflower tacos with chipotle crema, cabbage slaw, and lime.",
     ingredients: [
@@ -3666,7 +3666,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Chicken", "High Protein", "Baked"],
     image:
-      "https://images.pexels.com/photos/14201685/pexels-photo-14201685.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.unsplash.com/photo-1517609948086-6a03114ae1af?q=80&w=870&auto=format&fit=crop",
     description:
       "Chicken breasts filled with creamy spinach-artichoke mixture and baked until golden.",
     ingredients: [
@@ -3708,7 +3708,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Japanese", "Salad", "Vegetarian"],
     image:
-      "https://images.unsplash.com/photo-1694934588452-a1a02b2ec718?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1692934938643-326c3970825f?q=80&w=1470&auto=format&fit=crop",
     description:
       "Cold soba noodles tossed with crunchy vegetables in a toasted sesame dressing.",
     ingredients: [
@@ -3751,7 +3751,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Eggs", "Turkish", "One Pan"],
     image:
-      "https://images.pexels.com/photos/36472448/pexels-photo-36472448.jpeg?auto=compress&cs=tinysrgb&w=1200",
+      "https://images.unsplash.com/photo-1662751331020-8a30ce0c78f6?q=80&w=654&auto=format&fit=crop",
     description:
       "Soft scrambled eggs in a buttery tomato and pepper base with Aleppo chili and parsley.",
     ingredients: [
@@ -3792,7 +3792,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Seafood", "One Pot", "Quick"],
     image:
-      "https://images.unsplash.com/photo-1647589285293-7b79deadfd58?auto=format&fit=crop&w=1200&q=80",
+      "https://plus.unsplash.com/premium_photo-1707764614963-d765b772f0c7?q=80&w=1470&auto=format&fit=crop",
     description:
       "Creamy one-pot orzo with juicy shrimp, garlic butter, lemon, and parsley.",
     ingredients: [
@@ -3877,7 +3877,7 @@ export const recipes: Recipe[] = [
     difficulty: "Medium",
     tags: ["Vietnamese", "Pork", "Rice Bowl"],
     image:
-      "https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=1200&q=80",
+      "https://plus.unsplash.com/premium_photo-1667807522175-bc48128e951e?q=80&w=774&auto=format&fit=crop",
     description:
       "Fragrant lemongrass pork served over jasmine rice with pickled carrot and cucumber.",
     ingredients: [
@@ -3920,7 +3920,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Salad", "Vegan", "No Cook"],
     image:
-      "https://images.unsplash.com/photo-1769481614068-47cfb4d1f125?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1719196339826-c66c13ad5b86?q=80&w=1470&auto=format&fit=crop",
     description:
       "Chickpeas tossed with cucumber, tomato, olives, herbs, and lemon-oregano dressing.",
     ingredients: [
@@ -3959,7 +3959,7 @@ export const recipes: Recipe[] = [
     difficulty: "Easy",
     tags: ["Tofu", "Vegan", "High Protein"],
     image:
-      "https://images.unsplash.com/photo-1516684732162-798a0062be99?auto=format&fit=crop&w=1200&q=80",
+      "https://plus.unsplash.com/premium_photo-1712606248512-16eb120f1d90?q=80&w=774&auto=format&fit=crop",
     description:
       "Crispy tofu glazed in sticky soy-ginger sauce with steamed rice and broccoli.",
     ingredients: [
