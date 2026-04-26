@@ -13,7 +13,7 @@ if (!API_TOKEN) {
 console.log(`Starting deployment for ${DOMAIN} using archive ${ARCHIVE_PATH}...`);
 
 // Start the hostinger-api-mcp server
-const server = spawn('npx', ['-y', 'hostinger-api-mcp@latest', '--stdio'], {
+const server = spawn('npx', ['-y', 'hostinger-api-mcp@0.1.36', '--stdio'], {
     env: {
         ...process.env,
         API_TOKEN: API_TOKEN,
