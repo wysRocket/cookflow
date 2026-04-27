@@ -12,3 +12,8 @@ id = "1ae694bfe72a41e8875b3fcd3b152a8c"
 [vars]
 MERCHANT_ID = "2445"
 ALLOWED_ORIGIN = "https://eurocookflow.com"
+
+# Secrets (set via `wrangler secret put <name>` — never commit values here):
+#   MERCHANT_SECRET
+#   SMTP_USER   (noreply@eurocookflow.com)
+#   SMTP_PASS

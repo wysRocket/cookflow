@@ -100,18 +100,18 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <Link
-                  to="/auth/sign-up"
+                  to="/contact"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
-                  Careers
+                  Contact
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/app/community"
+                  to="/auth/sign-up"
                   className="hover:text-[#14b8a6] transition-colors"
                 >
-                  Press
+                  Careers
                 </Link>
               </li>
             </ul>
@@ -213,6 +213,12 @@ const Footer: React.FC = () => {
                 {companyInfo.registrationLabel} {companyInfo.registrationNumber}
               </p>
               <p>{companyDisplayAddress}</p>
+              <a
+                href={`mailto:${companyInfo.contactEmail}`}
+                className="text-[#14b8a6] hover:text-[#2dd4bf] transition-colors"
+              >
+                {companyInfo.contactEmail}
+              </a>
             </div>
           </div>
         </div>

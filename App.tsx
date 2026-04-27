@@ -27,6 +27,7 @@ const Settings = lazy(() => import("./pages/Settings"));
 const PaymentSuccess = lazy(() => import("./pages/PaymentSuccess"));
 const PaymentCancel = lazy(() => import("./pages/PaymentCancel"));
 const LegalPage = lazy(() => import("./pages/LegalPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/SignUp"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
@@ -180,6 +181,7 @@ const App: React.FC = () => {
               <Route path="/" element={<LandingPage />} />
               {/* Legal pages — no auth required */}
               <Route path="/legal/:page" element={<LegalPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route element={<PublicOnlyRoute />}>
                 <Route path="/auth/sign-in" element={<SignIn />} />
                 <Route path="/auth/sign-up" element={<SignUp />} />

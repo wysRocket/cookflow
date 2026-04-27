@@ -3,6 +3,7 @@ export const companyInfo = {
   legalName: "ARDWILL LTD",
   registrationLabel: "Reg.Nr.",
   registrationNumber: "HE 490692",
+  contactEmail: "contact@eurocookflow.com",
   addressLines: [
     "Lopathou 6",
     "Strovolos",

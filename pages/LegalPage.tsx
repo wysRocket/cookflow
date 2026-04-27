@@ -34,6 +34,13 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             give customers a public reference for company requisites when
             reviewing billing details or preparing internal approvals.
           </p>
+          <h3>Contact</h3>
+          <p>
+            For billing, support, or general enquiries:{" "}
+            <a href={`mailto:${companyInfo.contactEmail}`}>
+              {companyInfo.contactEmail}
+            </a>
+          </p>
         </>
       ),
     },
