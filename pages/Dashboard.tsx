@@ -7,7 +7,7 @@ const academyCourses = [
     id: 1,
     title: "Modern Pastry",
     instructor: "PARIS",
-    timeAgo: "2 days ago",
+    timeAgo: "2 years ago",
     details: "27 details",
     image:
       "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=1200&q=80",
@@ -16,7 +16,7 @@ const academyCourses = [
     id: 2,
     title: "Artisan Pasta",
     instructor: "ROME",
-    timeAgo: "4 days ago",
+    timeAgo: "2 years ago",
     details: "15 details",
     image:
       "https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=1200&q=80",
@@ -25,7 +25,7 @@ const academyCourses = [
     id: 3,
     title: "Molecular Tapas",
     instructor: "SAN SEBASTIAN",
-    timeAgo: "1 week ago",
+    timeAgo: "2 years ago",
     details: "15 details",
     image:
       "https://images.unsplash.com/photo-1773333155314-cbfb5f6d4dba?q=80&w=1470&auto=format&fit=crop",
@@ -34,7 +34,7 @@ const academyCourses = [
     id: 4,
     title: "New Nordic Fermentation",
     instructor: "COPENHAGEN",
-    timeAgo: "1 week ago",
+    timeAgo: "2 years ago",
     details: "27 details",
     image:
       "https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop",
@@ -43,7 +43,7 @@ const academyCourses = [
     id: 5,
     title: "Seafood Butchery",
     instructor: "MARSEILLE",
-    timeAgo: "2 weeks ago",
+    timeAgo: "3 years ago",
     details: "14 lessons",
     image:
       "https://images.unsplash.com/photo-1534080564583-6be75777b70a?auto=format&fit=crop&w=800&q=80",
@@ -52,7 +52,7 @@ const academyCourses = [
     id: 6,
     title: "Oenology & Pairing",
     instructor: "BORDEAUX",
-    timeAgo: "2 weeks ago",
+    timeAgo: "2 years ago",
     details: "6 lessons",
     image:
       "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
@@ -61,7 +61,7 @@ const academyCourses = [
     id: 7,
     title: "Plant-Based Molecular",
     instructor: "BERLIN",
-    timeAgo: "3 weeks ago",
+    timeAgo: "1 year ago",
     details: "11 lessons",
     image:
       "https://images.unsplash.com/photo-1671437361711-1d78e0546583?q=80&w=1470&auto=format&fit=crop",
@@ -70,7 +70,7 @@ const academyCourses = [
     id: 8,
     title: "The New Mother Sauces",
     instructor: "LYON",
-    timeAgo: "3 weeks ago",
+    timeAgo: "6 months ago",
     details: "18 lessons",
     image:
       "https://images.unsplash.com/photo-1551437424-8d2ccf214a19?q=80&w=1470&auto=format&fit=crop",
@@ -79,7 +79,7 @@ const academyCourses = [
     id: 9,
     title: "Architectural Desserts",
     instructor: "VIENNA",
-    timeAgo: "4 weeks ago",
+    timeAgo: "1 year ago",
     details: "9 lessons",
     image:
       "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
@@ -88,7 +88,7 @@ const academyCourses = [
     id: 10,
     title: "Japanese Knife Mastery",
     instructor: "TOKYO",
-    timeAgo: "1 month ago",
+    timeAgo: "8 months ago",
     details: "16 lessons",
     image:
       "https://images.unsplash.com/photo-1591831616711-bcc70b017abb?q=80&w=774&auto=format&fit=crop",
@@ -97,7 +97,7 @@ const academyCourses = [
     id: 11,
     title: "Meze & Live-Fire Cooking",
     instructor: "ISTANBUL",
-    timeAgo: "1 month ago",
+    timeAgo: "5 months ago",
     details: "10 lessons",
     image:
       "https://images.unsplash.com/photo-1664463761167-ad704d263da6?q=80&w=774&auto=format&fit=crop",
@@ -106,7 +106,7 @@ const academyCourses = [
     id: 12,
     title: "Spice Alchemy",
     instructor: "MARRAKECH",
-    timeAgo: "1 month ago",
+    timeAgo: "3 months ago",
     details: "8 lessons",
     image:
       "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80",
@@ -115,7 +115,7 @@ const academyCourses = [
     id: 13,
     title: "Mole & Masa",
     instructor: "MEXICO CITY",
-    timeAgo: "1.5 months ago",
+    timeAgo: "2 months ago",
     details: "14 lessons",
     image:
       "https://images.unsplash.com/photo-1625167473766-a0cda0257d9c?q=80&w=774&auto=format&fit=crop",
@@ -124,7 +124,7 @@ const academyCourses = [
     id: 14,
     title: "Dim Sum Architecture",
     instructor: "SHANGHAI",
-    timeAgo: "1.5 months ago",
+    timeAgo: "4 months ago",
     details: "12 lessons",
     image:
       "https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=800&q=80",
@@ -133,7 +133,7 @@ const academyCourses = [
     id: 15,
     title: "Ceviche & Citrus Chemistry",
     instructor: "LIMA",
-    timeAgo: "2 months ago",
+    timeAgo: "6 months ago",
     details: "11 lessons",
     image:
       "https://images.unsplash.com/photo-1619221881833-5e5aeff458fd?q=80&w=774&auto=format&fit=crop",
@@ -142,7 +142,7 @@ const academyCourses = [
     id: 16,
     title: "Thai Curry Science",
     instructor: "BANGKOK",
-    timeAgo: "2 months ago",
+    timeAgo: "7 months ago",
     details: "9 lessons",
     image:
       "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80",
@@ -151,7 +151,7 @@ const academyCourses = [
     id: 17,
     title: "Smoke & Char Mastery",
     instructor: "OAXACA",
-    timeAgo: "2 months ago",
+    timeAgo: "1 month ago",
     details: "13 lessons",
     image:
       "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
