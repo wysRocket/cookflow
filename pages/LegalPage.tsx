@@ -4,7 +4,7 @@ import { ChefHat, ArrowLeft } from "lucide-react";
 import Seo from "../components/Seo";
 import { companyDisplayAddress, companyInfo } from "../lib/companyInfo";
 
-type LegalSection = "about" | "privacy" | "terms" | "vat";
+type LegalSection = "about" | "privacy" | "terms" | "vat" | "refund" | "complaints";
 
 const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
   {
@@ -186,6 +186,110 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
         </>
       ),
     },
+    refund: {
+      title: "Refund Policy",
+      body: (
+        <>
+          <p>Last updated: May 8, 2026</p>
+          <h3>1. Eligibility</h3>
+          <p>
+            Credits purchased through CookFlow are non-refundable once consumed
+            against any feature, recipe, chef profile, or planner unlock. Unspent
+            credits may be refunded within 14 days of the original purchase date, in
+            accordance with EU consumer rights for digital goods (Directive
+            2011/83/EU).
+          </p>
+          <h3>2. How to Request a Refund</h3>
+          <p>
+            Submit your request to{" "}
+            <a href={`mailto:${companyInfo.contactEmail}`}>
+              {companyInfo.contactEmail}
+            </a>{" "}
+            including: (a) your registered email address, (b) the order/invoice
+            reference from your confirmation email, (c) the number of unspent
+            credits you are requesting a refund for, and (d) the reason for the
+            request.
+          </p>
+          <h3>3. Response SLA</h3>
+          <p>
+            We will acknowledge your request within 2 business days and issue a
+            decision within 5 business days of acknowledgement. Approved refunds are
+            processed within 7 business days via your original payment method.
+          </p>
+          <h3>4. Exclusions</h3>
+          <p>The following are not eligible for refund:</p>
+          <ul>
+            <li>Credits that have been partially or fully consumed.</li>
+            <li>Promotional or bonus credits granted outside a direct purchase.</li>
+            <li>Credits whose 14-day eligibility window has expired.</li>
+          </ul>
+          <h3>5. Chargebacks</h3>
+          <p>
+            Initiating a chargeback before contacting us may result in temporary
+            account suspension while the dispute is resolved. We encourage you to
+            contact support first — most issues are resolved faster through our
+            direct process.
+          </p>
+          <h3>6. Contact</h3>
+          <p>
+            {companyInfo.legalName} · {companyInfo.registrationLabel}{" "}
+            {companyInfo.registrationNumber} · {companyDisplayAddress}
+          </p>
+        </>
+      ),
+    },
+    complaints: {
+      title: "Complaints Policy",
+      body: (
+        <>
+          <p>Last updated: May 8, 2026</p>
+          <h3>1. Who Can File</h3>
+          <p>
+            Any registered CookFlow user, or any person whose personal data we
+            process, may submit a complaint. You do not need to be a paying
+            customer.
+          </p>
+          <h3>2. Required Information</h3>
+          <p>A complete complaint must include:</p>
+          <ul>
+            <li>Your full name and registered email address.</li>
+            <li>Your account ID (visible in Settings → Profile).</li>
+            <li>A clear description of the issue or concern.</li>
+            <li>The date(s) on which the issue occurred.</li>
+            <li>Any supporting evidence (screenshots, transaction references).</li>
+          </ul>
+          <h3>3. How to Submit</h3>
+          <p>
+            Send your complaint to{" "}
+            <a href={`mailto:${companyInfo.contactEmail}`}>
+              {companyInfo.contactEmail}
+            </a>{" "}
+            with the subject line{" "}
+            <em>"Formal Complaint — [brief topic]"</em>.
+          </p>
+          <h3>4. Review SLA</h3>
+          <p>
+            Acknowledgement: within 2 business days of receipt. Initial assessment:
+            within 5 business days. Full resolution or escalation notice: within 15
+            business days.
+          </p>
+          <h3>5. Appeals</h3>
+          <p>
+            If you are unsatisfied with our decision you may: (a) request an
+            internal appeal within 14 days by replying to the resolution notice with
+            your grounds — a senior team member will conclude the appeal within 10
+            business days; or (b) escalate to your national data-protection
+            supervisory authority for data-related complaints, or to your national
+            consumer-protection authority for billing or service complaints.
+          </p>
+          <h3>6. Contact</h3>
+          <p>
+            {companyInfo.legalName} · {companyInfo.registrationLabel}{" "}
+            {companyInfo.registrationNumber} · {companyDisplayAddress}
+          </p>
+        </>
+      ),
+    },
   };
 
 const LegalPage: React.FC = () => {
@@ -201,6 +305,10 @@ const LegalPage: React.FC = () => {
     terms:
       "Review CookFlow's terms of service, billing rules, credit wallet terms, and acceptable use policy.",
     vat: "View ARDWILL LTD billing, VAT, and tax information for eurocookflow.com customers.",
+    refund:
+      "Read CookFlow's refund policy, including eligibility, the request process, SLAs, and exclusions.",
+    complaints:
+      "Read CookFlow's complaints policy: who can file, required information, review SLAs, and how to appeal.",
   };
 
   return (
@@ -230,7 +338,7 @@ const LegalPage: React.FC = () => {
       {/* Tab nav */}
       <nav className="border-b border-white/5 px-6 max-w-4xl mx-auto">
         <div className="flex gap-6">
-          {(["about", "privacy", "terms", "vat"] as LegalSection[]).map((s) => (
+          {(["about", "privacy", "terms", "vat", "refund", "complaints"] as LegalSection[]).map((s) => (
             <Link
               key={s}
               to={`/legal/${s}`}
@@ -240,11 +348,14 @@ const LegalPage: React.FC = () => {
                   : "border-transparent text-[#64748B] hover:text-[#94A3B8]"
               }`}
             >
-              {s === "about"
-                ? "About"
-                : s === "vat"
-                ? "VAT Info"
-                : s.charAt(0).toUpperCase() + s.slice(1)}
+              {({
+                about: "About",
+                privacy: "Privacy",
+                terms: "Terms",
+                vat: "VAT Info",
+                refund: "Refund Policy",
+                complaints: "Complaints Policy",
+              } as Record<LegalSection, string>)[s]}
             </Link>
           ))}
         </div>
