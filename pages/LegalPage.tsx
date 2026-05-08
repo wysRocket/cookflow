@@ -104,9 +104,11 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
           </p>
           <h3>3. CookFlow Credits</h3>
           <p>
-            Credits are non-refundable, non-transferable, and expire 24 months
-            after purchase. Credits have no cash value and cannot be exchanged
-            for money.
+            Credits are non-transferable and expire 24 months after purchase.
+            Credits have no cash value and cannot be exchanged for money. Once
+            consumed, credits are non-refundable. Unspent credits may be
+            refunded within 14 days of purchase in accordance with EU Directive
+            2011/83/EU — see the Refund Policy for full details.
           </p>
           <h3>4. Billing Entity</h3>
           <p>
@@ -342,7 +344,7 @@ const LegalPage: React.FC = () => {
             <Link
               key={s}
               to={`/legal/${s}`}
-              className={`py-4 text-sm font-medium border-b-2 transition-colors capitalize ${
+              className={`py-4 text-sm font-medium border-b-2 transition-colors ${
                 s === section
                   ? "border-[#14b8a6] text-[#14b8a6]"
                   : "border-transparent text-[#64748B] hover:text-[#94A3B8]"
