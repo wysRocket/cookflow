@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Clock, Flame, Star, Bookmark, ChevronRight, Sparkles } from "lucide-react";
 import { recipes } from "../data";
@@ -40,14 +40,14 @@ const RecipeList: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
+  const [bookmarksHydrated, setBookmarksHydrated] = useState(false);
 
   const [savedRecipes, setSavedRecipes] = useState<GeneratedRecipe[]>([]);
-  const savedAiHydratedRef = useRef(false);
+  const [savedAiHydrated, setSavedAiHydrated] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
 
   const { credits, spendCredits } = useAccess();
   const { user } = useAuth();
-  const bookmarksHydratedRef = useRef(false);
 
   useEffect(() => {
     const q = searchParams.get("q");
@@ -56,11 +56,11 @@ const RecipeList: React.FC = () => {
 
   useEffect(() => {
     let cancelled = false;
-    bookmarksHydratedRef.current = false;
+    setBookmarksHydrated(false);
 
     const loadBookmarks = async () => {
       if (!user) {
-        bookmarksHydratedRef.current = true;
+        setBookmarksHydrated(true);
         return;
       }
       try {
@@ -78,7 +78,7 @@ const RecipeList: React.FC = () => {
       } catch (error) {
         console.error("Failed to load recipe bookmarks", error);
       } finally {
-        if (!cancelled) bookmarksHydratedRef.current = true;
+        if (!cancelled) setBookmarksHydrated(true);
       }
     };
 
@@ -89,7 +89,7 @@ const RecipeList: React.FC = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!user || !bookmarksHydratedRef.current) return;
+    if (!user || !bookmarksHydrated) return;
     const timer = window.setTimeout(() => {
       const bookmarkedIds = Array.from(bookmarked).sort((a, b) => a - b);
       void saveUserAppData(user.uid, "recipeList", { bookmarkedIds }).catch(
@@ -99,15 +99,15 @@ const RecipeList: React.FC = () => {
       );
     }, 350);
     return () => window.clearTimeout(timer);
-  }, [bookmarked, user]);
+  }, [bookmarked, user, bookmarksHydrated]);
 
   useEffect(() => {
     let cancelled = false;
-    savedAiHydratedRef.current = false;
+    setSavedAiHydrated(false);
 
     const loadSavedAi = async () => {
       if (!user) {
-        savedAiHydratedRef.current = true;
+        setSavedAiHydrated(true);
         return;
       }
       try {
@@ -130,7 +130,7 @@ const RecipeList: React.FC = () => {
       } catch (error) {
         console.error("Failed to load saved AI recipes", error);
       } finally {
-        if (!cancelled) savedAiHydratedRef.current = true;
+        if (!cancelled) setSavedAiHydrated(true);
       }
     };
 
@@ -141,7 +141,7 @@ const RecipeList: React.FC = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!user || !savedAiHydratedRef.current) return;
+    if (!user || !savedAiHydrated) return;
     const timer = window.setTimeout(() => {
       void saveUserAppData(user.uid, "savedAiRecipes", { savedAiRecipes: savedRecipes }).catch(
         (error) => {
@@ -150,7 +150,7 @@ const RecipeList: React.FC = () => {
       );
     }, 350);
     return () => window.clearTimeout(timer);
-  }, [savedRecipes, user]);
+  }, [savedRecipes, user, savedAiHydrated]);
 
   useEffect(() => {
     if (!toast) return;

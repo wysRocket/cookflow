@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Heart,
@@ -507,15 +507,15 @@ const Community: React.FC = () => {
   const [newTags, setNewTags] = useState("");
   const [openComments, setOpenComments] = useState<Set<number>>(new Set());
   const [commentInputs, setCommentInputs] = useState<Record<number, string>>({});
-  const hydratedRef = useRef(false);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    hydratedRef.current = false;
+    setHydrated(false);
 
     const loadCommunityState = async () => {
       if (!user) {
-        hydratedRef.current = true;
+        setHydrated(true);
         return;
       }
       try {
@@ -530,7 +530,7 @@ const Community: React.FC = () => {
       } catch (error) {
         console.error("Failed to load community state", error);
       } finally {
-        if (!cancelled) hydratedRef.current = true;
+        if (!cancelled) setHydrated(true);
       }
     };
 
@@ -541,14 +541,14 @@ const Community: React.FC = () => {
   }, [user]);
 
   useEffect(() => {
-    if (!user || !hydratedRef.current) return;
+    if (!user || !hydrated) return;
     const timer = window.setTimeout(() => {
       void saveUserAppData(user.uid, "community", { posts }).catch((error) => {
         console.error("Failed to save community state", error);
       });
     }, 400);
     return () => window.clearTimeout(timer);
-  }, [posts, user]);
+  }, [posts, user, hydrated]);
 
   const handleNewPostSubmit = (e: React.FormEvent) => {
     e.preventDefault();
