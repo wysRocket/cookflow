@@ -48,7 +48,7 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
       title: "Privacy Policy",
       body: (
         <>
-          <p>Last updated: April 22, 2026</p>
+          <p>Last updated: May 8, 2026</p>
           <h3>1. Data We Collect</h3>
           <p>
             We collect information you provide directly (name, email, profile
