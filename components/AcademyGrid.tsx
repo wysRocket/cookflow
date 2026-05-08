@@ -168,17 +168,6 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
               </div>
             </div>
 
-            <div className="flex items-center justify-between border-t border-white/20 pt-4 backdrop-blur-sm bg-black/20 rounded px-2 -mx-2">
-              <div className="flex flex-col">
-                <span className="text-xl font-bold text-white">
-                  €{module.price}
-                </span>
-                <span className="text-[10px] text-[#14b8a6] font-bold tracking-wider uppercase">
-                  or {module.price * 100} Credits
-                </span>
-              </div>
-              <span className="text-xs text-gray-300">Full Access</span>
-            </div>
           </div>
 
           {/* Hidden Reveal on Hover */}
