@@ -80,6 +80,11 @@ const Settings: React.FC = () => {
   const [topUpInput, setTopUpInput] = useState(String(DEFAULT_TOPUP_CREDITS));
   const [toast, setToast] = useState<string | null>(null);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
+  const [tosAccepted, setTosAccepted] = useState(false);
+
+  useEffect(() => {
+    if (!showTopUpModal) setTosAccepted(false);
+  }, [showTopUpModal]);
 
   useEffect(() => {
     if (!user) return;
@@ -435,9 +440,41 @@ const Settings: React.FC = () => {
                 </div>
               </div>
 
+              <label className="flex items-start gap-3 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  checked={tosAccepted}
+                  onChange={(e) => setTosAccepted(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded accent-[#0EA5C6] flex-shrink-0 cursor-pointer"
+                />
+                <span className="text-xs text-[#8AA0C5] leading-5">
+                  I have read and agree to the{" "}
+                  <a
+                    href="/legal/terms"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#35D2F1] underline hover:text-white"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Terms of Service
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="/legal/refund"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[#35D2F1] underline hover:text-white"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    Refund Policy
+                  </a>
+                  .
+                </span>
+              </label>
+
               <button
                 onClick={handleTopUpProceed}
-                disabled={isPaymentLoading}
+                disabled={!tosAccepted || isPaymentLoading}
                 className="w-full py-3 rounded-xl bg-[#0EA5C6] hover:bg-[#0b93b1] disabled:opacity-60 disabled:cursor-not-allowed text-white text-lg font-bold transition-colors flex items-center justify-center gap-2"
               >
                 {isPaymentLoading ? (
