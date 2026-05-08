@@ -25,9 +25,16 @@ interface Post {
   image?: string;
   tags: string[];
   likes: number;
-  comments: number;
+  comments: CommentItem[];
   liked: boolean;
   bookmarked: boolean;
+}
+
+interface CommentItem {
+  id: number;
+  author: string;
+  content: string;
+  time: string;
 }
 
 const INITIAL_POSTS: Post[] = [
@@ -42,7 +49,7 @@ const INITIAL_POSTS: Post[] = [
       "Just finished a 3-hour session on spherification. The key insight most people miss: the ratio of sodium alginate to liquid matters more than the calcium bath concentration. Getting it right changes everything about mouthfeel.",
     tags: ["Molecular", "Technique"],
     likes: 142,
-    comments: 34,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -58,7 +65,7 @@ const INITIAL_POSTS: Post[] = [
       "https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=800&q=80",
     tags: ["Seafood", "Win"],
     likes: 89,
-    comments: 17,
+    comments: [],
     liked: true,
     bookmarked: false,
   },
@@ -73,7 +80,7 @@ const INITIAL_POSTS: Post[] = [
       "A question I get constantly: why does my choux pastry collapse? Nine times out of ten it's opened too early. Wait until the shells are completely set and dry before you open the oven. Patience is the real ingredient.",
     tags: ["Pastry", "Tips"],
     likes: 215,
-    comments: 52,
+    comments: [],
     liked: false,
     bookmarked: true,
   },
@@ -87,7 +94,7 @@ const INITIAL_POSTS: Post[] = [
       "Completed my first week of the Knife Skills course. My julienne went from embarrassing to actually presentable. Still slow, but consistent. Anyone have tips for building speed without sacrificing accuracy?",
     tags: ["Knife Skills", "Question"],
     likes: 43,
-    comments: 28,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -104,7 +111,7 @@ const INITIAL_POSTS: Post[] = [
       "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80",
     tags: ["Japanese", "Ramen"],
     likes: 318,
-    comments: 76,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -121,7 +128,7 @@ const INITIAL_POSTS: Post[] = [
       "https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?auto=format&fit=crop&w=800&q=80",
     tags: ["Mexican", "Street Food", "Prep"],
     likes: 201,
-    comments: 41,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -135,7 +142,7 @@ const INITIAL_POSTS: Post[] = [
       "Question for the fermentation crowd: my kimchi tastes great but is too fizzy by day 4. Cooler room temp or less sugar in the mix?",
     tags: ["Fermentation", "Question"],
     likes: 57,
-    comments: 33,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -150,7 +157,7 @@ const INITIAL_POSTS: Post[] = [
       "Fresh tagliatelle test: 52% hydration and a 30-minute rest gave the smoothest sheet and cleaner cut in the machine. Worth trying.",
     tags: ["Italian", "Pasta", "Technique"],
     likes: 133,
-    comments: 24,
+    comments: [],
     liked: false,
     bookmarked: true,
   },
@@ -164,7 +171,7 @@ const INITIAL_POSTS: Post[] = [
       "First attempt at knife drills with carrots and cucumbers. Not fast yet, but my cuts are finally same size. Progress!",
     tags: ["Knife Skills", "Win"],
     likes: 39,
-    comments: 9,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -179,7 +186,7 @@ const INITIAL_POSTS: Post[] = [
       "If your mousse splits, your chocolate and cream temperatures are too far apart. Keep both warm-ish and fold in stages, not all at once.",
     tags: ["Pastry", "Tips"],
     likes: 187,
-    comments: 37,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -194,7 +201,7 @@ const INITIAL_POSTS: Post[] = [
       "Ramen tare workshop this week. Quick reminder: taste tare diluted in broth ratio, never straight, before adjusting salt.",
     tags: ["Japanese", "Ramen", "Technique"],
     likes: 246,
-    comments: 58,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -208,7 +215,7 @@ const INITIAL_POSTS: Post[] = [
       "Tried the meal planner for the full week and actually stuck to it. Shopping list autofill saved me at least an hour.",
     tags: ["Meal Prep", "Productivity"],
     likes: 74,
-    comments: 12,
+    comments: [],
     liked: true,
     bookmarked: false,
   },
@@ -223,7 +230,7 @@ const INITIAL_POSTS: Post[] = [
       "Low-temp egg experiment today: 63C for 45 min gives a silky yolk and barely set white. Great for grain bowls and toasts.",
     tags: ["Molecular", "Eggs", "Technique"],
     likes: 165,
-    comments: 29,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -237,7 +244,7 @@ const INITIAL_POSTS: Post[] = [
       "Anyone else balancing full-time work with the academy tracks? Looking for routines that keep momentum without burnout.",
     tags: ["Question", "Community"],
     likes: 52,
-    comments: 44,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -252,7 +259,7 @@ const INITIAL_POSTS: Post[] = [
       "Batch-cooked coconut dahl for 4 lunches. Added lemon at the end and it kept brightness all week.",
     tags: ["Indian", "Meal Prep", "Tips"],
     likes: 141,
-    comments: 19,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -266,7 +273,7 @@ const INITIAL_POSTS: Post[] = [
       "Question: how do you keep tofu crispy after adding sauce? Mine goes soft in 2 minutes.",
     tags: ["Question", "Tofu", "Technique"],
     likes: 61,
-    comments: 31,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -281,7 +288,7 @@ const INITIAL_POSTS: Post[] = [
       "Reminder for orzo dishes: finish with zest first, juice second. You get a cleaner citrus profile.",
     tags: ["Greek", "Technique"],
     likes: 117,
-    comments: 14,
+    comments: [],
     liked: false,
     bookmarked: true,
   },
@@ -295,7 +302,7 @@ const INITIAL_POSTS: Post[] = [
       "Just unlocked planner with credits and built my first 7-day menu. UI flow was super smooth.",
     tags: ["Planner", "Win", "Credits"],
     likes: 73,
-    comments: 11,
+    comments: [],
     liked: true,
     bookmarked: false,
   },
@@ -310,7 +317,7 @@ const INITIAL_POSTS: Post[] = [
       "Pasta water check: if it doesn't taste like the sea, your sauce won't emulsify as well as it should.",
     tags: ["Italian", "Pasta", "Tips"],
     likes: 188,
-    comments: 22,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -326,7 +333,7 @@ const INITIAL_POSTS: Post[] = [
       "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=800&q=80",
     tags: ["Chicken", "Dinner", "Win"],
     likes: 92,
-    comments: 16,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -341,7 +348,7 @@ const INITIAL_POSTS: Post[] = [
       "Ramen eggs: marinate 6 to 8 hours only. Longer and the whites over-season while yolks get chalky.",
     tags: ["Japanese", "Ramen", "Technique"],
     likes: 223,
-    comments: 47,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -355,7 +362,7 @@ const INITIAL_POSTS: Post[] = [
       "Need advice: best budget knife for practicing daily? Not ready for premium steel yet.",
     tags: ["Question", "Knife Skills", "Beginner"],
     likes: 48,
-    comments: 36,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -370,7 +377,7 @@ const INITIAL_POSTS: Post[] = [
       "Plant protein combo of the week: lentils + walnuts + smoked paprika for deep savory flavor in sauces.",
     tags: ["Vegan", "Protein", "Molecular"],
     likes: 129,
-    comments: 18,
+    comments: [],
     liked: false,
     bookmarked: false,
   },
@@ -384,7 +391,7 @@ const INITIAL_POSTS: Post[] = [
       "Anyone wants a monthly community cook-along challenge? Could do one recipe each week by cuisine.",
     tags: ["Community", "Question", "Challenge"],
     likes: 67,
-    comments: 40,
+    comments: [],
     liked: false,
     bookmarked: true,
   },
@@ -430,10 +437,9 @@ const FEATURED_CHEFS = [
 
 function normalizePost(value: unknown): Post | null {
   if (!value || typeof value !== "object") return null;
-  const post = value as Partial<Post>;
+  const post = value as Partial<Post> & { comments?: unknown };
   const id = Number(post.id);
   const likes = Number(post.likes);
-  const comments = Number(post.comments);
   if (
     !Number.isFinite(id) ||
     typeof post.author !== "string" ||
@@ -449,6 +455,18 @@ function normalizePost(value: unknown): Post | null {
         .map((tag) => String(tag).trim())
         .filter((tag) => tag.length > 0)
     : [];
+  const commentsRaw = post.comments;
+  const comments: CommentItem[] = Array.isArray(commentsRaw)
+    ? commentsRaw.filter(
+        (c): c is CommentItem =>
+          c !== null &&
+          typeof c === "object" &&
+          typeof (c as CommentItem).id === "number" &&
+          typeof (c as CommentItem).author === "string" &&
+          typeof (c as CommentItem).content === "string" &&
+          typeof (c as CommentItem).time === "string"
+      )
+    : [];
   return {
     id: Math.round(id),
     author: post.author,
@@ -459,7 +477,7 @@ function normalizePost(value: unknown): Post | null {
     image: typeof post.image === "string" ? post.image : undefined,
     tags,
     likes: Number.isFinite(likes) ? Math.max(0, Math.round(likes)) : 0,
-    comments: Number.isFinite(comments) ? Math.max(0, Math.round(comments)) : 0,
+    comments,
     liked: Boolean(post.liked),
     bookmarked: Boolean(post.bookmarked),
   };
@@ -487,9 +505,9 @@ const Community: React.FC = () => {
   const [showNewPost, setShowNewPost] = useState(false);
   const [newContent, setNewContent] = useState("");
   const [newTags, setNewTags] = useState("");
-  const [replyingTo, setReplyingTo] = useState<number | null>(null);
-  const [replyContent, setReplyContent] = useState("");
   const [shareToast, setShareToast] = useState<number | null>(null);
+  const [openComments, setOpenComments] = useState<Set<number>>(new Set());
+  const [commentInputs, setCommentInputs] = useState<Record<number, string>>({});
   const hydratedRef = useRef(false);
 
   useEffect(() => {
@@ -549,7 +567,7 @@ const Community: React.FC = () => {
       content: newContent.trim(),
       tags: tags.length ? tags : ["General"],
       likes: 0,
-      comments: 0,
+      comments: [],
       liked: false,
       bookmarked: false,
     };
@@ -582,6 +600,25 @@ const Community: React.FC = () => {
     setPosts((prev) =>
       prev.map((p) => (p.id !== id ? p : { ...p, bookmarked: !p.bookmarked })),
     );
+  };
+
+  const handleAddComment = (postId: number) => {
+    const text = commentInputs[postId]?.trim();
+    if (!text) return;
+    const newComment: CommentItem = {
+      id: Date.now(),
+      author: "You",
+      content: text,
+      time: "Just now",
+    };
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.id !== postId
+          ? p
+          : { ...p, comments: [...p.comments, newComment] }
+      )
+    );
+    setCommentInputs((prev) => ({ ...prev, [postId]: "" }));
   };
 
   const trendingTopics = TRENDING_TAGS.map((tag) => ({
@@ -799,11 +836,21 @@ const Community: React.FC = () => {
                   {post.likes}
                 </button>
                 <button
-                  onClick={() => alert("Comments section coming soon!")}
-                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm text-[#64748B] hover:text-[#D4AF37] hover:bg-[#D4AF37]/10 transition-colors"
+                  onClick={() =>
+                    setOpenComments((prev) => {
+                      const next = new Set(prev);
+                      next.has(post.id) ? next.delete(post.id) : next.add(post.id);
+                      return next;
+                    })
+                  }
+                  className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm transition-colors ${
+                    openComments.has(post.id)
+                      ? "text-[#D4AF37] bg-[#D4AF37]/10"
+                      : "text-[#64748B] hover:text-[#D4AF37] hover:bg-[#D4AF37]/10"
+                  }`}
                 >
                   <MessageCircle className="w-4 h-4" />
-                  {post.comments}
+                  {post.comments.length}
                 </button>
                 <button
                   onClick={() => alert("Share feature coming soon!")}
@@ -824,6 +871,50 @@ const Community: React.FC = () => {
                   />
                 </button>
               </div>
+
+              {/* Comment thread */}
+              {openComments.has(post.id) && (
+                <div className="border-t border-[#334155] pt-3 space-y-3">
+                  {post.comments.length === 0 ? (
+                    <p className="text-xs text-[#475569]">No comments yet.</p>
+                  ) : (
+                    post.comments.map((c) => (
+                      <div key={c.id} className="flex gap-2.5">
+                        <div className="w-6 h-6 rounded-full bg-[#334155] flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-[#94A3B8]">
+                          {c.author[0]}
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold text-[#94A3B8]">
+                            {c.author} <span className="font-normal text-[#475569]">{c.time}</span>
+                          </p>
+                          <p className="text-xs text-[#CBD5E1] mt-0.5">{c.content}</p>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                  <div className="flex gap-2 pt-1">
+                    <input
+                      type="text"
+                      value={commentInputs[post.id] ?? ""}
+                      onChange={(e) =>
+                        setCommentInputs((prev) => ({ ...prev, [post.id]: e.target.value }))
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") handleAddComment(post.id);
+                      }}
+                      placeholder="Add a comment..."
+                      className="flex-1 bg-[#0F172A] border border-[#334155] rounded-lg px-3 py-1.5 text-xs text-[#CBD5E1] placeholder-[#475569] focus:outline-none focus:border-[#14b8a6] transition-colors"
+                    />
+                    <button
+                      onClick={() => handleAddComment(post.id)}
+                      disabled={!commentInputs[post.id]?.trim()}
+                      className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#14b8a6] text-white hover:bg-[#0d9488] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    >
+                      Post
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
