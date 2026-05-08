@@ -6,10 +6,10 @@ const creditBundles = [
   {
     name: "Starter Pack",
     price: 4.99,
-    credits: 50,
+    credits: 500,
     features: [
-      "Unlock 3 recipes",
-      "or 2 chef profiles",
+      "500 credits — unlock ~5 recipes",
+      "or top up your chef profile views",
       "Great for first-time cooks",
       "No subscription required",
     ],
@@ -20,11 +20,11 @@ const creditBundles = [
   {
     name: "Pro Pack",
     price: 14.99,
-    credits: 200,
+    credits: 1500,
     features: [
-      "Unlock multiple recipes and chefs",
-      "Includes planner month unlock",
-      "Best value for active users",
+      "1500 credits — unlock recipes and chefs",
+      "Includes planner month unlock (100 cr)",
+      "Best value for active learners",
       "No recurring billing",
     ],
     popular: true,
@@ -35,9 +35,9 @@ const creditBundles = [
   {
     name: "Studio Pack",
     price: 29.99,
-    credits: 500,
+    credits: 3000,
     features: [
-      "Maximum credit reserve",
+      "3000 credits — maximum reserve",
       "Batch unlocks for deep learning",
       "Multiple planner month extensions",
       "No lock-in, pay as you go",
