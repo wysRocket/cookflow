@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
                   </h3>
                   <div className="flex items-center justify-between mt-2">
                     <p className="text-xs text-[#64748B]">
-                      {course.timeAgo} · {course.lessons} Lessons
+                      {course.lessons} Lessons
                     </p>
                     <span className="text-xs font-bold text-[#14b8a6]">
                       €{course.price}
@@ -206,7 +206,7 @@ const Dashboard: React.FC = () => {
               <span className="text-[#64748B]"> one-time</span>
             </div>
             <p className="text-sm text-[#94A3B8] mb-8">
-              50 credits for unlocking recipes, chef profiles, and premium tools
+              500 credits for unlocking recipes, chef profiles, and premium tools
               at your own pace.
             </p>
             <Link
@@ -231,7 +231,7 @@ const Dashboard: React.FC = () => {
               <span className="text-[#94A3B8]"> one-time</span>
             </div>
             <p className="text-sm text-[#F1F5F9] mb-8">
-              200 credits. Ideal for active learners who unlock multiple
+              1500 credits. Ideal for active learners who unlock multiple
               recipes and planner access.
             </p>
             <Link
@@ -253,7 +253,7 @@ const Dashboard: React.FC = () => {
               <span className="text-[#64748B]"> one-time</span>
             </div>
             <p className="text-sm text-[#94A3B8] mb-8">
-              500 credits for heavy usage, experimentation, and long-term
+              3000 credits for heavy usage, experimentation, and long-term
               unlock flexibility.
             </p>
             <Link
