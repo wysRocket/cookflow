@@ -106,14 +106,6 @@ const Footer: React.FC = () => {
                   Contact
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/auth/sign-up"
-                  className="hover:text-[#14b8a6] transition-colors"
-                >
-                  Careers
-                </Link>
-              </li>
             </ul>
           </div>
           <div>
@@ -135,6 +127,22 @@ const Footer: React.FC = () => {
                   className="hover:text-[#14b8a6] transition-colors"
                 >
                   Terms
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/legal/refund"
+                  className="hover:text-[#14b8a6] transition-colors"
+                >
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/legal/complaints"
+                  className="hover:text-[#14b8a6] transition-colors"
+                >
+                  Complaints Policy
                 </Link>
               </li>
               <li>
