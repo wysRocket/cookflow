@@ -20,20 +20,6 @@ const CREDIT_ACTIONS = [
     cost: 100,
     icon: "calendar_month",
   },
-  {
-    key: "ai",
-    title: "Generate AI Recipe",
-    subtitle: "One generation",
-    cost: 50,
-    icon: "auto_awesome",
-  },
-  {
-    key: "chef",
-    title: "Book Chef Session",
-    subtitle: "30-minute slot",
-    cost: 150,
-    icon: "video_camera_front",
-  },
 ] as const;
 
 const Settings: React.FC = () => {
@@ -242,8 +228,6 @@ const Settings: React.FC = () => {
       return;
     }
     setShowSpendModal(false);
-    if (actionKey === "ai") showToast("AI recipe generation started.");
-    if (actionKey === "chef") showToast("Chef session request submitted.");
   };
 
   const handleSignOut = async () => {
