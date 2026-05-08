@@ -505,7 +505,6 @@ const Community: React.FC = () => {
   const [showNewPost, setShowNewPost] = useState(false);
   const [newContent, setNewContent] = useState("");
   const [newTags, setNewTags] = useState("");
-  const [shareToast, setShareToast] = useState<number | null>(null);
   const [openComments, setOpenComments] = useState<Set<number>>(new Set());
   const [commentInputs, setCommentInputs] = useState<Record<number, string>>({});
   const hydratedRef = useRef(false);
@@ -836,6 +835,8 @@ const Community: React.FC = () => {
                   {post.likes}
                 </button>
                 <button
+                  aria-label={`${openComments.has(post.id) ? "Hide" : "Show"} comments`}
+                  aria-expanded={openComments.has(post.id)}
                   onClick={() =>
                     setOpenComments((prev) => {
                       const next = new Set(prev);
@@ -895,6 +896,7 @@ const Community: React.FC = () => {
                   <div className="flex gap-2 pt-1">
                     <input
                       type="text"
+                      aria-label="Add a comment"
                       value={commentInputs[post.id] ?? ""}
                       onChange={(e) =>
                         setCommentInputs((prev) => ({ ...prev, [post.id]: e.target.value }))
