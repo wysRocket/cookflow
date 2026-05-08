@@ -20,6 +20,13 @@ interface Recipe {
   readonly badgeColor?: string;
 }
 
+interface GeneratedRecipe {
+  id: number;
+  name: string;
+  generatedAt: string;
+  prompt?: string;
+}
+
 const filters = ["All", "Breakfast", "Lunch", "Dinner", "Dessert", "Snack"];
 
 const difficultyColor: Record<Recipe["difficulty"], string> = {
@@ -33,6 +40,10 @@ const RecipeList: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const [bookmarked, setBookmarked] = useState<Set<number>>(new Set());
+
+  const [savedRecipes, setSavedRecipes] = useState<GeneratedRecipe[]>([]);
+  const savedAiHydratedRef = useRef(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   const { credits, spendCredits } = useAccess();
   const { user } = useAuth();
@@ -90,6 +101,63 @@ const RecipeList: React.FC = () => {
     return () => window.clearTimeout(timer);
   }, [bookmarked, user]);
 
+  useEffect(() => {
+    let cancelled = false;
+    savedAiHydratedRef.current = false;
+
+    const loadSavedAi = async () => {
+      if (!user) {
+        savedAiHydratedRef.current = true;
+        return;
+      }
+      try {
+        const saved = await loadUserAppData<{ savedAiRecipes?: unknown }>(
+          user.uid,
+          "savedAiRecipes",
+        );
+        if (cancelled) return;
+        if (Array.isArray(saved?.savedAiRecipes)) {
+          const valid = saved.savedAiRecipes.filter(
+            (r): r is GeneratedRecipe =>
+              r !== null &&
+              typeof r === "object" &&
+              typeof (r as GeneratedRecipe).id === "number" &&
+              typeof (r as GeneratedRecipe).name === "string" &&
+              typeof (r as GeneratedRecipe).generatedAt === "string",
+          );
+          setSavedRecipes(valid);
+        }
+      } catch (error) {
+        console.error("Failed to load saved AI recipes", error);
+      } finally {
+        if (!cancelled) savedAiHydratedRef.current = true;
+      }
+    };
+
+    void loadSavedAi();
+    return () => {
+      cancelled = true;
+    };
+  }, [user]);
+
+  useEffect(() => {
+    if (!user || !savedAiHydratedRef.current) return;
+    const timer = window.setTimeout(() => {
+      void saveUserAppData(user.uid, "savedAiRecipes", { savedAiRecipes: savedRecipes }).catch(
+        (error) => {
+          console.error("Failed to save AI recipes", error);
+        },
+      );
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [savedRecipes, user]);
+
+  useEffect(() => {
+    if (!toast) return;
+    const timer = window.setTimeout(() => setToast(null), 4000);
+    return () => window.clearTimeout(timer);
+  }, [toast]);
+
   const filtered = recipes.filter((r) => {
     const matchesFilter = activeFilter === "All" || r.category === activeFilter;
     const searchLower = search.toLowerCase();
@@ -111,15 +179,29 @@ const RecipeList: React.FC = () => {
   };
 
   const handleGenerateAiRecipe = () => {
-    if (spendCredits(1)) {
-      window.alert("Generating AI Recipe...\nAI Recipe generated! Check your saved items.");
+    if (spendCredits(50)) {
+      const now = new Date();
+      const label = now.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+      const newRecipe: GeneratedRecipe = {
+        id: Date.now(),
+        name: `AI Recipe — ${label}`,
+        generatedAt: now.toISOString(),
+      };
+      setSavedRecipes((prev) => [newRecipe, ...prev]);
+      setToast("50 credits charged — AI recipe saved to Saved Recipes.");
     } else {
-      window.alert("Not enough credits. Add more credits in Settings.");
+      setToast("Not enough credits. Top up in Settings.");
     }
   };
 
   return (
     <div className="space-y-6">
+      {/* Toast */}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 bg-[#1E293B] border border-[#334155] rounded-xl shadow-xl text-sm text-[#CBD5E1] whitespace-nowrap">
+          {toast}
+        </div>
+      )}
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
         <div>
@@ -163,6 +245,42 @@ const RecipeList: React.FC = () => {
           ))}
         </div>
       </div>
+
+      {/* Saved Recipes */}
+      {savedRecipes.length > 0 && (
+        <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-5">
+          <h2 className="text-sm font-bold text-[#F1F5F9] uppercase tracking-widest mb-4">
+            Saved Recipes
+          </h2>
+          <div className="space-y-2">
+            {savedRecipes.map((r) => (
+              <div
+                key={r.id}
+                className="flex items-center justify-between gap-4 py-2.5 border-b border-[#334155] last:border-0"
+              >
+                <div>
+                  <p className="text-sm text-[#F1F5F9] font-medium">{r.name}</p>
+                  <p className="text-xs text-[#64748B] mt-0.5">
+                    {new Date(r.generatedAt).toLocaleDateString("en-GB", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </p>
+                </div>
+                <button
+                  onClick={() =>
+                    setSavedRecipes((prev) => prev.filter((x) => x.id !== r.id))
+                  }
+                  className="text-xs text-[#64748B] hover:text-red-400 transition-colors flex-shrink-0"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Grid */}
       {filtered.length === 0 ? (
