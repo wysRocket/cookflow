@@ -79,7 +79,26 @@ const content: Record<LegalSection, { title: string; body: React.ReactNode }> =
             submitted through the CookFlow support channel referenced in your
             account area.
           </p>
-          <h3>6. Contact</h3>
+          <h3>6. International Data Transfers</h3>
+          <p>
+            Your personal data is processed within the European Economic Area
+            (EEA). Where we use infrastructure providers — including
+            Firebase/Google Cloud for authentication and database services, and
+            Stripe for payment processing — those providers are certified under
+            the EU–US Data Privacy Framework and operate under Standard
+            Contractual Clauses. No personal data is transferred to third
+            countries outside those safeguards.
+          </p>
+          <h3>7. Complaints About Data Processing</h3>
+          <p>
+            To log a complaint about how we handle your personal data, follow
+            the procedure set out in our{" "}
+            <Link to="/legal/complaints">Complaints Policy</Link>. You also have
+            the right to lodge a complaint directly with your national
+            supervisory authority (for EU/EEA residents, the relevant Data
+            Protection Authority for your country).
+          </p>
+          <h3>8. Contact</h3>
           <p>
             {companyInfo.legalName} · {companyInfo.registrationLabel}{" "}
             {companyInfo.registrationNumber} · {companyDisplayAddress}
