@@ -31,9 +31,6 @@ const AcademyCard: React.FC<{ module: AcademyModule; index: number }> = ({
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["22deg", "-22deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-22deg", "22deg"]);
 
-  // Parallax effect for content
-  const contentZ = useTransform(mouseYSpring, [-0.5, 0.5], ["30px", "30px"]);
-
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
 
